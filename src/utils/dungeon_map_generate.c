@@ -11,17 +11,6 @@
 #include <assert.h>
 #include "dungeon_map_generate.h"
 
-void generate_dungon(dungeon_t *dunegeon) {
-
-    srand(time(NULL));
-
-    init_dungeon(&dunegeon);
-    gen_dungeon(&dunegeon);
-    render_dungeon(&dunegeon);
-    delete_dungeon(&dunegeon);
-
-    return;
-}
 static uint32_t in_room(dungeon_t *d, int16_t y, int16_t x)
 {
     int i;
@@ -613,47 +602,17 @@ int gen_dungeon(dungeon_t *d)
     return 0;
 }
 
-void render_dungeon(dungeon_t *d)
-{
-    pair_t p;
-
-    for (p[dim_y] = 0; p[dim_y] < DUNGEON_Y; p[dim_y]++) {
-        for (p[dim_x] = 0; p[dim_x] < DUNGEON_X; p[dim_x]++) {
-            switch (mappair(p)) {
-                case ter_wall:
-                case ter_wall_immutable:
-                    putchar(' ');
-                    break;
-                case ter_floor:
-                case ter_floor_room:
-                    putchar('.');
-                    break;
-                case ter_floor_hall:
-                    putchar('#');
-                    break;
-                case ter_debug:
-                    putchar('*');
-                    fprintf(stderr, "Debug character at %d, %d\n", p[dim_y], p[dim_x]);
-                    break;
-                case ter_stairs_up:
-                    putchar('<');
-                    break;
-                case ter_stairs_down:
-                    putchar('>');
-                    break;
-                default:
-                    break;
-            }
-        }
-        putchar('\n');
-    }
-}
-
-void delete_dungeon(dungeon_t *d)
-{
-}
-
 void init_dungeon(dungeon_t *d)
 {
     empty_dungeon(d);
+}
+
+void generate_dungon(dungeon_t *dunegeon) {
+
+    srand(time(NULL));
+
+    init_dungeon(dunegeon);
+    gen_dungeon(dunegeon);
+
+    return;
 }

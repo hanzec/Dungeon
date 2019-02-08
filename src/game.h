@@ -67,15 +67,16 @@ typedef struct room{
 
 typedef struct dungeon {
     uint32_t num_rooms;
+    pair_t pc_position;
     room_t rooms[MAX_ROOMS];
     uint8_t hardness[DUNGEON_Y][DUNGEON_X];
     terrain_type_t map[DUNGEON_Y][DUNGEON_X];
 } dungeon_t;
 
 
-
-void start_new(bool mode);
-void close_game(bool mode);
-void start_save(dungeon_t saved_dungeon);
+dungeon_t* dump_dungeon();
+void start_new(bool cli_mode);
+void close_dungeon(bool cli_mode);
+void load_dungeon(dungeon_t *dungeon, bool cli_mode);
 
 #endif //DUNGEON_V1_01_GAME_H

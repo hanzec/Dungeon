@@ -2,33 +2,54 @@
 // Created by chen_ on 2019/1/31.
 //
 #import <stdio.h>
-#include<ncurses.h>
 #include <curses.h>
-#include "main.h"
+#include <string.h>
+#include <ncurses.h>
+
+typedef enum file_action {
+    read_saved_game,
+    write_saved_name,
+} file_action_t;
 
 const int base_width = 80;
 const int base_height = 21;
 
-int main(int argc, char *argv[]) {
-    WINDOW *my_win;
-    int startx, starty;
-    int ch;
-    initscr(); /* 初始化并进入 curses模式 */
-    cbreak(); /* 行缓冲禁止，传递所有控制信息 */
-    starty = (LINES - base_height) / 2; /*计算窗口中心位置的行数 */
-    startx = (COLS - base_width) / 2; /*计算窗口中心位置的列数 */
-    printw("PressF1toexit");
-    refresh();
-    my_win = create_newwin(base_height, base_width, starty, startx);
-    while ((ch = getch()) != KEY_F(1)) {
+int8_t text_mod(int argc, char *argv[]){
+    file_action_t action;
+
+    if (argc !=2){
+        fprintf(stderr, "Usage: %s <-wt|-wb|-rt|-rb>\n", argv[0]); //<> required argument, [] optional argument.
+        return - 1;
+    } else{
 
     }
-    endwin();/*结束 curses模式 */
-    return 0;
+
+    switch (action){
+        case :
+    }
 }
 
-W
+void graph_mod(){
+    //todo add welcome menu here;
+};
 
-//todo add welcome menu here;
+int main(int argc, char *argv[]) {
+    int8_t error_code;
 
+    if (argc != 1){
+        error_code = text_mod(argc,argv);
 
+        if (error_code != 0){
+            return -1;
+        }
+    }else{
+        if (!strcmp(argv[0],"-g")){
+            printf("error input");
+            return -1;
+        } else{
+            graph_mod();
+        }
+    }
+
+    return 0;
+}

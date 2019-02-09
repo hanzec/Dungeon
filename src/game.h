@@ -11,15 +11,17 @@
 #ifndef DUNGEON_V1_01_GAME_H
 #define DUNGEON_V1_01_GAME_H
 
+
 #define DUNGEON_X              80
 #define DUNGEON_Y              21
 #define MIN_ROOMS              6
-#define MAX_ROOMS              (DUNGEON_X * DUNGEON_Y * MAX_ROOM_RATIO / 100)/ (ROOM_MAX_X * ROOM_MAX_Y)
 #define ROOM_MAX_X             20
 #define ROOM_MAX_Y             15
 #define ROOM_MIN_X             4
 #define ROOM_MIN_Y             3
 #define MAX_ROOM_RATIO         90
+#define DUNGEON_VERSION        0
+#define MAX_ROOMS              10
 #define mappair(pair) (d->map[pair[dim_y]][pair[dim_x]])
 #define mapxy(x, y) (d->map[y][x])
 #define hardnesspair(pair) (d->hardness[pair[dim_y]][pair[dim_x]])
@@ -66,10 +68,12 @@ typedef struct room{
 }room_t;
 
 typedef struct dungeon {
-    uint32_t num_rooms;
+    uint16_t num_rooms;
     pair_t pc_position;
+    uint16_t num_up_stairs;
     room_t rooms[MAX_ROOMS];
-    uint8_t hardness[DUNGEON_Y][DUNGEON_X];
+    uint16_t num_down_stairs;
+    uint16_t hardness[DUNGEON_Y][DUNGEON_X];
     terrain_type_t map[DUNGEON_Y][DUNGEON_X];
 } dungeon_t;
 

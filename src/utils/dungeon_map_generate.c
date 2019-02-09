@@ -1,7 +1,7 @@
 //
 // Created by chen_ on 2019/1/31.
 //
-#include "game.h"
+#include "../../../../Downloads/chen_hanze-assignment-1.02/game.h"
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -552,6 +552,7 @@ static void place_stairs(dungeon_t *d)
                ((mappair(p) < ter_floor)                 ||
                 (mappair(p) > ter_stairs)))
             ;
+        d->num_down_stairs += 1;
         mappair(p) = ter_stairs_down;
     } while (rand_under(1, 3));
     do {
@@ -561,8 +562,11 @@ static void place_stairs(dungeon_t *d)
                 (mappair(p) > ter_stairs)))
 
             ;
+        d->num_up_stairs += 1;
         mappair(p) = ter_stairs_up;
     } while (rand_under(2, 4));
+
+    //tmp set stair number to 1
 }
 
 static int make_rooms(dungeon_t *d)

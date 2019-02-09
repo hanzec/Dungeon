@@ -5,7 +5,7 @@
 #ifndef COMS327_S19_DUNGEON_DUNGEON_MAP_GENERATE_H
 #define COMS327_S19_DUNGEON_DUNGEON_MAP_GENERATE_H
 
-#include "heap.h"
+#include "../../../../Downloads/chen_hanze-assignment-1.02/heap.h"
 
 
 typedef struct corridor_path {
@@ -16,6 +16,8 @@ typedef struct corridor_path {
 } corridor_path_t;
 
 
+static int connect_rooms(dungeon_t *d);
 void generate_dungon(dungeon_t *dunegeon);
+
 
 #endif //COMS327_S19_DUNGEON_DUNGEON_MAP_GENERATE_H

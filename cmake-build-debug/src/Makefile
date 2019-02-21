@@ -125,110 +125,221 @@ dungeon-coms327-f19/fast:
 	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/build
 .PHONY : dungeon-coms327-f19/fast
 
-# target to build an object file
-game.o:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/game.o
+game.o: game.c.o
+
 .PHONY : game.o
 
-# target to preprocess a source file
-game.i:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/game.i
+# target to build an object file
+game.c.o:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/game.c.o
+.PHONY : game.c.o
+
+game.i: game.c.i
+
 .PHONY : game.i
 
-# target to generate assembly for a file
-game.s:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/game.s
+# target to preprocess a source file
+game.c.i:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/game.c.i
+.PHONY : game.c.i
+
+game.s: game.c.s
+
 .PHONY : game.s
 
-# target to build an object file
-io_display/window/windos_dungeon.o:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.o
+# target to generate assembly for a file
+game.c.s:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/game.c.s
+.PHONY : game.c.s
+
+io_display/window/windos_dungeon.o: io_display/window/windos_dungeon.c.o
+
 .PHONY : io_display/window/windos_dungeon.o
 
-# target to preprocess a source file
-io_display/window/windos_dungeon.i:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.i
+# target to build an object file
+io_display/window/windos_dungeon.c.o:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.c.o
+.PHONY : io_display/window/windos_dungeon.c.o
+
+io_display/window/windos_dungeon.i: io_display/window/windos_dungeon.c.i
+
 .PHONY : io_display/window/windos_dungeon.i
 
-# target to generate assembly for a file
-io_display/window/windos_dungeon.s:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.s
+# target to preprocess a source file
+io_display/window/windos_dungeon.c.i:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.c.i
+.PHONY : io_display/window/windos_dungeon.c.i
+
+io_display/window/windos_dungeon.s: io_display/window/windos_dungeon.c.s
+
 .PHONY : io_display/window/windos_dungeon.s
 
-# target to build an object file
-io_file.o:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/io_file.o
+# target to generate assembly for a file
+io_display/window/windos_dungeon.c.s:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.c.s
+.PHONY : io_display/window/windos_dungeon.c.s
+
+io_file.o: io_file.c.o
+
 .PHONY : io_file.o
 
-# target to preprocess a source file
-io_file.i:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/io_file.i
+# target to build an object file
+io_file.c.o:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/io_file.c.o
+.PHONY : io_file.c.o
+
+io_file.i: io_file.c.i
+
 .PHONY : io_file.i
 
-# target to generate assembly for a file
-io_file.s:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/io_file.s
+# target to preprocess a source file
+io_file.c.i:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/io_file.c.i
+.PHONY : io_file.c.i
+
+io_file.s: io_file.c.s
+
 .PHONY : io_file.s
 
-# target to build an object file
-main.o:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/main.o
+# target to generate assembly for a file
+io_file.c.s:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/io_file.c.s
+.PHONY : io_file.c.s
+
+main.o: main.c.o
+
 .PHONY : main.o
 
-# target to preprocess a source file
-main.i:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/main.i
+# target to build an object file
+main.c.o:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/main.c.o
+.PHONY : main.c.o
+
+main.i: main.c.i
+
 .PHONY : main.i
 
-# target to generate assembly for a file
-main.s:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/main.s
+# target to preprocess a source file
+main.c.i:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/main.c.i
+.PHONY : main.c.i
+
+main.s: main.c.s
+
 .PHONY : main.s
 
-# target to build an object file
-utils/display_utils.o:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.o
+# target to generate assembly for a file
+main.c.s:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/main.c.s
+.PHONY : main.c.s
+
+utils/display_utils.o: utils/display_utils.c.o
+
 .PHONY : utils/display_utils.o
 
-# target to preprocess a source file
-utils/display_utils.i:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.i
+# target to build an object file
+utils/display_utils.c.o:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.c.o
+.PHONY : utils/display_utils.c.o
+
+utils/display_utils.i: utils/display_utils.c.i
+
 .PHONY : utils/display_utils.i
 
-# target to generate assembly for a file
-utils/display_utils.s:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.s
+# target to preprocess a source file
+utils/display_utils.c.i:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.c.i
+.PHONY : utils/display_utils.c.i
+
+utils/display_utils.s: utils/display_utils.c.s
+
 .PHONY : utils/display_utils.s
 
+# target to generate assembly for a file
+utils/display_utils.c.s:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.c.s
+.PHONY : utils/display_utils.c.s
+
+utils/dungeon_gen_path.o: utils/dungeon_gen_path.c.o
+
+.PHONY : utils/dungeon_gen_path.o
+
 # target to build an object file
-utils/dungeon_map_generate.o:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.o
+utils/dungeon_gen_path.c.o:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_gen_path.c.o
+.PHONY : utils/dungeon_gen_path.c.o
+
+utils/dungeon_gen_path.i: utils/dungeon_gen_path.c.i
+
+.PHONY : utils/dungeon_gen_path.i
+
+# target to preprocess a source file
+utils/dungeon_gen_path.c.i:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_gen_path.c.i
+.PHONY : utils/dungeon_gen_path.c.i
+
+utils/dungeon_gen_path.s: utils/dungeon_gen_path.c.s
+
+.PHONY : utils/dungeon_gen_path.s
+
+# target to generate assembly for a file
+utils/dungeon_gen_path.c.s:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_gen_path.c.s
+.PHONY : utils/dungeon_gen_path.c.s
+
+utils/dungeon_map_generate.o: utils/dungeon_map_generate.c.o
+
 .PHONY : utils/dungeon_map_generate.o
 
-# target to preprocess a source file
-utils/dungeon_map_generate.i:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.i
+# target to build an object file
+utils/dungeon_map_generate.c.o:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.c.o
+.PHONY : utils/dungeon_map_generate.c.o
+
+utils/dungeon_map_generate.i: utils/dungeon_map_generate.c.i
+
 .PHONY : utils/dungeon_map_generate.i
 
-# target to generate assembly for a file
-utils/dungeon_map_generate.s:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.s
+# target to preprocess a source file
+utils/dungeon_map_generate.c.i:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.c.i
+.PHONY : utils/dungeon_map_generate.c.i
+
+utils/dungeon_map_generate.s: utils/dungeon_map_generate.c.s
+
 .PHONY : utils/dungeon_map_generate.s
 
-# target to build an object file
-utils/dungeon_utils.o:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.o
+# target to generate assembly for a file
+utils/dungeon_map_generate.c.s:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.c.s
+.PHONY : utils/dungeon_map_generate.c.s
+
+utils/dungeon_utils.o: utils/dungeon_utils.c.o
+
 .PHONY : utils/dungeon_utils.o
 
-# target to preprocess a source file
-utils/dungeon_utils.i:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.i
+# target to build an object file
+utils/dungeon_utils.c.o:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.c.o
+.PHONY : utils/dungeon_utils.c.o
+
+utils/dungeon_utils.i: utils/dungeon_utils.c.i
+
 .PHONY : utils/dungeon_utils.i
 
-# target to generate assembly for a file
-utils/dungeon_utils.s:
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.s
+# target to preprocess a source file
+utils/dungeon_utils.c.i:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.c.i
+.PHONY : utils/dungeon_utils.c.i
+
+utils/dungeon_utils.s: utils/dungeon_utils.c.s
+
 .PHONY : utils/dungeon_utils.s
+
+# target to generate assembly for a file
+utils/dungeon_utils.c.s:
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug && $(MAKE) -f src/CMakeFiles/dungeon-coms327-f19.dir/build.make src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.c.s
+.PHONY : utils/dungeon_utils.c.s
 
 # Help Target
 help:
@@ -254,6 +365,9 @@ help:
 	@echo "... utils/display_utils.o"
 	@echo "... utils/display_utils.i"
 	@echo "... utils/display_utils.s"
+	@echo "... utils/dungeon_gen_path.o"
+	@echo "... utils/dungeon_gen_path.i"
+	@echo "... utils/dungeon_gen_path.s"
 	@echo "... utils/dungeon_map_generate.o"
 	@echo "... utils/dungeon_map_generate.i"
 	@echo "... utils/dungeon_map_generate.s"

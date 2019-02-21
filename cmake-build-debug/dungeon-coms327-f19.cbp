@@ -4,7 +4,7 @@
 	<Project>
 		<Option title="dungeon-coms327-f19"/>
 		<Option makefile_is_custom="1"/>
-		<Option compiler="clang"/>
+		<Option compiler="gcc"/>
 		<Option virtualFolders="CMake Files\;CMake Files\src\;"/>
 		<Build>
 			<Target title="all">
@@ -39,21 +39,20 @@
 			</Target>
 			<Target title="dungeon-coms327-f19">
 				<Option output="/Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src/dungeon-coms327-f19" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir=""/>
+				<Option working_dir="/Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
-				<Option compiler="clang"/>
+				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils"/>
 					<Add directory="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display_io"/>
 					<Add directory="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/."/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
 					<Build command="/usr/bin/make -j4 -f &quot;/Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 dungeon-coms327-f19"/>
@@ -64,21 +63,20 @@
 			</Target>
 			<Target title="dungeon-coms327-f19/fast">
 				<Option output="/Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src/dungeon-coms327-f19" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir=""/>
+				<Option working_dir="/Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
-				<Option compiler="clang"/>
+				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils"/>
 					<Add directory="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display_io"/>
 					<Add directory="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/."/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
 					<Build command="/usr/bin/make -j4 -f &quot;/Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 dungeon-coms327-f19/fast"/>
@@ -113,6 +111,12 @@
 			<Option target="dungeon-coms327-f19"/>
 		</Unit>
 		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/display_utils.h">
+			<Option target="dungeon-coms327-f19"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_gen_path.c">
+			<Option target="dungeon-coms327-f19"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_gen_path.h">
 			<Option target="dungeon-coms327-f19"/>
 		</Unit>
 		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_map_generate.c">

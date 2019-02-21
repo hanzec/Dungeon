@@ -19,16 +19,14 @@ void start_new(bool cli_mode){
     }
 }
 
-void load_dungeon(dungeon_t *dungeon, bool cli_mode){
+void load_dungeon(bool cli_mode){
+    current_level_map = malloc(sizeof(dungeon_t));
 
-    if (dungeon == NULL){
-        printf("read error");
-        return;
-    }
+    read_operation(dump_dungeon());
 
     current_level_map = malloc(sizeof(dungeon_t));
-    memcpy(current_level_map,dungeon, sizeof(dungeon_t));
-    free(dungeon);
+    memcpy(current_level_map,current_level_map, sizeof(dungeon_t));
+    free(current_level_map);
     print_dungeon_cli(current_level_map);
 }
 

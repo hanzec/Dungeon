@@ -2,14 +2,14 @@
 // Created by chen_ on 2019/2/6.
 //
 
-#include "game.h"
+#include "../../../Downloads/chen_hanze-assignment-1.03/game.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
 #include "io_file.h"
 #include <sys/stat.h>
 #include <assert.h>
-#include "dungeon_map_generate.h"
+#include "../../../Downloads/chen_hanze-assignment-1.03/dungeon_map_generate.h"
 
 void read_operation(dungeon_t *dungeon){
     uint16_t tmp = 0;
@@ -42,11 +42,11 @@ void read_operation(dungeon_t *dungeon){
     fread(&dungeon->pc_position[dim_x],1,1,saved_file);
     fread(&dungeon->pc_position[dim_y],1,1,saved_file);
 
+    bzero(dungeon->hardness, sizeof(uint8_t)*DUNGEON_Y*DUNGEON_X);
     //read the hardness of the dungeon
     for (int i = 0; i < DUNGEON_Y; ++i) {
         for (int j = 0; j < DUNGEON_X; ++j) {
-            fread(&tmp,1,1,saved_file);
-            dungeon->hardness[i][j] = be16toh(tmp);
+            fread(&dungeon->hardness[i][j],1,1,saved_file);
             if (dungeon->hardness[i][j] < 1)
                 dungeon->map[i][j] = ter_floor_hall;
             else if (dungeon->hardness[i][j] == 255)

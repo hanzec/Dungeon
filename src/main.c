@@ -3,7 +3,6 @@
 //
 #import <stdio.h>
 #include "game.h"
-#include "io_file.h"
 #include <curses.h>
 #include <string.h>
 #include <ncurses.h>
@@ -44,7 +43,7 @@ int main(int argc, char *argv[]) {
         case no_select:
             return -1;
         case read_saved_game:
-            load_dungeon(read_operation(),false);
+            load_dungeon(false);
             break;
         case write_game_to_file:
             write_operation(dump_dungeon());

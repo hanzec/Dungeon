@@ -73,7 +73,7 @@ typedef struct dungeon {
     uint16_t num_up_stairs;
     room_t rooms[MAX_ROOMS];
     uint16_t num_down_stairs;
-    uint16_t hardness[DUNGEON_Y][DUNGEON_X];
+    uint8_t hardness[DUNGEON_Y][DUNGEON_X];
     terrain_type_t map[DUNGEON_Y][DUNGEON_X];
 } dungeon_t;
 
@@ -81,6 +81,6 @@ typedef struct dungeon {
 dungeon_t* dump_dungeon();
 void start_new(bool cli_mode);
 void close_dungeon(bool cli_mode);
-void load_dungeon(dungeon_t *dungeon, bool cli_mode);
+void load_dungeon(bool cli_mode);
 
 #endif //DUNGEON_V1_01_GAME_H

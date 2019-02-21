@@ -2,14 +2,14 @@
 // Created by chen_ on 2019/2/6.
 //
 
-#include "../../../Downloads/chen_hanze-assignment-1.03/game.h"
+#include "../../../Downloads/chen_hanze-assignment-1.03 2/game.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
 #include "io_file.h"
 #include <sys/stat.h>
 #include <assert.h>
-#include "../../../Downloads/chen_hanze-assignment-1.03/dungeon_map_generate.h"
+#include "../../../Downloads/chen_hanze-assignment-1.03 2/dungeon_map_generate.h"
 
 void read_operation(dungeon_t *dungeon){
     uint16_t tmp = 0;

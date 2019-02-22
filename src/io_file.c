@@ -7,9 +7,10 @@
 #include <stdlib.h>
 #include <memory.h>
 #include "io_file.h"
-#include <sys/stat.h>
 #include <assert.h>
+#include <sys/stat.h>
 #include "utils/dungeon_gen_map.h"
+#include <crossplatform_header/endian.h>
 
 void read_operation(dungeon_t *dungeon, char *path){
     uint16_t tmp = 0;

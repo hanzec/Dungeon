@@ -5,7 +5,7 @@
 #include "io_file.h"
 #include "io_display/display.h"
 #include "utils/dungeon_utils.h"
-#include "dungeon_map_generate.h"
+#include "dungeon_gen_map.h"
 
 dungeon_t *current_level_map;
 //todo current status
@@ -22,7 +22,7 @@ void start_new(bool cli_mode){
 void load_dungeon(bool cli_mode){
     current_level_map = malloc(sizeof(dungeon_t));
 
-    read_operation(dump_dungeon());
+    read_operation(dump_dungeon(), NULL);
 
     current_level_map = malloc(sizeof(dungeon_t));
     memcpy(current_level_map,current_level_map, sizeof(dungeon_t));

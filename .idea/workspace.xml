@@ -11,7 +11,24 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3e69912-a87e-440f-ae2d-67874d133c0f" name="Default Changelist" comment="1.01 code from instructor" />
+    <list default="true" id="e3e69912-a87e-440f-ae2d-67874d133c0f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/utils/endian.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/dungeon-coms327-f19.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/dungeon-coms327-f19.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/dungeon-coms327-f19.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/dungeon-coms327-f19.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/dungeon-coms327-f19.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/dungeon-coms327-f19.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/dungeon-coms327-f19.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/dungeon-coms327-f19.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/dungeon-coms327-f19.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/dungeon-coms327-f19.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/game.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/io_file.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/io_file.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/io_file.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/io_file.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/dungeon_map_generate.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/dungeon_gen_map.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/dungeon_map_generate.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/dungeon_gen_map.h" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,12 +40,49 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utils/dungeon_map_generate.c">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/src/utils/dungeon_gen_map.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="14">
+              <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utils/dungeon_map_generate.h">
+        <entry file="file://$PROJECT_DIR$/src/utils/endian.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+              <folding>
+                <element signature="e#147#158#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/io_file.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="263">
+              <caret line="49" column="66" selection-start-line="49" selection-start-column="66" selection-end-line="49" selection-end-column="66" />
+              <folding>
+                <element signature="e#40#57#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/io_file.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="51" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils/dungeon_gen_map.h">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
@@ -53,10 +107,10 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1065">
+            <state relative-caret-position="1125">
               <caret line="75" column="9" selection-start-line="75" selection-start-column="9" selection-end-line="75" selection-end-column="9" />
             </state>
           </provider>
@@ -106,19 +160,22 @@
         <option value="$PROJECT_DIR$/src/main.h" />
         <option value="$PROJECT_DIR$/src/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/src/utils/dungeon_utils.c" />
-        <option value="$PROJECT_DIR$/src/io_file.h" />
-        <option value="$PROJECT_DIR$/src/io_file.c" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/src/utils/dungeon_utils.h" />
         <option value="$PROJECT_DIR$/src/main.c" />
         <option value="$PROJECT_DIR$/src/game.c" />
         <option value="$PROJECT_DIR$/src/utils/display_utils.h" />
         <option value="$PROJECT_DIR$/src/io_display/window/windos_dungeon.c" />
-        <option value="$PROJECT_DIR$/src/utils/dungeon_map_generate.c" />
         <option value="$PROJECT_DIR$/src/utils/dungeon_map_generate.h" />
         <option value="$PROJECT_DIR$/src/utils/dungeon_gen_path.h" />
         <option value="$PROJECT_DIR$/src/utils/dungeon_gen_path.c" />
         <option value="$PROJECT_DIR$/src/game.h" />
+        <option value="$PROJECT_DIR$/src/utils/dungeon_map_generate.c" />
+        <option value="$PROJECT_DIR$/src/utils/dungeon_gen_pap.c" />
+        <option value="$PROJECT_DIR$/src/utils/dungeon_gen_map.c" />
+        <option value="$PROJECT_DIR$/src/utils/endian.h" />
+        <option value="$PROJECT_DIR$/src/io_file.h" />
+        <option value="$PROJECT_DIR$/src/io_file.c" />
       </list>
     </option>
   </component>
@@ -157,6 +214,12 @@
               <item name="dungeon-coms327-f19" type="b2602c69:ProjectViewProjectNode" />
               <item name="coms327-s19-dungeon" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="io_display" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dungeon-coms327-f19" type="b2602c69:ProjectViewProjectNode" />
+              <item name="coms327-s19-dungeon" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -186,8 +249,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/utils" />
       <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/utils" />
       <recent name="$PROJECT_DIR$/src/utils/data_stucture" />
       <recent name="C:\Users\chen_\CLionProjects\coms327-s19-dungeon\src\utils" />
     </key>
@@ -245,6 +308,9 @@
       <workItem from="1550701198729" duration="262000" />
       <workItem from="1550702548748" duration="432000" />
       <workItem from="1550717527814" duration="374000" />
+      <workItem from="1550718266982" duration="175000" />
+      <workItem from="1550718448052" duration="498000" />
+      <workItem from="1550794356493" duration="827000" />
     </task>
     <task id="LOCAL-00001" summary="finished job until now">
       <created>1548997653751</created>
@@ -267,17 +333,24 @@
       <option name="project" value="LOCAL" />
       <updated>1550717725485</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="1.03 update">
+      <created>1550718426085</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1550718426085</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83317000" />
+    <option name="totallyTimeSpent" value="84817000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19957082" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2081545" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -289,7 +362,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49928468" visible="true" weight="0.33012047" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49928468" visible="true" weight="0.33012047" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5007153" side_tool="true" weight="0.33012047" />
       <window_info active="true" anchor="bottom" id="Messages" order="11" visible="true" weight="0.38554215" />
       <window_info anchor="bottom" id="CMake" order="12" sideWeight="0.49928468" weight="0.27831325" />
@@ -306,7 +379,8 @@
     <MESSAGE value="finished job until now" />
     <MESSAGE value="1.01 code from instructor" />
     <MESSAGE value="fix bug in io_file.h" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix bug in io_file.h" />
+    <MESSAGE value="1.03 update" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.03 update" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/CHANGELOG">
@@ -377,13 +451,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/io_file.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/io_display/window/windos_dungeon.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -431,30 +498,6 @@
     <entry file="file://$PROJECT_DIR$/src/utils/data_stucture/heap.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/dungeon_map_generate.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" selection-start-line="10" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/io_file.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2655">
-          <caret line="177" column="43" selection-start-line="177" selection-start-column="43" selection-end-line="177" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/dungeon_gen_path.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-          <folding>
-            <element signature="e#40#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/dungeon_utils.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -469,40 +512,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/dungeon_gen_path.h">
+    <entry file="file://$PROJECT_DIR$/src/utils/dungeon_gen_path.c" />
+    <entry file="file://$PROJECT_DIR$/src/utils/dungeon_gen_path.h" />
+    <entry file="file://$PROJECT_DIR$/src/utils/dungeon_gen_map.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="2" selection-start-column="2" selection-end-column="2" />
+        <state relative-caret-position="14">
+          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="26" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
-          <folding>
-            <element signature="e#40#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/dungeon_map_generate.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/dungeon_gen_path.c">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/dungeon_gen_path.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/dungeon_map_generate.c">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/dungeon_map_generate.h">
+    <entry file="file://$PROJECT_DIR$/src/utils/dungeon_gen_map.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$USER_HOME$/Downloads/chen_hanze-assignment-1.03/game.h">
@@ -522,8 +541,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1065">
+        <state relative-caret-position="1125">
           <caret line="75" column="9" selection-start-line="75" selection-start-column="9" selection-end-line="75" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="26" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
+          <folding>
+            <element signature="e#40#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/endian.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+          <folding>
+            <element signature="e#147#158#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io_file.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="51" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/io_file.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="49" column="66" selection-start-line="49" selection-start-column="66" selection-end-line="49" selection-end-column="66" />
+          <folding>
+            <element signature="e#40#57#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

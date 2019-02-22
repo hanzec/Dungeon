@@ -2,48 +2,52 @@
 // Created by chen_ on 2019/2/6.
 //
 
-#include "../../../Downloads/chen_hanze-assignment-1.03 2/game.h"
+#include "game.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
 #include "io_file.h"
 #include <sys/stat.h>
 #include <assert.h>
-#include "../../../Downloads/chen_hanze-assignment-1.03 2/dungeon_map_generate.h"
+#include "utils/dungeon_gen_map.h"
 
-void read_operation(dungeon_t *dungeon){
+void read_operation(dungeon_t *dungeon, char *path){
     uint16_t tmp = 0;
     FILE * saved_file;
     struct stat statbuf;
-    char *home = getenv("HOME");
-    uint32_t *file_size = malloc(4);
-    char *tmp_file_head = malloc(12);
-    int *tmp_file_version = malloc(4);
     char file_head[] = "RLG327-S2019";
-    char *path = malloc(strlen(home) + strlen("/.rlg327/dungeon") + 1);
 
-    strcpy(path,home);
-    strcat(path,"/.rlg327/dungeon");
+    if (path == NULL){
+        char *home = getenv("HOME");
+        *path = malloc(strlen(home) + strlen("/.rlg327/dungeon") + 1);
+        strcpy(path,home);
+        strcat(path,"/.rlg327/dungeon");
+        free(home);
+    }
+
 
     stat(path,&statbuf);
     saved_file = fopen(path,"r");
     fflush(saved_file);
 
     //check the file head
+    char *tmp_file_head = malloc(12);
     fread(tmp_file_head,12,1,saved_file);
 
     //Read the file version;
+    int *tmp_file_version = malloc(4);
     fread(tmp_file_version,4,1,saved_file);
 
     //read the file size
+    uint32_t *file_size = malloc(4);
     fread(file_size,4,1,saved_file);
 
     //Read the pc location
     fread(&dungeon->pc_position[dim_x],1,1,saved_file);
     fread(&dungeon->pc_position[dim_y],1,1,saved_file);
 
-    bzero(dungeon->hardness, sizeof(uint8_t)*DUNGEON_Y*DUNGEON_X);
     //read the hardness of the dungeon
+    bzero(dungeon->hardness, sizeof(uint8_t)*DUNGEON_Y*DUNGEON_X);
     for (int i = 0; i < DUNGEON_Y; ++i) {
         for (int j = 0; j < DUNGEON_X; ++j) {
             fread(&dungeon->hardness[i][j],1,1,saved_file);
@@ -101,10 +105,10 @@ void read_operation(dungeon_t *dungeon){
         dungeon->map[y][x] = ter_stairs_down;
     }
 
+    free(file_size);
     fclose(saved_file);
-
-
-    return;
+    free(tmp_file_head);
+    free(tmp_file_version);
 
 }
 int write_operation(dungeon_t *dungeon){

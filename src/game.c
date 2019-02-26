@@ -2,7 +2,7 @@
 // Created by chen_ on 2019/1/31.
 //
 #include "game.h"
-#include "io_file.h"
+#include "io_file_c.h"
 #include "io_display/display.h"
 #include "utils/dungeon_utils.h"
 #include "dungeon_gen_map.h"

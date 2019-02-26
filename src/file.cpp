@@ -1,33 +1,39 @@
 //
-// Created by chen_ on 2019/2/6.
+// Created by 陈瀚泽 on 2019-02-22.
 //
 
 #include "game.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <memory.h>
-#include "io_file.h"
-#include <assert.h>
+#include "file.h"
+#include <fstream>
 #include <sys/stat.h>
-#include "utils/dungeon_gen_map.h"
-#include <crossplatform_header/endian.h>
+#include "utils/crossplatform_header/endian.h"
 
-void read_operation(dungeon_t *dungeon, char *path){
-    uint16_t tmp = 0;
-    FILE * saved_file;
+file::file(std::string * path) {
+    std::string homePath (getenv("HOME"));
+
+    if (path == nullptr)
+        this->filePath = &homePath.append("/.rlg327/dungeon");
+    else if (path->find("/") == std::string::npos)
+        this->filePath = &homePath.append("/.rlg327/").append(*path);
+    else
+        this->filePath = path;
+}
+
+int8_t file::read_saved_map(dungeon_t *dungeon){
+
+    std::ifstream savedDungeon(*this->filePath);
+
+    //make sure the file is exsist
+    if (! savedDungeon.is_open())
+        return -1;
+
+    stat(path,&statbuf);
+
     struct stat statbuf;
     char file_head[] = "RLG327-S2019";
 
-    if (path == NULL){
-        char *home = getenv("HOME");
-        *path = malloc(strlen(home) + strlen("/.rlg327/dungeon") + 1);
-        strcpy(path,home);
-        strcat(path,"/.rlg327/dungeon");
-        free(home);
-    }
 
 
-    stat(path,&statbuf);
     saved_file = fopen(path,"r");
     fflush(saved_file);
 

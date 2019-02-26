@@ -86,49 +86,25 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/file.cpp">
+			<Option target="dungeon-coms327-f19"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/file.h">
+			<Option target="dungeon-coms327-f19"/>
+		</Unit>
 		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/game.c">
 			<Option target="dungeon-coms327-f19"/>
 		</Unit>
 		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/game.h">
 			<Option target="dungeon-coms327-f19"/>
 		</Unit>
-		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_display/window/windos_dungeon.c">
+		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_file_c.c">
 			<Option target="dungeon-coms327-f19"/>
 		</Unit>
-		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_display/window/windos_dungeon.h">
-			<Option target="dungeon-coms327-f19"/>
-		</Unit>
-		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_file.c">
-			<Option target="dungeon-coms327-f19"/>
-		</Unit>
-		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_file.h">
+		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_file_c.h">
 			<Option target="dungeon-coms327-f19"/>
 		</Unit>
 		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/main.c">
-			<Option target="dungeon-coms327-f19"/>
-		</Unit>
-		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/display_utils.c">
-			<Option target="dungeon-coms327-f19"/>
-		</Unit>
-		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/display_utils.h">
-			<Option target="dungeon-coms327-f19"/>
-		</Unit>
-		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_gen_path.c">
-			<Option target="dungeon-coms327-f19"/>
-		</Unit>
-		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_gen_path.h">
-			<Option target="dungeon-coms327-f19"/>
-		</Unit>
-		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_map_generate.c">
-			<Option target="dungeon-coms327-f19"/>
-		</Unit>
-		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_map_generate.h">
-			<Option target="dungeon-coms327-f19"/>
-		</Unit>
-		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_utils.c">
-			<Option target="dungeon-coms327-f19"/>
-		</Unit>
-		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_utils.h">
 			<Option target="dungeon-coms327-f19"/>
 		</Unit>
 		<Unit filename="/Users/hanzech/CLionProjects/coms327-s19-dungeon/CMakeLists.txt">

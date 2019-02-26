@@ -70,18 +70,18 @@ src/CMakeFiles/dungeon-coms327-f19.dir/game.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/dungeon-coms327-f19.dir/game.c.s"
 	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/game.c -o CMakeFiles/dungeon-coms327-f19.dir/game.c.s
 
-src/CMakeFiles/dungeon-coms327-f19.dir/io_file.c.o: src/CMakeFiles/dungeon-coms327-f19.dir/flags.make
-src/CMakeFiles/dungeon-coms327-f19.dir/io_file.c.o: ../src/io_file.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object src/CMakeFiles/dungeon-coms327-f19.dir/io_file.c.o"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/dungeon-coms327-f19.dir/io_file.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_file.c
+src/CMakeFiles/dungeon-coms327-f19.dir/io_file_c.c.o: src/CMakeFiles/dungeon-coms327-f19.dir/flags.make
+src/CMakeFiles/dungeon-coms327-f19.dir/io_file_c.c.o: ../src/io_file_c.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object src/CMakeFiles/dungeon-coms327-f19.dir/io_file_c.c.o"
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/dungeon-coms327-f19.dir/io_file_c.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_file_c.c
 
-src/CMakeFiles/dungeon-coms327-f19.dir/io_file.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/dungeon-coms327-f19.dir/io_file.c.i"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_file.c > CMakeFiles/dungeon-coms327-f19.dir/io_file.c.i
+src/CMakeFiles/dungeon-coms327-f19.dir/io_file_c.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/dungeon-coms327-f19.dir/io_file_c.c.i"
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_file_c.c > CMakeFiles/dungeon-coms327-f19.dir/io_file_c.c.i
 
-src/CMakeFiles/dungeon-coms327-f19.dir/io_file.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/dungeon-coms327-f19.dir/io_file.c.s"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_file.c -o CMakeFiles/dungeon-coms327-f19.dir/io_file.c.s
+src/CMakeFiles/dungeon-coms327-f19.dir/io_file_c.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/dungeon-coms327-f19.dir/io_file_c.c.s"
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_file_c.c -o CMakeFiles/dungeon-coms327-f19.dir/io_file_c.c.s
 
 src/CMakeFiles/dungeon-coms327-f19.dir/main.c.o: src/CMakeFiles/dungeon-coms327-f19.dir/flags.make
 src/CMakeFiles/dungeon-coms327-f19.dir/main.c.o: ../src/main.c
@@ -96,98 +96,38 @@ src/CMakeFiles/dungeon-coms327-f19.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/dungeon-coms327-f19.dir/main.c.s"
 	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/main.c -o CMakeFiles/dungeon-coms327-f19.dir/main.c.s
 
-src/CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.c.o: src/CMakeFiles/dungeon-coms327-f19.dir/flags.make
-src/CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.c.o: ../src/utils/display_utils.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object src/CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.c.o"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/display_utils.c
+src/CMakeFiles/dungeon-coms327-f19.dir/file.cpp.o: src/CMakeFiles/dungeon-coms327-f19.dir/flags.make
+src/CMakeFiles/dungeon-coms327-f19.dir/file.cpp.o: ../src/file.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/CMakeFiles/dungeon-coms327-f19.dir/file.cpp.o"
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dungeon-coms327-f19.dir/file.cpp.o -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/file.cpp
 
-src/CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.c.i"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/display_utils.c > CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.c.i
+src/CMakeFiles/dungeon-coms327-f19.dir/file.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dungeon-coms327-f19.dir/file.cpp.i"
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/file.cpp > CMakeFiles/dungeon-coms327-f19.dir/file.cpp.i
 
-src/CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.c.s"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/display_utils.c -o CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.c.s
-
-src/CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.c.o: src/CMakeFiles/dungeon-coms327-f19.dir/flags.make
-src/CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.c.o: ../src/io_display/window/windos_dungeon.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object src/CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.c.o"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_display/window/windos_dungeon.c
-
-src/CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.c.i"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_display/window/windos_dungeon.c > CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.c.i
-
-src/CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.c.s"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_display/window/windos_dungeon.c -o CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.c.s
-
-src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.c.o: src/CMakeFiles/dungeon-coms327-f19.dir/flags.make
-src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.c.o: ../src/utils/dungeon_map_generate.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.c.o"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_map_generate.c
-
-src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.c.i"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_map_generate.c > CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.c.i
-
-src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.c.s"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_map_generate.c -o CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.c.s
-
-src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.c.o: src/CMakeFiles/dungeon-coms327-f19.dir/flags.make
-src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.c.o: ../src/utils/dungeon_utils.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.c.o"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_utils.c
-
-src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.c.i"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_utils.c > CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.c.i
-
-src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.c.s"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_utils.c -o CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.c.s
-
-src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_gen_path.c.o: src/CMakeFiles/dungeon-coms327-f19.dir/flags.make
-src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_gen_path.c.o: ../src/utils/dungeon_gen_path.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_gen_path.c.o"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_gen_path.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_gen_path.c
-
-src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_gen_path.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_gen_path.c.i"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_gen_path.c > CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_gen_path.c.i
-
-src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_gen_path.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_gen_path.c.s"
-	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_gen_path.c -o CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_gen_path.c.s
+src/CMakeFiles/dungeon-coms327-f19.dir/file.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dungeon-coms327-f19.dir/file.cpp.s"
+	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/file.cpp -o CMakeFiles/dungeon-coms327-f19.dir/file.cpp.s
 
 # Object files for target dungeon-coms327-f19
 dungeon__coms327__f19_OBJECTS = \
 "CMakeFiles/dungeon-coms327-f19.dir/game.c.o" \
-"CMakeFiles/dungeon-coms327-f19.dir/io_file.c.o" \
+"CMakeFiles/dungeon-coms327-f19.dir/io_file_c.c.o" \
 "CMakeFiles/dungeon-coms327-f19.dir/main.c.o" \
-"CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.c.o" \
-"CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.c.o" \
-"CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.c.o" \
-"CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.c.o" \
-"CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_gen_path.c.o"
+"CMakeFiles/dungeon-coms327-f19.dir/file.cpp.o"
 
 # External object files for target dungeon-coms327-f19
 dungeon__coms327__f19_EXTERNAL_OBJECTS =
 
 src/dungeon-coms327-f19: src/CMakeFiles/dungeon-coms327-f19.dir/game.c.o
-src/dungeon-coms327-f19: src/CMakeFiles/dungeon-coms327-f19.dir/io_file.c.o
+src/dungeon-coms327-f19: src/CMakeFiles/dungeon-coms327-f19.dir/io_file_c.c.o
 src/dungeon-coms327-f19: src/CMakeFiles/dungeon-coms327-f19.dir/main.c.o
-src/dungeon-coms327-f19: src/CMakeFiles/dungeon-coms327-f19.dir/utils/display_utils.c.o
-src/dungeon-coms327-f19: src/CMakeFiles/dungeon-coms327-f19.dir/io_display/window/windos_dungeon.c.o
-src/dungeon-coms327-f19: src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_map_generate.c.o
-src/dungeon-coms327-f19: src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_utils.c.o
-src/dungeon-coms327-f19: src/CMakeFiles/dungeon-coms327-f19.dir/utils/dungeon_gen_path.c.o
+src/dungeon-coms327-f19: src/CMakeFiles/dungeon-coms327-f19.dir/file.cpp.o
 src/dungeon-coms327-f19: src/CMakeFiles/dungeon-coms327-f19.dir/build.make
 src/dungeon-coms327-f19: /usr/lib/libcurses.dylib
 src/dungeon-coms327-f19: /usr/lib/libform.dylib
 src/dungeon-coms327-f19: src/CMakeFiles/dungeon-coms327-f19.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking C executable dungeon-coms327-f19"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable dungeon-coms327-f19"
 	cd /Users/hanzech/CLionProjects/coms327-s19-dungeon/cmake-build-debug/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/dungeon-coms327-f19.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

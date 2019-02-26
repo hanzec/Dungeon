@@ -6,19 +6,3 @@
 
 #IncludeRegexTransform: 
 
-../src/utils/display_utils.c
-curses.h
--
-display_utils.h
-../src/utils/display_utils.h
-
-../src/utils/display_utils.h
-
-/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_display/window/windos_dungeon.c
-display_utils.c
-/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_display/window/display_utils.c
-windos_dungeon.h
-/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_display/window/windos_dungeon.h
-
-/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_display/window/windos_dungeon.h
-

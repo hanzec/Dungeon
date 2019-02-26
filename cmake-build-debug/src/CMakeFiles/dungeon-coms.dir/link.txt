@@ -1,1 +1,0 @@
-/usr/bin/cc -g  -rdynamic CMakeFiles/dungeon-coms.dir/game.o CMakeFiles/dungeon-coms.dir/main.o CMakeFiles/dungeon-coms.dir/utils/display_utils.o CMakeFiles/dungeon-coms.dir/io_display/window/windos_dungeon.o  -o dungeon-coms -lcurses -lform 

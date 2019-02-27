@@ -12,7 +12,7 @@ static int32_t corridor_node_cmp(const void *key, const void *with) {
     return ((corridor_node_t *) key)->cost - ((corridor_node_t *) with)->cost;
 }
 
-void dijkstra_no_tunnelling(dungeon_t *d, pair_t from)
+void dijkstra_no_tunnelling(dungeon_t *d, pair_t from, pair_t to)
 {
 
     heap_t h;

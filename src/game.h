@@ -22,6 +22,7 @@
 #define MAX_ROOM_RATIO         90
 #define DUNGEON_VERSION        0
 #define MAX_ROOMS              10
+#define MONSTER_RANGE           3
 #define mappair(pair) (d->map[pair[dim_y]][pair[dim_x]])
 #define mapxy(x, y) (d->map[y][x])
 #define hardnesspair(pair) (d->hardness[pair[dim_y]][pair[dim_x]])

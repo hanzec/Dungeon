@@ -1,16 +1,11 @@
 //
 // Created by chen_ on 2019/1/31.
 //
-
-#include <stdint.h>
-#include <time.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
 #ifndef DUNGEON_V1_01_GAME_H
 #define DUNGEON_V1_01_GAME_H
 
+#include <stdint.h>
+#include <stdbool.h>
 
 #define DUNGEON_X              80
 #define DUNGEON_Y              21
@@ -70,14 +65,13 @@ typedef struct room{
 
 typedef struct dungeon {
     uint16_t num_rooms;
-    pair_t pc_position;
     uint16_t num_up_stairs;
     room_t rooms[MAX_ROOMS];
     uint16_t num_down_stairs;
+    char character[DUNGEON_Y][DUNGEON_X];
     uint8_t hardness[DUNGEON_Y][DUNGEON_X];
     terrain_type_t map[DUNGEON_Y][DUNGEON_X];
 } dungeon_t;
-
 
 dungeon_t* dump_dungeon();
 void start_new(bool cli_mode);

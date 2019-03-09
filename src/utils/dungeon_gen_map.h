@@ -5,8 +5,8 @@
 #ifndef COMS327_S19_DUNGEON_DUNGEON_MAP_GENERATE_H
 #define COMS327_S19_DUNGEON_DUNGEON_MAP_GENERATE_H
 
-#include "data_stucture/heap.h"
-
+#include "heap.h"
+#include "game.h"
 
 typedef struct corridor_path {
     heap_node_t *hn;

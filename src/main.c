@@ -46,7 +46,6 @@ int main(int argc, char *argv[]) {
             load_dungeon(false);
             break;
         case write_game_to_file:
-            write_operation(dump_dungeon());
             break;
         case graph_mode:
             graph_mod();

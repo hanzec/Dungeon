@@ -23,6 +23,8 @@
 #define hardnesspair(pair) (d->hardness[pair[dim_y]][pair[dim_x]])
 #define hardnessxy(x, y) (d->hardness[y][x])
 
+#define DUNGEON_KEY_CONF_LOC "~/.rlg327/KeyBind.conf"
+
 typedef enum dim {
     dim_x,
     dim_y,

@@ -7,7 +7,7 @@
 
 
 #include "game.h"
-#include "monster.h"
+#include "monster/monster.h"
 
 void dijkstra_tunnelling(dungeon_t *d, pair_t from, monster_t * monster);
 void dijkstra_no_tunnelling(dungeon_t *d, pair_t from, monster_t * monster);

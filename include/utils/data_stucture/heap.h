@@ -7,15 +7,50 @@ extern "C" {
 
 # include <stdint.h>
 
-struct heap_node;
-typedef struct heap_node heap_node_t;
+typedef struct heap_node {
+    void *datum;
+    uint32_t mark;
+    uint32_t degree;
+    struct heap_node *next;
+    struct heap_node *prev;
+    struct heap_node *parent;
+    struct heap_node *child;
+} heap_node_t;
 
 typedef struct heap {
-  heap_node_t *min;
-  uint32_t size;
-  int32_t (*compare)(const void *key, const void *with);
-  void (*datum_delete)(void *);
+    heap_node_t *min;
+    uint32_t size;
+    int32_t (*compare)(const void *key, const void *with);
+    void (*datum_delete)(void *);
 } heap_t;
+
+
+#define swap(a, b) ({    \
+  typeof (a) _tmp = (a); \
+  (a) = (b);             \
+  (b) = _tmp;            \
+})
+
+#define splice_heap_node_lists(n1, n2) ({ \
+  if ((n1) && (n2)) {                     \
+    (n1)->next->prev = (n2)->prev;        \
+    (n2)->prev->next = (n1)->next;        \
+    (n1)->next = (n2);                    \
+    (n2)->prev = (n1);                    \
+  }                                       \
+})
+
+#define insert_heap_node_in_list(n, l) ({ \
+  (n)->next = (l);                        \
+  (n)->prev = (l)->prev;                  \
+  (n)->prev->next = (n);                  \
+  (l)->prev = (n);                        \
+})
+
+#define remove_heap_node_from_list(n) ({ \
+  (n)->next->prev = (n)->prev;           \
+  (n)->prev->next = (n)->next;           \
+})
 
 void heap_init(heap_t *h,
                int32_t (*compare)(const void *key, const void *with),

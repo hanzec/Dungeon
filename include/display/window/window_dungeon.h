@@ -7,9 +7,9 @@
 #include <curses.h>
 #include "../../game.h"
 #include "../../characters/pc.h"
-#include "../../characters/monster.h"
+#include "../../characters/MonsterController.h"
 
-WINDOW * initDungeonDisplay(dungeon_t * dungeon, monster_t * monster, pc_t * pc);
+WINDOW * initDungeonDisplay(dungeon_t * dungeon, monsterNode_t * monster, pc_t * pc);
 
 
 #endif //DUNGEON_V1_01_WINDOS_DUNGEON_H

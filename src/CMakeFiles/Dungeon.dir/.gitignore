@@ -5,3 +5,5 @@ cmake-build-debug/*
 CMakeFiles/*
 src/CMakeFiles/*
 src/display/CMakeFiles/*
+
+*.cmake

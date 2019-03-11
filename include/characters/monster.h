@@ -2,15 +2,12 @@
 // Created by 陈瀚泽 on 2019-02-26.
 //
 
-#include "dungeon_gen_path.h"
-
 #ifndef DUNGEON_COMS327_F19_MONSTER_H
 #define DUNGEON_COMS327_F19_MONSTER_H
-#include "game.h"
+
 #include "pc.h"
-#include "heap.h"
-
-
+#include "../game.h"
+#include "../utils/data_stucture/heap.h"
 #define monsterNext(monster) ((corridor_node_t *) monster->path[monster->location[dim_y]][monster->location[dim_x]].prev_node)
 
 typedef struct corridor_node {

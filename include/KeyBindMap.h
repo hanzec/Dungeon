@@ -15,4 +15,6 @@ typedef enum keyList{
 }keyList_t;
 
 int * initKeyMap();
+int setMoveKeySet(int * keyMap, int8_t combNum);
+int setKey(int * keyMap, keyList_t func, int key);
 #endif //DUNGEON_COMS327_F19_KEYBINDMAP_H

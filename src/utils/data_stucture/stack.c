@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "stack.h"
+#include "../../../include/utils/data_stucture/stack.h"
 
 int stack_init(stack_t *s)
 {

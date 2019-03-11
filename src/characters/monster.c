@@ -7,7 +7,7 @@
 #include <math.h>
 #include <time.h>
 #include "dungeon_gen_path.h"
-#include "monster.h"
+#include "../../include/characters/monster.h"
 #include "macros.h"
 #include "game.h"
 

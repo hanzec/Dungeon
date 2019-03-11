@@ -4,6 +4,7 @@
 
 #ifndef DUNGEON_V1_01_DISPLAY_H
 #define DUNGEON_V1_01_DISPLAY_H
+#include <curses.h>
 
 void display_dungeon(char** map);
 

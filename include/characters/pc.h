@@ -4,7 +4,7 @@
 
 #ifndef DUNGEON_COMS327_F19_PC_H
 #define DUNGEON_COMS327_F19_PC_H
-#include "game.h"
+#include "../game.h"
 
 typedef struct pc{
     pair_t location;

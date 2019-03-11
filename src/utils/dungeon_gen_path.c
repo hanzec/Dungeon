@@ -1,9 +1,7 @@
 //
 // Created by 陈瀚泽 on 2019-02-14.
 //
-#include <stddef.h>
-#include "dungeon_gen_path.h"
-#include "macros.h"
+#include "../../include/utils/dungeon_gen_path.h"
 
 static int32_t corridor_node_cmp(const void *key, const void *with) {
     return ((corridor_node_t *) key)->cost - ((corridor_node_t *) with)->cost;

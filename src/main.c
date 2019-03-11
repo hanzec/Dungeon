@@ -2,7 +2,7 @@
 // Created by chen_ on 2019/1/31.
 //
 #import <stdio.h>
-#include "game.h"
+#include "../include/game.h"
 #include <curses.h>
 #include <string.h>
 #include <ncurses.h>

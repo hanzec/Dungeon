@@ -2,8 +2,8 @@
 // Created by 陈瀚泽 on 2019-02-22.
 //
 
-#include "game.h"
-#include "file.h"
+#include "../include/game.h"
+#include "../include/file.h"
 #include <fstream>
 #include <sys/stat.h>
 #include "utils/crossplatform_header/endian.h"

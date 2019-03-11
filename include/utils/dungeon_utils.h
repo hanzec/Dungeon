@@ -4,7 +4,8 @@
 #ifndef DUNGEON_COMS327_F19_DUNGEON_UTILS_H
 #define DUNGEON_COMS327_F19_DUNGEON_UTILS_H
 
-#include "game.h"
+#include <stdio.h>
+#include "../game.h"
 
 void print_dungeon_cli(dungeon_t *d);
 

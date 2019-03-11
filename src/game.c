@@ -1,11 +1,11 @@
 //
 // Created by chen_ on 2019/1/31.
 //
-#include "game.h"
-#include "io_file_c.h"
-#include "io_display/display.h"
-#include "utils/dungeon_utils.h"
-#include "dungeon_gen_map.h"
+#include "../include/game.h"
+#include "../include/io_file_c.h"
+#include "../include/display/display.h"
+#include "../include/utils/dungeon_utils.h"
+#include "../include/utils/dungeon_gen_map.h"
 
 dungeon_t *current_level_map;
 //todo current status

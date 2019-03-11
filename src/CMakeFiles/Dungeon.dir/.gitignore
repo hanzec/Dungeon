@@ -1,0 +1,7 @@
+.idea/
+.DS_Store
+cmake-build-debug/*
+
+CMakeFiles/*
+src/CMakeFiles/*
+src/display/CMakeFiles/*

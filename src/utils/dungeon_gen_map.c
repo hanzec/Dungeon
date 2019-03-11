@@ -1,15 +1,7 @@
 //
 // Created by chen_ on 2019/1/31.
 //
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
-#include <limits.h>
-#include <time.h>
-#include <assert.h>
-#include "game.h"
-#include "dungeon_gen_map.h"
+#include "../../include/utils/dungeon_gen_map.h"
 
 static uint32_t in_room(dungeon_t *d, int16_t y, int16_t x)
 {

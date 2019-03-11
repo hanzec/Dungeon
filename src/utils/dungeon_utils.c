@@ -2,8 +2,7 @@
 // Created by chen_ on 2019/2/7.
 //
 
-#include <stdio.h>
-#include "dungeon_utils.h"
+#include "../../include/utils/dungeon_utils.h"
 
 void print_dungeon_cli(dungeon_t *d)
 {

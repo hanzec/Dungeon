@@ -5,9 +5,10 @@
 #ifndef DUNGEON_COMS327_F19_DUNGEON_GEN_PATH_H
 #define DUNGEON_COMS327_F19_DUNGEON_GEN_PATH_H
 
-
-#include "game.h"
-#include "monster/monster.h"
+#include <stddef.h>
+#include "../game.h"
+#include "../macros.h"
+#include "../characters/monster.h"
 
 void dijkstra_tunnelling(dungeon_t *d, pair_t from, monster_t * monster);
 void dijkstra_no_tunnelling(dungeon_t *d, pair_t from, monster_t * monster);

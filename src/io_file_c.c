@@ -2,14 +2,14 @@
 // Created by chen_ on 2019/2/6.
 //
 
-#include "game.h"
+#include "../include/game.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
-#include "io_file_c.h"
+#include "../include/io_file_c.h"
 #include <assert.h>
 #include <sys/stat.h>
-#include "utils/dungeon_gen_map.h"
+#include "../include/utils/dungeon_gen_map.h"
 #include <crossplatform_header/endian.h>
 
 void read_operation(dungeon_t *dungeon, char *path){

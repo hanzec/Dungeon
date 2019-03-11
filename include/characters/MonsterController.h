@@ -5,6 +5,8 @@
 #ifndef COMS327_S19_DUNGEON_MONSTERCONTROLLER_H
 #define COMS327_S19_DUNGEON_MONSTERCONTROLLER_H
 
+#include <stdlib.h>
+#include <stddef.h>
 #include "monster.h"
 
 typedef struct monsterNode{

@@ -7,18 +7,9 @@
 #include <curses.h>
 #include "../../game.h"
 #include "../../characters/pc.h"
-#include "../../characters/MonsterController.h"
+#include "../../characters/monster.h"
 
-typedef struct gameArea{
-    pc_t pc;
-    WINDOW * window;
-    dungeon_t * dungeon;
-    monsterNode_t * monsterNode
-}gameArea_t;
+WINDOW * initDungeonDisplay(dungeon_t * dungeon, monster_t * monster, pc_t * pc);
 
-
-int updateAll(gameArea_t * gameArea);
-int updateArea(gameArea_t * gameArea, uint8_t x, uint8_t y);
-gameArea_t initDungeonDisplay(dungeon_t * dungeon,monsterNode_t * monsterNode,pc_t * pc);
 
 #endif //DUNGEON_V1_01_WINDOS_DUNGEON_H

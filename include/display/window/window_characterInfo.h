@@ -5,5 +5,7 @@
 #ifndef DUNGEON_COMS327_F19_WINDOW_H
 #define DUNGEON_COMS327_F19_WINDOW_H
 
-void initCharacterInfo();
+#include "../../characters/pc.h"
+
+WINDOW * initCharacterInfo(pc_t * pc);
 #endif //DUNGEON_COMS327_F19_WINDOW_H

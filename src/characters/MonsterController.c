@@ -2,12 +2,7 @@
 // Created by 陈瀚泽 on 2019-02-27.
 //
 
-#include <assert.h>
-#include <stddef.h>
-#include <zconf.h>
 #include "../../include/characters/MonsterController.h"
-#include "game.h"
-#include "../../include/characters/monster.h"
 
 void pushSingleMonster(monsterNode_t * monsterNode, monster_t * monster, uint32_t weight){
     monsterNode_t * nextMonster = malloc(sizeof(monsterNode_t));

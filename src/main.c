@@ -1,7 +1,7 @@
 //
 // Created by chen_ on 2019/1/31.
 //
-#import <stdio.h>
+
 #include "../include/game.h"
 #include <curses.h>
 #include <string.h>
@@ -11,15 +11,7 @@ typedef enum file_action {
     no_select,
     graph_mode,
     read_saved_game,
-    write_game_to_file,
 } action_t;
-
-int8_t text_mod(int argc, char *argv[]){
-}
-
-void graph_mod(){
-    //todo add welcome menu here;
-};
 
 int main(int argc, char *argv[]) {
     int8_t error_code;

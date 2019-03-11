@@ -4,6 +4,7 @@
 #ifndef DUNGEON_V1_01_GAME_H
 #define DUNGEON_V1_01_GAME_H
 
+#include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
 

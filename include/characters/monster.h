@@ -6,7 +6,11 @@
 #define DUNGEON_COMS327_F19_MONSTER_H
 
 #include "pc.h"
+#include <time.h>
+#include <math.h>
+#include <strings.h>
 #include "../game.h"
+#include "../macros.h"
 #include "../utils/data_stucture/heap.h"
 #define monsterNext(monster) ((corridor_node_t *) monster->path[monster->location[dim_y]][monster->location[dim_x]].prev_node)
 
@@ -31,5 +35,7 @@ typedef struct monster{
 
 int moveMonster(monster_t * monster);
 void newMonster(dungeon_t *dungeon, pc_t * pc, monster_t * monster);
+void dijkstra_tunnelling(dungeon_t *d, pair_t from, monster_t * monster);
+void dijkstra_no_tunnelling(dungeon_t *d, pair_t from, monster_t * monster);
 
 #endif //DUNGEON_COMS327_F19_MONSTER_H

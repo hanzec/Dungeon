@@ -4,9 +4,8 @@
 
 #ifndef DUNGEON_COMS327_F19_PC_H
 #define DUNGEON_COMS327_F19_PC_H
-#include "../game.h"
+#include "charactersCommon.h"
 
-typedef struct pc{
-    pair_t location;
-}pc_t;
+int movePC(direction_t direction, pc_t * pc);
+
 #endif //DUNGEON_COMS327_F19_PC_H

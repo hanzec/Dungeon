@@ -1,46 +1,128 @@
 //
 // Created by chen_ on 2019/1/31.
 //
-#include "../include/game.h"
-#include "../include/io_file_c.h"
-#include "../include/display/display.h"
-#include "../include/utils/dungeon_utils.h"
-#include "../include/utils/dungeon_gen_map.h"
-
-dungeon_t *current_level_map;
+#include <stdlib.h>
+#include <strings.h>
+#include <ncurses.h>
+#include "game.h"
+#include "display.h"
+#include "dungeon_utils.h"
+#include "dungeon_gen_map.h"
+#include "MonsterController.h"
+#include "monster.h"
+#include "pc.h"
 //todo current status
 //todo multiple stair support
-void start_new(bool cli_mode){
-    current_level_map = malloc(sizeof(dungeon_t));
-    generate_dungon(current_level_map);
 
-    if (cli_mode){
-        print_dungeon_cli(current_level_map);
+pc_t pc;
+dungeon_t dungeon;
+baseScreen_t * screen;
+monsterNode_t monsterNode;
+
+void start_new(){
+    //generate dungeon
+    generate_dungon(&dungeon);
+    bzero(&monsterNode,sizeof(monsterNode_t));
+
+    //initial pc location
+    pc.dungeon = &dungeon;
+    bzero(&pc.prevLocation, sizeof(pair_t));
+    pc.location[dim_x] = dungeon.rooms[0].position[dim_x];
+    pc.location[dim_y] = dungeon.rooms[0].position[dim_y];
+
+    //generate monster
+    pushMonsterToQueue(10,&dungeon,&pc,&monsterNode);
+    
+    //start game
+    startGame(&dungeon,&monsterNode,&pc);
+}
+
+
+void close_dungeon(int mode){
+    switch (mode)
+    {
+        case 1:
+            showDiedScreen(screen);
+            break;
+        default:
+            endwin();
+            closeScreen(screen);
+            break;
     }
+    return;
 }
 
-void load_dungeon(bool cli_mode){
-    current_level_map = malloc(sizeof(dungeon_t));
+void startGame(){
+    int time = 0;
+    bool flag = true;
+    
+    initDisplayEnv();
+    screen = initScreen(&dungeon,&pc,monsterNode);
 
-    read_operation(dump_dungeon(), NULL);
+    while(flag){
+        while(time >= seeFrontMonsterNode(&monsterNode)->time){
+            monster_t * current = popMinMonster(&monsterNode);
+            if (moveMonster(current) == 1){
+                flag = false;
+                close_dungeon(1);
+                goto end;
+            }
+            pushSingleMonster(&monsterNode, current, (uint32_t) (time + 1000 / current->speed));
+        }
 
-    current_level_map = malloc(sizeof(dungeon_t));
-    memcpy(current_level_map,current_level_map, sizeof(dungeon_t));
-    free(current_level_map);
-    print_dungeon_cli(current_level_map);
+        reselect:
+        switch (getch())
+        {
+            case KEY_UP:
+                if(movePC(Upper,&pc))
+                    goto reselect;
+                updatePCLocation(screen,&pc);
+                break;
+            case KEY_DOWN:
+                if(movePC(Down,&pc))
+                    goto reselect;
+                updatePCLocation(screen,&pc);
+                break;
+            case KEY_RIGHT:
+                if(movePC(Right,&pc))
+                    goto reselect;
+                updatePCLocation(screen,&pc);
+                break;
+            case KEY_LEFT:
+                if(movePC(Left,&pc))
+                    goto reselect;
+                updatePCLocation(screen,&pc);
+                break;
+            case 'm':
+                showMonsterList(screen,&monsterNode);
+                break;
+            default:
+                goto reselect;
+                break;
+        }
+        if ((dungeon.map[pc.location[dim_y]][pc.location[dim_x]] == ter_stairs_up) ||
+            (dungeon.map[pc.location[dim_y]][pc.location[dim_x]] == ter_stairs_up) ){
+            bzero(&dungeon,sizeof(dungeon_t));
+            //TODO may leak memory need imrove
+            bzero(&monsterNode, sizeof(monsterNode_t));
+
+            generate_dungon(&dungeon);
+
+            //initial pc location
+            pc.dungeon = &dungeon;
+            bzero(&pc.prevLocation, sizeof(pair_t));
+            pc.location[dim_x] = dungeon.rooms[0].position[dim_x];
+            pc.location[dim_y] = dungeon.rooms[0].position[dim_y];
+
+            //generate monster
+            pushMonsterToQueue(10,&dungeon,&pc,&monsterNode);
+            
+            updateDungeonScreen(screen,&dungeon);
+        time += 10;
+    }
+    end:
+
+    return;
 }
 
-dungeon_t* dump_dungeon(){
-    dungeon_t *dump = malloc(sizeof(dungeon_t));
-    memcpy(dump,current_level_map, sizeof(dungeon_t));
-
-    return dump;
-}
-
-
-void close_dungeon(bool cli_mode){
-
-    free(current_level_map);
-
-}
 

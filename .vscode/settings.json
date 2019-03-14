@@ -1,0 +1,22 @@
+{
+    "files.exclude": {
+        "**/*.o": true,
+        "**/.hg": true,
+        "**/.git": true,
+        "**/.svn": true,
+        "**/*.o.cmd": true,
+        "**/.DS_Store": true,
+        "**/CMakeFiles": true,
+        "**/.gitattributes": true,
+        "**/CMakeCache.txt": true,
+        "**/cmake-build-debug": true,
+        "**/cmake_install.cmake": true
+    },
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": false
+    },
+    "files.autoSave" : "afterDelay",
+    "C_Cpp.configurationWarnings": "Disabled"
+}

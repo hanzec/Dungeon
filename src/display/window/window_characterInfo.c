@@ -2,8 +2,15 @@
 // Created by 陈瀚泽 on 2019/3/10.
 //
 
-#include <curses.h>
-#include "../../../include/display/window/window_characterInfo.h"
+#include "displayCommon.h"
+#include "window_characterInfo.h"
+#include "gameCommon.h"
+#include "charactersCommon.h"
 
-void initCharacterInfo(){
+WINDOW * initCharacterInfo(pc_t * pc){
+    WINDOW * statusBar = newwin(3,DUNGEON_X,22,0);
+
+    wbkgd(statusBar,COLOR_PAIR(PAIR_CHARACTER_STATUS));
+
+    wrefresh(statusBar);
 }

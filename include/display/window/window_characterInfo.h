@@ -4,8 +4,8 @@
 
 #ifndef DUNGEON_COMS327_F19_WINDOW_H
 #define DUNGEON_COMS327_F19_WINDOW_H
-
-#include "../../characters/pc.h"
+#include <ncurses.h>
+#include "charactersCommon.h"
 
 WINDOW * initCharacterInfo(pc_t * pc);
 #endif //DUNGEON_COMS327_F19_WINDOW_H

@@ -4,26 +4,33 @@
 
 #ifndef DUNGEON_V1_01_DISPLAY_H
 #define DUNGEON_V1_01_DISPLAY_H
-#include <stdlib.h>
-#include <curses.h>
-#include "../game.h"
-#include "display_utils.h"
-#include "../characters/monster.h"
-#include "window/window_dungeon.h"
-#include "window/window_statusBar.h"
-#include "window/window_characterInfo.h"
-#include "../characters/MonsterController.h"
+
+#include <ncurses.h>
+#include <panel.h>
+#include "charactersCommon.h"
+#include "gameCommon.h"
 
 typedef struct baseScreen{
-    pc_t * pc;
-    dungeon_t * dungeon;
     WINDOW * pcInfoWindow;
     WINDOW * statusWindow;
     WINDOW * dungeonWindow;
-    monsterNode_t * monsterNode;
+    PANEL * monsterListPanel[2];
 } baseScreen_t;
 
+void initDisplayEnv();
 int closeScreen(baseScreen_t * screen);
-baseScreen_t initScreen(dungeon_t * dungeon, monsterNode_t * monster, pc_t * pc);
+baseScreen_t * initScreen(dungeon_t * dungeon, pc_t * pc, monsterNode_t monsterNode);
+
+//update screen 
+int updatePCLocation(baseScreen_t * screen, pc_t * pc);
+int updateDungeonScreen(baseScreen_t * screen, dungeon_t *dungeon);
+int updateMonsterLocation(baseScreen_t * screen, monster_t * monster);
+
+
+//panel related function
+int showMonsterList(baseScreen_t * screen,monsterNode_t * monsterNode);
+
+//end game screeen
+int showDiedScreen(baseScreen_t * screen);
 
 #endif //DUNGEON_V1_01_DISPLAY_H

@@ -2,7 +2,15 @@
 // Created by 陈瀚泽 on 2019-02-26.
 //
 
-#include "../../include/characters/monster.h"
+#include <stdbool.h>
+#include <math.h>
+#include <strings.h>
+#include <stdlib.h>
+#include <time.h>
+#include "macros.h"
+#include "monster.h"
+#include "gameCommon.h"
+#include "heap.h"
 
 
 void newMonster(dungeon_t *dungeon,pc_t *pc,monster_t * monster){
@@ -64,8 +72,8 @@ int moveMonster(monster_t * monster){
             if(monster->characteristics & 0x2){
                 if (monster->dungeon->hardness[monster->location[dim_y]][monster->location[dim_x]] == 0){
                     dijkstra_tunnelling(monster->dungeon,monster->pc->location,monster);
-                    nextParh[dim_x] = monsterNext(monster)->pos[dim_x];
-                    nextParh[dim_y] = monsterNext(monster)->pos[dim_y];
+                    nextParh[dim_x] = nextMonster(monster)->pos[dim_x];
+                    nextParh[dim_y] = nextMonster(monster)->pos[dim_y];
                     goto update;
                 } else{
                     if (monster->dungeon->hardness[monster->location[dim_y]][monster->location[dim_x]] <= 85)
@@ -77,8 +85,8 @@ int moveMonster(monster_t * monster){
                 }
             }else{
                 dijkstra_no_tunnelling(monster->dungeon,monster->pc->location,monster);
-                nextParh[dim_x] = monsterNext(monster)->pos[dim_x];
-                nextParh[dim_y] = monsterNext(monster)->pos[dim_y];
+                nextParh[dim_x] = nextMonster(monster)->pos[dim_x];
+                nextParh[dim_y] = nextMonster(monster)->pos[dim_y];
                 goto update;
             }
         }else{
@@ -105,8 +113,8 @@ int moveMonster(monster_t * monster){
             if(monster->characteristics & 0x2){
                 if (monster->dungeon->hardness[monster->location[dim_y]][monster->location[dim_x]] == 0){
                     dijkstra_tunnelling(monster->dungeon,monster->pc->location,monster);
-                    nextParh[dim_x] = monsterNext(monster)->pos[dim_x];
-                    nextParh[dim_y] = monsterNext(monster)->pos[dim_y];
+                    nextParh[dim_x] = nextMonster(monster)->pos[dim_x];
+                    nextParh[dim_y] = nextMonster(monster)->pos[dim_y];
                     goto update;
                 } else{
                     if (monster->dungeon->hardness[monster->location[dim_y]][monster->location[dim_x]] <= 85)
@@ -118,8 +126,8 @@ int moveMonster(monster_t * monster){
                 }
             }else{
                 dijkstra_no_tunnelling(monster->dungeon,monster->lastPcLocation,monster);
-                nextParh[dim_x] = monsterNext(monster)->pos[dim_x];
-                nextParh[dim_y] = monsterNext(monster)->pos[dim_y];
+                nextParh[dim_x] = nextMonster(monster)->pos[dim_x];
+                nextParh[dim_y] = nextMonster(monster)->pos[dim_y];
                 goto update;
             }
         } else
@@ -128,16 +136,13 @@ int moveMonster(monster_t * monster){
         return 0;
 
     update:
-    monster->dungeon->character[monster->location[dim_y]][monster->location[dim_x]] = ' ';
-
-    if (monster->dungeon->character[nextParh[dim_y]][nextParh[dim_x]] != '@'){
+        //set prev location
+        monster->prev_location[dim_x] = monster->location[dim_x];
+        monster->prev_location[dim_y] = monster->location[dim_y];
+        //set next location
         monster->location[dim_x] = nextParh[dim_x];
         monster->location[dim_y] = nextParh[dim_y];
-    } else
         return 1;
-
-
-    monster->dungeon->character[monster->location[dim_y]][monster->location[dim_x]] = 'D';
     return 0;
 }
 

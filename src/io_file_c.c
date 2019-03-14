@@ -1,16 +1,13 @@
 //
 // Created by chen_ on 2019/2/6.
 //
-
-#include "../include/game.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <memory.h>
-#include "../include/io_file_c.h"
-#include <assert.h>
 #include <sys/stat.h>
-#include "../include/utils/dungeon_gen_map.h"
-#include <crossplatform_header/endian.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "../include/io_file_c.h"
+#include "../include/utils/crossplatform_header/endian.h"
+
 
 void read_operation(dungeon_t *dungeon, char *path){
     uint16_t tmp = 0;
@@ -44,8 +41,8 @@ void read_operation(dungeon_t *dungeon, char *path){
     fread(file_size,4,1,saved_file);
 
     //Read the pc location
-    fread(&dungeon->pc_position[dim_x],1,1,saved_file);
-    fread(&dungeon->pc_position[dim_y],1,1,saved_file);
+    fread(&dungeon->pc_location[dim_x],1,1,saved_file);
+    fread(&dungeon->pc_location[dim_y],1,1,saved_file);
 
     //read the hardness of the dungeon
     bzero(dungeon->hardness, sizeof(uint8_t)*DUNGEON_Y*DUNGEON_X);

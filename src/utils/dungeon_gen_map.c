@@ -1,7 +1,13 @@
 //
 // Created by chen_ on 2019/1/31.
 //
-#include "../../include/utils/dungeon_gen_map.h"
+
+#include <time.h>
+#include <limits.h>
+#include "gameCommon.h"
+#include "heap.h"
+#include "dungeon_gen_map.h"
+#include "game.h"
 
 static uint32_t in_room(dungeon_t *d, int16_t y, int16_t x)
 {
@@ -606,8 +612,6 @@ void init_dungeon(dungeon_t *d)
 void generate_dungon(dungeon_t *dunegeon) {
 
     srand(time(NULL));
-
-    bzero(dunegeon->character,sizeof(dunegeon->character));
     init_dungeon(dunegeon);
     gen_dungeon(dunegeon);
 

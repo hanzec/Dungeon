@@ -3,14 +3,16 @@
 //
 // todo replace with hashmap
 
-#include "../include/game.h"
-#include "../include/KeyBindMap.h"
-#include <unistd.h>
-#include <curses.h>
+#include <zconf.h>
+#include <ncurses.h>
+#include "game.h"
+#include "KeyBindMap.h"
+#include "gameCommon.h"
 
 int * initKeyMap(){
     int * result = malloc(sizeof(keyList_t));
 
+    // TODO using using hashmap to impliment this function
     if(access(DUNGEON_KEY_CONF_LOC,4) < 0){
         result[MOVE_L] = KEY_LEFT;
         result[MOVE_UL] = KEY_HOME;

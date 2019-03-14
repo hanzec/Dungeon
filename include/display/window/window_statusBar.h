@@ -4,9 +4,7 @@
 
 #ifndef DUNGEON_COMS327_F19_WINDOW_STATUSBAR_H
 #define DUNGEON_COMS327_F19_WINDOW_STATUSBAR_H
-
-#include <curses.h>
-#include "../../game.h"
+#include <ncurses.h>
 
 WINDOW * initStatusBar();
 #endif //DUNGEON_COMS327_F19_WINDOW_STATUSBAR_H

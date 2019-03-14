@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <assert.h>
-
 #include "../../../include/utils/data_stucture/heap.h"
 
 void print_heap_node(heap_node_t *n, unsigned indent,

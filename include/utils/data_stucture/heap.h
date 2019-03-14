@@ -1,11 +1,14 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+# include <stdint.h>
+
 #ifndef HEAP_H
 # define HEAP_H
 
 # ifdef __cplusplus
 extern "C" {
 # endif
-
-# include <stdint.h>
 
 typedef struct heap_node {
     void *datum;

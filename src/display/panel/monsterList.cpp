@@ -16,7 +16,7 @@ monsterList::monsterList(monsterNode_t *monsterNode) {
     wbkgd(panel_window(this->panel),COLOR_PAIR(PAIR_PANEL));
 }
 
-int monsterList::updatePanel() {
+int monsterList::updatePanel(monsterNode_t * monsterNode) {
     int x, y;
     int tmpNumber = 1;
     WINDOW * tmpWindowsPtr = panel_window(this->panel);

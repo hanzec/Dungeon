@@ -11,12 +11,8 @@
 
 class monsterList : public gamePanel {
 public:
-    monsterList(monsterNode_t *monsterNode);
-    int updatePanel() override;
-
-private:
-    monsterNode_t * monsterNode;
-
+    explicit monsterList(monsterNode_t *monsterNode);
+    int updatePanel(monsterNode_t * monsterNode);
 };
 
 

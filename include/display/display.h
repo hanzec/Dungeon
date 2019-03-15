@@ -26,25 +26,25 @@ class display{
 public:
     //screen operation
     display();
-    int closeScreen();
-    int initScreen(dungeon_t * dungeon, npc_t * pc, monsterNode_t * monsterNode);
+    static int closeScreen();
+    static int initScreen(dungeon_t * dungeon, npc_t * pc, monsterNode_t * monsterNode);
 
     //special screen function
-    int showDiedScreen();
+    static int showDiedScreen();
 
     //panel realated Function
-    int showMonsterList();
+    static int showMonsterList();
 
     //update screen function
-    int updateNPCLocation();
-    int updateDungeonScreen();
-    int updateMonsterLocation();
+    static int updateNPCLocation();
+    static int updateDungeonScreen();
+    static int updateMonsterLocation(monster_t * monster);
 
 private:
-    npc_t * npcPtr;
-    dungeon_t * dungeonPtr;
-    monsterList * monsterListPtr;
-    monsterNode_t * monsterNodePtr;
-    gameWindow * windowStack[num_windows];
+    static npc_t * npcPtr;
+    static dungeon_t * dungeonPtr;
+    static monsterList * monsterListPtr;
+    static monsterNode_t * monsterNodePtr;
+    static gameWindow * windowStack[num_windows];
 };
 #endif //DUNGEON_V1_01_DISPLAY_H

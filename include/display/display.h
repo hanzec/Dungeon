@@ -9,28 +9,42 @@
 #include <ncurses.h>
 #include "../gameCommon.h"
 #include "../characters/charactersCommon.h"
+#include "window/gameWindow.h"
+#include "panel/monsterList.h"
 
-typedef struct baseScreen{
-    WINDOW * pcInfoWindow;
-    WINDOW * statusWindow;
-    WINDOW * dungeonWindow;
-    PANEL * monsterListPanel[2];
-} baseScreen_t;
+typedef enum windowList{
+    dungeonScreen_win,      statusBar_win,      characterInfo_win,
+    num_windows
+}windowList_t;
 
-void initDisplayEnv();
-int closeScreen(baseScreen_t * screen);
-baseScreen_t * initScreen(dungeon_t * dungeon, npc_t * pc, monsterNode_t monsterNode);
+typedef enum panelList{
+    monsterList_pan,
+    num_panel
+}panelList_T;
 
-//update screen 
-int updatePCLocation(baseScreen_t * screen, npc_t * pc);
-int updateDungeonScreen(baseScreen_t * screen, dungeon_t *dungeon);
-int updateMonsterLocation(baseScreen_t * screen, monster_t * monster);
+class display{
+public:
+    //screen operation
+    display();
+    int closeScreen();
+    int initScreen(dungeon_t * dungeon, npc_t * pc, monsterNode_t * monsterNode);
 
+    //special screen function
+    int showDiedScreen();
 
-//panel related function
-int showMonsterList(baseScreen_t * screen,monsterNode_t * monsterNode);
+    //panel realated Function
+    int showMonsterList();
 
-//end game screeen
-int showDiedScreen(baseScreen_t * screen);
+    //update screen function
+    int updateNPCLocation();
+    int updateDungeonScreen();
+    int updateMonsterLocation();
 
+private:
+    npc_t * npcPtr;
+    dungeon_t * dungeonPtr;
+    monsterList * monsterListPtr;
+    monsterNode_t * monsterNodePtr;
+    gameWindow * windowStack[num_windows];
+};
 #endif //DUNGEON_V1_01_DISPLAY_H

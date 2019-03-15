@@ -9,7 +9,7 @@
 #include "../../gameCommon.h"
 #include "../../characters/charactersCommon.h"
 
-class dungeonWindow : gameWindow {
+class dungeonWindow : public gameWindow {
 public:
     int updateMap();
     int updateNPC(npc_t * npc);

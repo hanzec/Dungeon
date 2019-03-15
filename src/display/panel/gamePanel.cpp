@@ -7,6 +7,8 @@
 int gamePanel::hidePanel() {
     if (this->panel != nullptr){
         bottom_panel(this->panel);
+        update_panels();
+        doupdate();
         return 0;
     }
     return -1;
@@ -15,16 +17,9 @@ int gamePanel::hidePanel() {
 int gamePanel::displayPanel() {
     if (this->panel != nullptr){
         top_panel(this->panel);
+        update_panels();
+        doupdate();
         return 0;
     }
     return -1;
 }
-
-PANEL * gamePanel::getPanelPtr() {
-    return this->panel;
-}
-
-int gamePanel::setPanelPtr(PANEL *p) {
-    this->panel = p;
-}
-

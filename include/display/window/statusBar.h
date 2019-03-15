@@ -7,9 +7,9 @@
 
 #include "gameWindow.h"
 
-class statusBarWindow : gameWindow {
+class statusBar : public gameWindow {
 public:
-    statusBarWindow();
+    statusBar();
 };
 
 

@@ -11,7 +11,7 @@ include_directories(${CURSES_INCLUDE_DIR})
 SET(LIBRARY_OUTPUT_PATH "${PROJECT_BINARY_DIR}/lib")
 
 #set library name
-add_library (DisplayLib SHARED ${DIR_DISPLAY_SRCS_PANEL} ${DIR_DISPLAY_SRCS_WINDOW} display.c window/gameWindow.cpp ../../include/display/window/gameWindow.h)
+add_library (DisplayLib SHARED ${DIR_DISPLAY_SRCS_PANEL} ${DIR_DISPLAY_SRCS_WINDOW} display.cpp)
 
 # link ncurses lib
 target_link_libraries(DisplayLib panel ${CURSES_LIBRARIES})

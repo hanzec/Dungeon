@@ -4,9 +4,9 @@
 
 #include "../../../include/gameCommon.h"
 #include "../../../include/display/displayCommon.h"
-#include "../../../include/display/window/statusBarWindow.h"
+#include "../../../include/display/window/statusBar.h"
 
-statusBarWindow::statusBarWindow() {
+statusBar::statusBar() {
     this->windowPtr = newwin(1,DUNGEON_X,0,0);
     wbkgd(this->windowPtr,COLOR_PAIR(PAIR_STATUS_BAR));
 

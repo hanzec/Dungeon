@@ -3,9 +3,9 @@
 //
 
 #include "../../../include/display/displayCommon.h"
-#include "../../../include/display/window/characterInfoWindow.h"
+#include "../../../include/display/window/characterInfo.h"
 
-characterInfo::characterInfo(dungeon_t *dungeon) {
+characterInfo::characterInfo() {
     this->windowPtr = newwin(3,DUNGEON_X,22,0);
     wbkgd(this->windowPtr,COLOR_PAIR(PAIR_CHARACTER_STATUS));
 }

@@ -9,7 +9,7 @@
 #include "../../characters/charactersCommon.h"
 
 
-class monsterList : private gamePanel {
+class monsterList : public gamePanel {
 public:
     monsterList(monsterNode_t *monsterNode);
     int updatePanel() override;

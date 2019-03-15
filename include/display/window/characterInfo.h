@@ -9,9 +9,9 @@
 #include "gameWindow.h"
 #include "../../gameCommon.h"
 
-class characterInfo : gameWindow{
+class characterInfo : public gameWindow{
 public:
-    characterInfo(dungeon_t * dungeon);
+    characterInfo();
 };
 
 

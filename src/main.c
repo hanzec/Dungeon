@@ -4,7 +4,6 @@
 
 #include <string.h>
 #include <ncurses.h>
-#include "game.h"
 
 typedef enum file_action {
     no_select,

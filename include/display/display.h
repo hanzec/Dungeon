@@ -5,10 +5,10 @@
 #ifndef DUNGEON_V1_01_DISPLAY_H
 #define DUNGEON_V1_01_DISPLAY_H
 
-#include <ncurses.h>
 #include <panel.h>
-#include "charactersCommon.h"
-#include "gameCommon.h"
+#include <ncurses.h>
+#include "../gameCommon.h"
+#include "../characters/charactersCommon.h"
 
 typedef struct baseScreen{
     WINDOW * pcInfoWindow;
@@ -19,10 +19,10 @@ typedef struct baseScreen{
 
 void initDisplayEnv();
 int closeScreen(baseScreen_t * screen);
-baseScreen_t * initScreen(dungeon_t * dungeon, pc_t * pc, monsterNode_t monsterNode);
+baseScreen_t * initScreen(dungeon_t * dungeon, npc_t * pc, monsterNode_t monsterNode);
 
 //update screen 
-int updatePCLocation(baseScreen_t * screen, pc_t * pc);
+int updatePCLocation(baseScreen_t * screen, npc_t * pc);
 int updateDungeonScreen(baseScreen_t * screen, dungeon_t *dungeon);
 int updateMonsterLocation(baseScreen_t * screen, monster_t * monster);
 

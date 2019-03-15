@@ -4,13 +4,8 @@
 
 //WINDOW *menu  todo: menu need to add;
 
-#include "display.h"
-#include "displayCommon.h"
-#include "window_statusBar.h"
-#include "window_characterInfo.h"
-#include "window_dungeon.h"
-#include "panel_monsterList.h"
-#include "display_utils.h"
+#include "../../include/display/display.h"
+baseScreen_t screen;
 
 void initDisplayEnv(){
     initscr();
@@ -28,7 +23,7 @@ void initDisplayEnv(){
     refresh();
 }
 
-baseScreen_t * initScreen(dungeon_t * dungeon, pc_t * pc, monsterNode_t monsterNode){
+baseScreen_t * initScreen(dungeon_t * dungeon, npc_t * pc, monsterNode_t monsterNode){
     baseScreen_t * screen = malloc(sizeof(baseScreen_t));
     bzero(screen,sizeof(baseScreen_t));
     // FIXME bug here statusWindow and pcInfoWindow have same memory address for no reason
@@ -38,7 +33,7 @@ baseScreen_t * initScreen(dungeon_t * dungeon, pc_t * pc, monsterNode_t monsterN
     screen->monsterListPanel[0] = initMonsterList(&monsterNode);
     screen->monsterListPanel[1] = new_panel(screen->dungeonWindow);
 
-    //update pc location
+    //update npc location
     updatePc(screen->dungeonWindow,pc);
 
     // set up monsterList
@@ -68,7 +63,7 @@ int closeScreen(baseScreen_t * screen){
     return 0;
 }
 
-int updatePCLocation(baseScreen_t * screen,pc_t * pc){
+int updatePCLocation(baseScreen_t * screen,npc_t * pc){
     updatePc(screen->dungeonWindow,pc);
     wrefresh(screen->dungeonWindow);
 }

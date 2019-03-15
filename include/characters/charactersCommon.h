@@ -4,14 +4,13 @@
 #ifndef DUNGEON_COMS327_F19_CHARACTERSCOMMON_H
 #define DUNGEON_COMS327_F19_CHARACTERSCOMMON_H
 
-#include "gameCommon.h"
-#include "heap.h"
+#include "../utils/data_stucture/heap.h"
 
-typedef struct pc{
+typedef struct npc{
     pair_t location;
     pair_t prevLocation;
     dungeon_t * dungeon;
-}pc_t;
+}npc_t;
 
 typedef enum direction{
     Upper,      UpperLeft,      UpperRight,
@@ -24,16 +23,14 @@ typedef struct corridor_node {
     pair_t pos;
     heap_node_t *hn;
     void * prev_node;
-
 } corridor_node_t;
 
 typedef struct monster{
-    pc_t * pc;
+    npc_t * pc;
     uint8_t speed;
     uint8_t range;
     pair_t location;
     pair_t prev_location;
-    dungeon_t * dungeon;
     pair_t lastPcLocation ;
     uint8_t characteristics;
     corridor_node_t path[DUNGEON_Y][DUNGEON_X];

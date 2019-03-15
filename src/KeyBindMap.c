@@ -5,9 +5,8 @@
 
 #include <zconf.h>
 #include <ncurses.h>
-#include "game.h"
-#include "KeyBindMap.h"
-#include "gameCommon.h"
+#include "../include/gameCommon.h"
+
 
 int * initKeyMap(){
     int * result = malloc(sizeof(keyList_t));

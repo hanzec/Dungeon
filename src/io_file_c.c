@@ -40,7 +40,7 @@ void read_operation(dungeon_t *dungeon, char *path){
     uint32_t *file_size = malloc(4);
     fread(file_size,4,1,saved_file);
 
-    //Read the pc location
+    //Read the npc location
     fread(&dungeon->pc_location[dim_x],1,1,saved_file);
     fread(&dungeon->pc_location[dim_y],1,1,saved_file);
 
@@ -134,7 +134,7 @@ int write_operation(dungeon_t *dungeon){
     tmp = htobe32(1704 + dungeon->num_rooms * 4 + 4 + dungeon->num_down_stairs * 2 + dungeon->num_up_stairs * 2);
     fwrite(&tmp, sizeof(tmp),1,saved_file);
 
-    //write the pc location
+    //write the npc location
     //tmp set to 1st room's position
     fwrite(&dungeon->rooms->position[dim_x], 1,1,saved_file);
     fwrite(&dungeon->rooms->position[dim_y], 1,1,saved_file);

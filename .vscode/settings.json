@@ -17,6 +17,16 @@
         "comments": false,
         "strings": false
     },
-    "files.autoSave" : "afterDelay",
-    "C_Cpp.configurationWarnings": "Disabled"
+    "[cpp]": {
+        "editor.quickSuggestions": true
+    },
+    "[c]": {
+        "editor.quickSuggestions": true
+    },
+    
+    "files.autoSave": "afterDelay",
+    "C_Cpp.intelliSenseEngine":"Default",
+    "C_Cpp.intelliSenseEngineFallback": "Disabled",
+    "C_Cpp.configurationWarnings": "Disabled",
+    
 }

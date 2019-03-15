@@ -16,7 +16,7 @@
 void newMonster(dungeon_t *dungeon,pc_t *pc,monster_t * monster){
     bzero(monster, sizeof(monster_t));
 
-    monster->pc = pc;
+    monster->npc = pc;
     monster->dungeon = dungeon;
     monster->range = (uint8_t) (rand() % 3);
     monster->speed = (uint8_t) (rand()%16 + 5);
@@ -30,7 +30,7 @@ bool meetWithPc(monster_t * monster){
             uint8_t y = (uint8_t) (monster->location[dim_y] + j);
 
             if (checkLocation(x,y)){
-                if ((x == monster->pc->location[dim_x]) && (y == monster->pc->location[dim_y])){
+                if ((x == monster->npc->location[dim_x]) && (y == monster->npc->location[dim_y])){
                     monster->lastPcLocation[dim_y] = y;
                     monster->lastPcLocation[dim_x] = x;
                     return true;
@@ -71,7 +71,7 @@ int moveMonster(monster_t * monster){
         if(monster->characteristics & 0x8){
             if(monster->characteristics & 0x2){
                 if (monster->dungeon->hardness[monster->location[dim_y]][monster->location[dim_x]] == 0){
-                    dijkstra_tunnelling(monster->dungeon,monster->pc->location,monster);
+                    dijkstra_tunnelling(monster->dungeon,monster->npc->location,monster);
                     nextParh[dim_x] = nextMonster(monster)->pos[dim_x];
                     nextParh[dim_y] = nextMonster(monster)->pos[dim_y];
                     goto update;
@@ -84,7 +84,7 @@ int moveMonster(monster_t * monster){
                     return 0;
                 }
             }else{
-                dijkstra_no_tunnelling(monster->dungeon,monster->pc->location,monster);
+                dijkstra_no_tunnelling(monster->dungeon,monster->npc->location,monster);
                 nextParh[dim_x] = nextMonster(monster)->pos[dim_x];
                 nextParh[dim_y] = nextMonster(monster)->pos[dim_y];
                 goto update;
@@ -96,8 +96,8 @@ int moveMonster(monster_t * monster){
                     int16_t y = (int16_t) (monster->location[dim_y] + j);
                     int16_t x = (int16_t) (monster->location[dim_x] + i);
                     if (checkLocation(x,y)){
-                        double distance = sqrt(abs(monster->location[dim_y] + j - monster->pc->location[dim_y])) +
-                                            sqrt(abs(monster->location[dim_x] + i - monster->pc->location[dim_x]));
+                        double distance = sqrt(abs(monster->location[dim_y] + j - monster->npc->location[dim_y])) +
+                                            sqrt(abs(monster->location[dim_x] + i - monster->npc->location[dim_x]));
                         if (distance < shortestDistance){
                             shortestDistance = distance;
                             nextParh[dim_x] = x;
@@ -112,7 +112,7 @@ int moveMonster(monster_t * monster){
         if(monster->characteristics & 0x8){
             if(monster->characteristics & 0x2){
                 if (monster->dungeon->hardness[monster->location[dim_y]][monster->location[dim_x]] == 0){
-                    dijkstra_tunnelling(monster->dungeon,monster->pc->location,monster);
+                    dijkstra_tunnelling(monster->dungeon,monster->npc->location,monster);
                     nextParh[dim_x] = nextMonster(monster)->pos[dim_x];
                     nextParh[dim_y] = nextMonster(monster)->pos[dim_y];
                     goto update;

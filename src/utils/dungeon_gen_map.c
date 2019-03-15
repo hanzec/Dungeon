@@ -4,10 +4,10 @@
 
 #include <time.h>
 #include <limits.h>
-#include "gameCommon.h"
-#include "heap.h"
-#include "dungeon_gen_map.h"
-#include "game.h"
+#include "../../include/game.h"
+#include "../../include/gameCommon.h"
+#include "../../include/utils/data_stucture/heap.h"
+
 
 static uint32_t in_room(dungeon_t *d, int16_t y, int16_t x)
 {

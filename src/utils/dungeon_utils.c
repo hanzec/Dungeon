@@ -3,7 +3,7 @@
 //
 
 #include <stdio.h>
-#include "dungeon_utils.h"
+#include "../../include/gameCommon.h"
 
 void print_dungeon_cli(dungeon_t *d)
 {

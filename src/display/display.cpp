@@ -65,14 +65,15 @@ int display::closeScreen() {
 
 
 int display::showDiedScreen() {
+
     mvaddstr(0,0,tombstone);
     refresh();
     getch();
 }
 
 int display::showMonsterList() {
-    (monsterList *)monsterListPtr->updatePanel(monsterNodePtr);
-    (monsterList *)monsterListPtr->displayPanel();
+    monsterListPtr->updatePanel(monsterNodePtr);
+    monsterListPtr->displayPanel();
 
     //wait for user press any key
     getch();

@@ -9,8 +9,7 @@
 
 class gamePanel{
 public:
-    PANEL * panel = nullptr;
-
+    PANEL * panel;
     int hidePanel();
     int displayPanel();
     virtual int updatePanel() = 0;

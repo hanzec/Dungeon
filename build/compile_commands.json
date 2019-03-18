@@ -1,0 +1,102 @@
+[
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src",
+  "command": "/usr/bin/clang   -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -o CMakeFiles/Dungeon.dir/main.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/main.c",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/main.c"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src",
+  "command": "/usr/bin/clang   -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -o CMakeFiles/Dungeon.dir/utils/dungeon_gen_map.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_gen_map.c",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_gen_map.c"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src",
+  "command": "/usr/bin/clang   -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -o CMakeFiles/Dungeon.dir/utils/dungeon_utils.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_utils.c",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/dungeon_utils.c"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src",
+  "command": "/usr/bin/clang   -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -o CMakeFiles/Dungeon.dir/characters/MonsterController.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/characters/MonsterController.c",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/characters/MonsterController.c"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src",
+  "command": "/usr/bin/clang   -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -o CMakeFiles/Dungeon.dir/characters/monster.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/characters/monster.c",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/characters/monster.c"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src",
+  "command": "/usr/bin/clang   -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -o CMakeFiles/Dungeon.dir/characters/pc.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/characters/pc.c",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/characters/pc.c"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src",
+  "command": "/usr/bin/clang   -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -o CMakeFiles/Dungeon.dir/utils/data_stucture/heap.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/data_stucture/heap.c",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/utils/data_stucture/heap.c"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src",
+  "command": "/usr/bin/clang   -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -o CMakeFiles/Dungeon.dir/KeyBindMap.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/KeyBindMap.c",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/KeyBindMap.c"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src",
+  "command": "/usr/bin/clang   -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -o CMakeFiles/Dungeon.dir/game.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/game.c",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/game.c"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src",
+  "command": "/usr/bin/clang   -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -o CMakeFiles/Dungeon.dir/io_file_c.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_file_c.c",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/io_file_c.c"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src",
+  "command": "/usr/bin/clang   -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -o CMakeFiles/Dungeon.dir/status_message.c.o   -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/status_message.c",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/status_message.c"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src",
+  "command": "/usr/bin/clang++    -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -o CMakeFiles/Dungeon.dir/display/panel/monsterList.cpp.o -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/panel/monsterList.cpp",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/panel/monsterList.cpp"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src/display",
+  "command": "/usr/bin/clang++  -DDisplayLib_EXPORTS  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -fPIC   -o CMakeFiles/DisplayLib.dir/panel/gamePanel.cpp.o -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/panel/gamePanel.cpp",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/panel/gamePanel.cpp"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src/display",
+  "command": "/usr/bin/clang++  -DDisplayLib_EXPORTS  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -fPIC   -o CMakeFiles/DisplayLib.dir/panel/monsterList.cpp.o -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/panel/monsterList.cpp",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/panel/monsterList.cpp"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src/display",
+  "command": "/usr/bin/clang++  -DDisplayLib_EXPORTS  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -fPIC   -o CMakeFiles/DisplayLib.dir/window/characterInfo.cpp.o -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/window/characterInfo.cpp",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/window/characterInfo.cpp"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src/display",
+  "command": "/usr/bin/clang++  -DDisplayLib_EXPORTS  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -fPIC   -o CMakeFiles/DisplayLib.dir/window/diedScreen.cpp.o -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/window/diedScreen.cpp",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/window/diedScreen.cpp"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src/display",
+  "command": "/usr/bin/clang++  -DDisplayLib_EXPORTS  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -fPIC   -o CMakeFiles/DisplayLib.dir/window/dungeonWindow.cpp.o -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/window/dungeonWindow.cpp",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/window/dungeonWindow.cpp"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src/display",
+  "command": "/usr/bin/clang++  -DDisplayLib_EXPORTS  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -fPIC   -o CMakeFiles/DisplayLib.dir/window/gameWindow.cpp.o -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/window/gameWindow.cpp",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/window/gameWindow.cpp"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src/display",
+  "command": "/usr/bin/clang++  -DDisplayLib_EXPORTS  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -fPIC   -o CMakeFiles/DisplayLib.dir/window/statusBar.cpp.o -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/window/statusBar.cpp",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/window/statusBar.cpp"
+},
+{
+  "directory": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/build/src/display",
+  "command": "/usr/bin/clang++  -DDisplayLib_EXPORTS  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -fPIC   -o CMakeFiles/DisplayLib.dir/display.cpp.o -c /Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/display.cpp",
+  "file": "/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/display/display.cpp"
+}
+]

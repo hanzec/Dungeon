@@ -2,6 +2,7 @@
 // Created by 陈瀚泽 on 2019-03-14.
 //
 
+#include <ncurses.h>
 #include "../../../include/display/displayCommon.h"
 #include "../../../include/display/window/dungeonWindow.h"
 
@@ -16,31 +17,31 @@ dungeonWindow::dungeonWindow(dungeon_t * d) {
 int dungeonWindow::updateMap() {
     for (int i = 0; i < DUNGEON_Y; ++i) {
         for (int j = 0; j < DUNGEON_X; ++j) {
-            mvwaddch(this->windowPtr,i,j,this->getTerFromChar(this->windowPtr, i, j));
+            mvwaddch(this->windowPtr,i,j,this->getTerFromChar(i, j));
         }
     }
 }
 
-int dungeonWindow::updateNPC(npc_t *npc) {
+int dungeonWindow::updateNPC(npc *npc) {
     if (npc->prevLocation != nullptr){
         mvwaddch(this->windowPtr,
                  npc->prevLocation[dim_y],
                  npc->prevLocation[dim_x],
                  this->getTerFromChar(npc->prevLocation[dim_y],npc->prevLocation[dim_x])
                  );
-        mvwaddch(this->windowPtr,npc->location[dim_y], npc->location[dim_x],'@');
+        mvwaddch(this->windowPtr,npc->currentLocation[dim_y], npc->currentLocation[dim_x],'@');
         return 0;
     } else
         return -1;
 }
 
-int dungeonWindow::updateMonster(monster_t * monster) {
-    if (monster->prev_location != nullptr){
+int dungeonWindow::updateMonster(monster * monster) {
+    if (monster->prevLocation != nullptr){
         mvwaddch(this->windowPtr,
-                 monster->prev_location[dim_x],
-                 monster->prev_location[dim_y],
-                 this->getTerFromChar(monster->prev_location[dim_x], monster->prev_location[dim_y]));
-        mvwaddch(this->windowPtr,monster->location[dim_y], monster->location[dim_x],'D');
+                 monster->prevLocation[dim_x],
+                 monster->prevLocation[dim_y],
+                 this->getTerFromChar(monster->prevLocation[dim_x], monster->prevLocation[dim_y]));
+        mvwaddch(this->windowPtr,monster->currentLocation[dim_y], monster->currentLocation[dim_x],'D');
         return 0;
     } else
         return -1;

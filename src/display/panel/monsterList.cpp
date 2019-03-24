@@ -10,17 +10,26 @@
 #include "../../../include/characters/MonsterController.h"
 
 monsterList::monsterList(monsterNode_t *monsterNode) {
-    int numMonster = getNumberOfMonster(*((monsterNode_t *) monsterNode));
+    int numMonster = getNumberOfMonster(* ((monsterNode_t *) monsterNode));
     // todo need to change instead of hard code
     this->panel = new_panel(newwin(3 + numMonster, 38,4,20));
     wbkgd(panel_window(this->panel),COLOR_PAIR(PAIR_PANEL));
 }
+int monsterList::getNumberOfMonster(monsterNode_t monsterNode){
+     int number = 0;
 
-int monsterList::updatePanel(monsterNode_t * monsterNode) {
+    while (monsterNode.nextNode != NULL){
+        number += 1;
+        monsterNode = * monsterNode.nextNode;
+    }
+    return number - 1;
+
+}
+int monsterList::updatePanel() {
     int x, y;
     int tmpNumber = 1;
     WINDOW * tmpWindowsPtr = panel_window(this->panel);
-    monsterNode_t * currentNode = monsterNode->nextNode;
+    monsterNode_t * currentNode = this->monsterNodePtr->nextNode;
     int numMonster = getNumberOfMonster(*currentNode);
 
     wclear(tmpWindowsPtr);
@@ -35,14 +44,14 @@ int monsterList::updatePanel(monsterNode_t * monsterNode) {
         mvwaddch(tmpWindowsPtr,i, 5, ' ');
         mvwaddch(tmpWindowsPtr,i, 6, 'x');
         mvwaddch(tmpWindowsPtr,i, 7, ':');
-        sprintf(tmp, "%d", currentNode->monster->location[dim_x]);
+        sprintf(tmp, "%d", currentNode->monster->currentLocation[dim_x]);
         mvwaddch(tmpWindowsPtr,i, 8, tmp[0]);
         mvwaddch(tmpWindowsPtr,i, 9, tmp[1]);
         mvwaddch(tmpWindowsPtr,i, 10, ' ');
 
         mvwaddch(tmpWindowsPtr,i, 11, 'y');
         mvwaddch(tmpWindowsPtr,i, 12, ':');
-        sprintf(tmp, "%d", currentNode->monster->location[dim_y]);
+        sprintf(tmp, "%d", currentNode->monster->currentLocation[dim_y]);
         mvwaddch(tmpWindowsPtr,i, 13, tmp[0]);
         mvwaddch(tmpWindowsPtr,i, 14, tmp[1]);
         mvwaddch(tmpWindowsPtr,i, 15, ' ');

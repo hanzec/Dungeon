@@ -8,7 +8,6 @@
 #include <panel.h>
 #include <ncurses.h>
 #include "../gameCommon.h"
-#include "../characters/charactersCommon.h"
 #include "window/gameWindow.h"
 #include "panel/monsterList.h"
 
@@ -27,7 +26,7 @@ public:
     //screen operation
     display();
     static int closeScreen();
-    static int initScreen(dungeon_t * dungeon, npc_t * pc, monsterNode_t * monsterNode);
+    static int initScreen(dungeon_t * dungeon, npc::npc * pc, monsterNode_t * monsterNode);
 
     //special screen function
     static int showDiedScreen();
@@ -38,10 +37,10 @@ public:
     //update screen function
     static int updateNPCLocation();
     static int updateDungeonScreen();
-    static int updateMonsterLocation(monster_t * monster);
+    static int updateMonsterLocation(monster::monster * monster);
 
 private:
-    static npc_t * npcPtr;
+    static npc::npc * npcPtr;
     static dungeon_t * dungeonPtr;
     static monsterList * monsterListPtr;
     static monsterNode_t * monsterNodePtr;

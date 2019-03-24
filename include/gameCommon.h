@@ -59,5 +59,10 @@ typedef struct dungeon {
     terrain_type_t map[DUNGEON_Y][DUNGEON_X];
 } dungeon_t;
 
+typedef enum direction{
+    Upper,      UpperLeft,      UpperRight,
+    Left,       Right,          Down,       
+    DownLeft,   DownRight,
+}direction_t;
 
 #endif //DUNGEON_COMS327_F19_GAMECOMMON_H

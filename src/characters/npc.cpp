@@ -1,17 +1,16 @@
-//
-// Created by 陈瀚泽 on 2019/2/26.
-//
 
-#include "pc.h"
-#include "macros.h"
-#include "charactersCommon.h"
+#include <cstring>
+#include "../../include/macros.h"
+#include "../../include/characters/npc.h"
 
-int movePC(direction_t direction, pc_t * pc){
+npc::npc(dungeon_t * dungeon){this->dungeon = dungeon;}
+
+int npc::movePC(direction_t direction){
     pair_t location;
     pair_t prev_location;
 
-    memcpy(&location,pc->location, sizeof(pair_t));
-    memcpy(&prev_location,pc->location, sizeof(pair_t));
+    memcpy(&location,this->currentLocation, sizeof(pair_t));
+    memcpy(&prev_location,this->prevLocation, sizeof(pair_t));
 
     switch (direction){
         case Upper:
@@ -47,16 +46,18 @@ int movePC(direction_t direction, pc_t * pc){
     }
 
     if (checkLocation(location[dim_x],location[dim_y])){
-        if ((pc->dungeon->map[location[dim_y]][location[dim_x]] == ter_floor_room) ||
-            (pc->dungeon->map[location[dim_y]][location[dim_x]] == ter_floor_hall) ||
-            (pc->dungeon->map[location[dim_y]][location[dim_x]] == ter_stairs_up)  ||  
-            (pc->dungeon->map[location[dim_y]][location[dim_x]] == ter_stairs_down)   ){
-                memcpy(pc->location, &location, sizeof(pair_t));
-                memcpy(pc->prevLocation, &prev_location, sizeof(pair_t));
+        if ((this->dungeon->map[location[dim_y]][location[dim_x]] == ter_floor_room) ||
+            (this->dungeon->map[location[dim_y]][location[dim_x]] == ter_floor_hall) ||
+            (this->dungeon->map[location[dim_y]][location[dim_x]] == ter_stairs_up)  ||  
+            (this->dungeon->map[location[dim_y]][location[dim_x]] == ter_stairs_down)   ){
+                memcpy(this->currentLocation, &location, sizeof(pair_t));
+                memcpy(this->prevLocation, &prev_location, sizeof(pair_t));
                 return 0;
         }else
             return -1;
     } else
         return -1;
 }
+
+
 

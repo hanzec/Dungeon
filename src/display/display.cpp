@@ -27,7 +27,7 @@ display::display() {
     refresh();
 }
 
-int display::initScreen(dungeon_t *dungeon, npc_t *pc, monsterNode_t * monsterNode) {
+int display::initScreen(dungeon_t *dungeon, npc *pc, monsterNode_t * monsterNode) {
     // FIXME bug here statusWindow and pcInfoWindow have same memory address for no reason
     // update 3-14-2019 may fix bug but need testing
 
@@ -72,7 +72,7 @@ int display::showDiedScreen() {
 }
 
 int display::showMonsterList() {
-    monsterListPtr->updatePanel(monsterNodePtr);
+    monsterListPtr->updatePanel();
     monsterListPtr->displayPanel();
 
     //wait for user press any key
@@ -88,6 +88,6 @@ int display::updateDungeonScreen() {
     ((dungeonWindow *)windowStack[dungeonScreen_win])->updateMap();
 }
 
-int display::updateMonsterLocation(monster_t * monster) {
+int display::updateMonsterLocation(monster::monster * monster) {
     ((dungeonWindow *)windowStack[dungeonScreen_win])->updateMonster(monster);
 }

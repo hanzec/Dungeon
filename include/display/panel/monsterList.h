@@ -6,13 +6,15 @@
 #define DUNGEON_COMS327_F19_MONSTERLIST_H
 
 #include "gamePanel.h"
-#include "../../characters/charactersCommon.h"
-
+#include "../../characters/MonsterController.h"
 
 class monsterList : public gamePanel {
+private:
+    monsterNode_t * monsterNodePtr;
+    int getNumberOfMonster(monsterNode_t monsterNode);
 public:
+    int updatePanel();
     explicit monsterList(monsterNode_t *monsterNode);
-    int updatePanel(monsterNode_t * monsterNode);
 };
 
 

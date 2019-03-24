@@ -5,13 +5,30 @@
 #ifndef COMS327_S19_DUNGEON_MONSTERCONTROLLER_H
 #define COMS327_S19_DUNGEON_MONSTERCONTROLLER_H
 
-#include "gameCommon.h"
-#include "charactersCommon.h"
+#include "npc.h"
+#include "Monster.h"
+#include "../gameCommon.h"
 
-int getNumberOfMonster(monsterNode_t monsterNode);
-void cleanMonsterQueue(monsterNode_t * monsterNode);
-monster_t * popMinMonster(monsterNode_t * monsterNode);
-monsterNode_t * seeFrontMonsterNode(monsterNode_t * monsterNode);
-void pushSingleMonster(monsterNode_t * monsterNode, monster_t * monster, uint32_t weight);
-void pushMonsterToQueue(uint32_t number, dungeon_t * dungeon, npc_t * pc , monsterNode_t * monsterNode);
+typedef struct monsterNode{
+    uint32_t time;
+    monster::monster * monster;
+    struct monsterNode * nextNode;
+    struct monsterNode * prevNode;
+}monsterNode_t;
+
+
+class monsterController{
+private:
+    npc::npc * npc;
+    dungeon_t * dungeon;
+    int numberOfMonster = 0;
+    monsterNode_t * currentNode;
+public:
+    int getNumberOfMonster();
+    void cleanMonsterQueue();
+    monster::monster * popMinMonster();
+    void addMonsterToQueue(uint32_t number);
+    monsterController(dungeon_t * dungeon, npc::npc * pc);
+    void addSingleMonster(monster::monster * monster, int weight);
+};
 #endif //COMS327_S19_DUNGEON_MONSTERCONTROLLER_H

@@ -4,13 +4,14 @@
 #include "../../include/characters/monster.h"
 #include "../../include/utils/data_stucture/heap.h"
 
-#define dungeonMap this->dungeon->map
 #define npcLocation this->npc->currentLocation
 #define dungeonHardness this->dungeon->hardness
+#define dungeonMapTer(x,y) this->dungeon->map[y][x].terrain_type
+#define getCurrentHardness this->dungeon->map[this->currentLocation[dim_y]][this->currentLocation[dim_x]].hardness
 #define nextMonster(monster) ((corridor_node_t *) monster->path[monster->currentLocation[dim_y]][monster->currentLocation[dim_x]].prev_node)
 
 
-monster::monster(dungeon_t *dungeon,npc::npc *pc){
+monster::monster(dungeon_t *dungeon,pc::pc *pc){
     this->npc = pc;
     this->dungeon = dungeon;
     this->range = (uint8_t) (rand() % 3);
@@ -49,8 +50,8 @@ int monster::moveMonster(){
                 int x = this->currentLocation[dim_x] + rand()%3 - 1;
                 int y = this->currentLocation[dim_y] + rand()%3 - 1;
                 if (checkLocation(x,y)){
-                    if ((dungeonMap[y][x] == ter_floor_room) ||
-                        (dungeonMap[y][x] == ter_floor_hall))
+                    if ((dungeonMapTer(x,y) == ter_floor_room) ||
+                        (dungeonMapTer(x,y)  == ter_floor_hall))
                     {
                         flag = false;
                         nextParh[dim_y] = (int16_t) y;
@@ -65,16 +66,16 @@ int monster::moveMonster(){
     if (this->characteristics & 0x4){
         if(this->characteristics & 0x8){
             if(this->characteristics & 0x2){
-                if (this->dungeon->hardness[this->currentLocation[dim_y]][this->currentLocation[dim_x]] == 0){
+                if ( getCurrentHardness == 0){
                     dijkstra_tunnelling();
                     nextParh[dim_x] = nextMonster(this)->pos[dim_x];
                     nextParh[dim_y] = nextMonster(this)->pos[dim_y];
                     goto update;
                 } else{
-                    if (this->dungeon->hardness[this->currentLocation[dim_y]][this->currentLocation[dim_x]] <= 85)
-                        this->dungeon->hardness[this->currentLocation[dim_y]][this->currentLocation[dim_x]] = 0;
+                    if (getCurrentHardness <= 85)
+                        getCurrentHardness = 0;
                     else{
-                        this->dungeon->hardness[this->currentLocation[dim_y]][this->currentLocation[dim_x]] -= 85;
+                        getCurrentHardness -= 85;
                     }
                     return 0;
                 }
@@ -106,16 +107,16 @@ int monster::moveMonster(){
     } else if (this->meetWithNPC()){
         if(this->characteristics & 0x8){
             if(this->characteristics & 0x2){
-                if (this->dungeon->hardness[this->currentLocation[dim_y]][this->currentLocation[dim_x]] == 0){
+                if (getCurrentHardness == 0){
                     dijkstra_tunnelling();
                     nextParh[dim_x] = nextMonster(this)->pos[dim_x];
                     nextParh[dim_y] = nextMonster(this)->pos[dim_y];
                     goto update;
                 } else{
-                    if (this->dungeon->hardness[this->currentLocation[dim_y]][this->currentLocation[dim_x]] <= 85)
-                        this->dungeon->hardness[this->currentLocation[dim_y]][this->currentLocation[dim_x]] = 0;
+                    if (getCurrentHardness <= 85)
+                        getCurrentHardness = 0;
                     else{
-                        this->dungeon->hardness[this->currentLocation[dim_y]][this->currentLocation[dim_x]] -= 85;
+                        getCurrentHardness -= 85;
                     }
                     return 0;
                 }
@@ -174,7 +175,7 @@ void monster::dijkstra_no_tunnelling()
                 uint16_t y = i + prev_node->pos[dim_y];
 
                 if (checkLocation(x,y)){
-                    if (dungeonMap[y][x] != ter_wall){
+                    if (dungeonMapTer(x,y) != ter_wall){
                         if (prev_node->cost + 1 < this->path[y][x].cost){
                             this->path[y][x].prev_node = prev_node;
                             this->path[y][x].cost = prev_node->cost + 1;
@@ -221,13 +222,13 @@ void monster::dijkstra_tunnelling()
                 if (checkLocation(x,y)){
                     int weight_tmp = 0;
 
-                    if (dungeonMap[y][x] == ter_wall_immutable)
+                    if (dungeonMapTer(x,y) == ter_wall_immutable)
                         break;
 
-                    if (dungeonHardness[y][x] == 0){
+                    if (dungeonMapTer(x,y) == 0){
                         weight_tmp = 1 + prev_node->cost;
                     }else{
-                        weight_tmp = 1 + (dungeonHardness[y][x]/85) + prev_node->cost;
+                        weight_tmp = 1 + (dungeonMapTer(x,y)/85) + prev_node->cost;
                     }
 
                     if (weight_tmp < this->path[y][x].cost){

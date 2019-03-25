@@ -5,15 +5,13 @@
 #ifndef DUNGEON_COMS327_F19_PC_H
 #define DUNGEON_COMS327_F19_PC_H
 
+#include "characters.h"
 #include "../gameCommon.h"
 
-class npc{
+class pc : public character{
 private:
-    dungeon_t * dungeon;
 public:
-    pair_t prevLocation;
-    pair_t currentLocation;
-    npc(dungeon_t * dungeon);
+    pc(dungeon_t * dungeon);
     int movePC(direction_t direction);
 };
 

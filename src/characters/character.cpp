@@ -1,11 +1,18 @@
-
-#include <cstring>
 #include "../../include/macros.h"
-#include "../../include/characters/npc.h"
+#include "../../include/characters/characters.h"
 
-npc::npc(dungeon_t * dungeon){this->dungeon = dungeon;}
+character::character(/* args */)
+{
+}
 
-int npc::movePC(direction_t direction){
+character::~character()
+{
+}
+
+int character::getSpeed(){ return this->speed;}
+int character::getRange(){ return this->range;}
+
+int character::move(direction_t direction){
     pair_t location;
     pair_t prev_location;
 
@@ -46,10 +53,10 @@ int npc::movePC(direction_t direction){
     }
 
     if (checkLocation(location[dim_x],location[dim_y])){
-        if ((this->dungeon->map[location[dim_y]][location[dim_x]] == ter_floor_room) ||
-            (this->dungeon->map[location[dim_y]][location[dim_x]] == ter_floor_hall) ||
-            (this->dungeon->map[location[dim_y]][location[dim_x]] == ter_stairs_up)  ||  
-            (this->dungeon->map[location[dim_y]][location[dim_x]] == ter_stairs_down)   ){
+        if ((this->dungeon->map[location[dim_y]][location[dim_x]].terrain_type == ter_floor_room) ||
+            (this->dungeon->map[location[dim_y]][location[dim_x]].terrain_type == ter_floor_hall) ||
+            (this->dungeon->map[location[dim_y]][location[dim_x]].terrain_type == ter_stairs_up)  ||  
+            (this->dungeon->map[location[dim_y]][location[dim_x]].terrain_type == ter_stairs_down)   ){
                 memcpy(this->currentLocation, &location, sizeof(pair_t));
                 memcpy(this->prevLocation, &prev_location, sizeof(pair_t));
                 return 0;
@@ -58,6 +65,3 @@ int npc::movePC(direction_t direction){
     } else
         return -1;
 }
-
-
-

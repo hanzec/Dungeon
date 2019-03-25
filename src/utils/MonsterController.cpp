@@ -5,7 +5,7 @@
 
 #include <cstdlib> 
 #include <cstring>
-#include "../../include/characters/MonsterController.h"
+#include "../../include/utils/MonsterController.h"
 
 int monsterController::getNumberOfMonster(){return this->numberOfMonster;}
 
@@ -16,7 +16,7 @@ void monsterController::addSingleMonster(monster::monster * monster, int weight)
     nextMonster->prevNode = nullptr;
     nextMonster->nextNode = nullptr;
     nextMonster->monster = monster;
-    nextMonster->time = (uint32_t) (1000 / monster->speed + weight);
+    nextMonster->time = (uint32_t) (1000 / monster->getSpeed + weight);
 
     if (this->currentNode->nextNode == NULL) {
         monsterNode_t * endNode = (monsterNode_t *)malloc(sizeof(monsterNode_t));
@@ -72,7 +72,7 @@ void monsterController::addMonsterToQueue(uint32_t number){
 
     for (int i = 0; i < number; ++i){
         monster::monster * monster = new monster::monster(dungeon,npc);
-        room_t tmp = dungeon->rooms[rand()%dungeon->num_rooms];
+        room_t tmp = dungeon->rooms[(rand()%dungeon->num_rooms)];
         monster->currentLocation[dim_y] = (uint16_t) (tmp.position[dim_y] + rand() % tmp.size[dim_y]);
         monster->currentLocation[dim_x] = (uint16_t) (tmp.position[dim_x] + rand() % tmp.size[dim_x]);
 

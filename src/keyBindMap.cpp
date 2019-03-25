@@ -6,6 +6,7 @@
 #include <zconf.h>
 #include <ncurses.h>
 #include <unordered_map>
+#include "../include/gameCommon.h"
 #include "../include/keyBindMap.h"
 
 io::keyBindMap::keyBindMap(){
@@ -41,6 +42,8 @@ io::keyBindMap::keyBindMap(){
         this->keyMap[INS_INVE_I] = 'I';
         this->keyMap[LOOK_AT_M] = 'L';
         this->keyMap[QUIT] = 'Q';
+
+    
     }
 }
 

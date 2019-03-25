@@ -5,9 +5,9 @@
 #ifndef COMS327_S19_DUNGEON_MONSTERCONTROLLER_H
 #define COMS327_S19_DUNGEON_MONSTERCONTROLLER_H
 
-#include "npc.h"
-#include "Monster.h"
 #include "../gameCommon.h"
+#include "../characters/pc.h"
+#include "../characters/Monster.h"
 
 typedef struct monsterNode{
     uint32_t time;

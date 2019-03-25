@@ -4,10 +4,9 @@
 
 #include <time.h>
 #include <limits.h>
-#include "../../include/game.h"
 #include "../../include/gameCommon.h"
+#include "../../include/utils/mapGenerator.h"
 #include "../../include/utils/data_stucture/heap.h"
-
 
 static uint32_t in_room(dungeon_t *d, int16_t y, int16_t x)
 {
@@ -79,7 +78,7 @@ static void dijkstra_corridor(dungeon_t *d, pair_t from, pair_t to)
         }
     }
 
-    while ((p = heap_remove_min(&h))) {
+    while ((p = (corridor_path * )heap_remove_min(&h))) {
         p->hn = NULL;
 
         if ((p->pos[dim_y] == to[dim_y]) && p->pos[dim_x] == to[dim_x]) {
@@ -178,7 +177,7 @@ static void dijkstra_corridor_inv(dungeon_t *d, pair_t from, pair_t to)
         }
     }
 
-    while ((p = heap_remove_min(&h))) {
+    while ((p = (corridor_path_t *)heap_remove_min(&h))) {
         p->hn = NULL;
 
         if ((p->pos[dim_y] == to[dim_y]) && p->pos[dim_x] == to[dim_x]) {
@@ -305,7 +304,7 @@ static int create_cycle(dungeon_t *d)
     return 0;
 }
 
-static int connect_rooms(dungeon_t *d)
+int mapGenerator::connect_rooms(dungeon_t *d)
 {
     uint32_t i;
 
@@ -349,9 +348,9 @@ static int smooth_hardness(dungeon_t *d)
         } while (hardness[y][x]);
         hardness[y][x] = i;
         if (i == 1) {
-            head = tail = malloc(sizeof (*tail));
+            head = tail =(queue_node_t *) malloc(sizeof (*tail));
         } else {
-            tail->next = malloc(sizeof (*tail));
+            tail->next = (queue_node_t *) malloc(sizeof (*tail));
             tail = tail->next;
         }
         tail->next = NULL;
@@ -372,7 +371,7 @@ static int smooth_hardness(dungeon_t *d)
 
         if (x - 1 >= 0 && y - 1 >= 0 && !hardness[y - 1][x - 1]) {
             hardness[y - 1][x - 1] = i;
-            tail->next = malloc(sizeof (*tail));
+            tail->next = (queue_node_t *) malloc(sizeof (*tail));
             tail = tail->next;
             tail->next = NULL;
             tail->x = x - 1;
@@ -380,7 +379,7 @@ static int smooth_hardness(dungeon_t *d)
         }
         if (x - 1 >= 0 && !hardness[y][x - 1]) {
             hardness[y][x - 1] = i;
-            tail->next = malloc(sizeof (*tail));
+            tail->next = (queue_node_t *) malloc(sizeof (*tail));
             tail = tail->next;
             tail->next = NULL;
             tail->x = x - 1;
@@ -388,7 +387,7 @@ static int smooth_hardness(dungeon_t *d)
         }
         if (x - 1 >= 0 && y + 1 < DUNGEON_Y && !hardness[y + 1][x - 1]) {
             hardness[y + 1][x - 1] = i;
-            tail->next = malloc(sizeof (*tail));
+            tail->next = (queue_node_t *) malloc(sizeof (*tail));
             tail = tail->next;
             tail->next = NULL;
             tail->x = x - 1;
@@ -396,7 +395,7 @@ static int smooth_hardness(dungeon_t *d)
         }
         if (y - 1 >= 0 && !hardness[y - 1][x]) {
             hardness[y - 1][x] = i;
-            tail->next = malloc(sizeof (*tail));
+            tail->next = (queue_node_t *) malloc(sizeof (*tail));
             tail = tail->next;
             tail->next = NULL;
             tail->x = x;
@@ -404,7 +403,7 @@ static int smooth_hardness(dungeon_t *d)
         }
         if (y + 1 < DUNGEON_Y && !hardness[y + 1][x]) {
             hardness[y + 1][x] = i;
-            tail->next = malloc(sizeof (*tail));
+            tail->next = (queue_node_t *) malloc(sizeof (*tail));
             tail = tail->next;
             tail->next = NULL;
             tail->x = x;
@@ -412,7 +411,7 @@ static int smooth_hardness(dungeon_t *d)
         }
         if (x + 1 < DUNGEON_X && y - 1 >= 0 && !hardness[y - 1][x + 1]) {
             hardness[y - 1][x + 1] = i;
-            tail->next = malloc(sizeof (*tail));
+            tail->next = (queue_node_t *) malloc(sizeof (*tail));
             tail = tail->next;
             tail->next = NULL;
             tail->x = x + 1;
@@ -420,7 +419,7 @@ static int smooth_hardness(dungeon_t *d)
         }
         if (x + 1 < DUNGEON_X && !hardness[y][x + 1]) {
             hardness[y][x + 1] = i;
-            tail->next = malloc(sizeof (*tail));
+            tail->next = (queue_node_t *) malloc(sizeof (*tail));
             tail = tail->next;
             tail->next = NULL;
             tail->x = x + 1;
@@ -428,7 +427,7 @@ static int smooth_hardness(dungeon_t *d)
         }
         if (x + 1 < DUNGEON_X && y + 1 < DUNGEON_Y && !hardness[y + 1][x + 1]) {
             hardness[y + 1][x + 1] = i;
-            tail->next = malloc(sizeof (*tail));
+            tail->next = (queue_node_t *) malloc(sizeof (*tail));
             tail = tail->next;
             tail->next = NULL;
             tail->x = x + 1;
@@ -452,7 +451,7 @@ static int smooth_hardness(dungeon_t *d)
                     }
                 }
             }
-            d->hardness[y][x] = t / s;
+            d->map[y][x].hardness = t / s;
         }
     }
     /* Let's do it again, until it's smooth like Kenny G. */
@@ -467,21 +466,9 @@ static int smooth_hardness(dungeon_t *d)
                     }
                 }
             }
-            d->hardness[y][x] = t / s;
+            d->map[y][x].hardness = t / s;
         }
     }
-
-
-    out = fopen("diffused.pgm", "w");
-    fprintf(out, "P5\n%u %u\n255\n", DUNGEON_X, DUNGEON_Y);
-    fwrite(&hardness, sizeof (hardness), 1, out);
-    fclose(out);
-
-    out = fopen("smoothed.pgm", "w");
-    fprintf(out, "P5\n%u %u\n255\n", DUNGEON_X, DUNGEON_Y);
-    fwrite(&d->hardness, sizeof (d->hardness), 1, out);
-    fclose(out);
-
     return 0;
 }
 
@@ -550,7 +537,6 @@ static void place_stairs(dungeon_t *d)
                ((mappair(p) < ter_floor)                 ||
                 (mappair(p) > ter_stairs)))
             ;
-        d->num_down_stairs += 1;
         mappair(p) = ter_stairs_down;
     } while (rand_under(1, 3));
     do {
@@ -560,7 +546,6 @@ static void place_stairs(dungeon_t *d)
                 (mappair(p) > ter_stairs)))
 
             ;
-        d->num_up_stairs += 1;
         mappair(p) = ter_stairs_up;
     } while (rand_under(2, 4));
 
@@ -598,7 +583,7 @@ int gen_dungeon(dungeon_t *d)
     do {
         make_rooms(d);
     } while (place_rooms(d));
-    connect_rooms(d);
+    mapGenerator::connect_rooms(d);
     place_stairs(d);
 
     return 0;
@@ -609,7 +594,7 @@ void init_dungeon(dungeon_t *d)
     empty_dungeon(d);
 }
 
-void generate_dungon(dungeon_t *dunegeon) {
+void mapGenerator::generate_dungon(dungeon_t *dunegeon) {
 
     srand(time(NULL));
     init_dungeon(dunegeon);

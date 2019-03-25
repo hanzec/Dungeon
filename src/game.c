@@ -4,21 +4,19 @@
 #include <stdlib.h>
 #include <strings.h>
 #include <ncurses.h>
-#include "../include/characters/charactersCommon.h"
 #include "../include/gameCommon.h"
 #include "../include/display/display.h"
 
 //todo current status
 //todo multiple stair support
 
-npc_t pc;
+npc::npc pc;
 dungeon_t dungeon;
-baseScreen_t * screen;
 monsterNode_t monsterNode;
 
 void start_new(){
     //generate dungeon
-    generate_dungon(&dungeon);
+    mapGererate::generate_dungon(&dungeon);
     bzero(&monsterNode,sizeof(monsterNode_t));
 
     //initial npc location

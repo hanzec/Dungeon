@@ -6,6 +6,8 @@ aux_source_directory(utils/ DIR_UTILS_SRCS)
 aux_source_directory(characters/ DIR_CHARACTERS_SRCS)
 aux_source_directory(utils/data_stucture DIR_UTILS_DS_SRCS)
 
-add_executable(Dungeon main.c ${DIR_UTILS_SRCS} ${DIR_CHARACTERS_SRCS} ${DIR_UTILS_DS_SRCS} ${DIR_GAME_EXE_SRCS} display/panel/monsterList.cpp ../include/display/panel/monsterList.h)
+#add header file
+
+add_executable(Dungeon main.c ${DIR_UTILS_SRCS} ${DIR_CHARACTERS_SRCS} ${DIR_UTILS_DS_SRCS} ${DIR_GAME_EXE_SRCS})
 
 target_link_libraries(Dungeon DisplayLib)

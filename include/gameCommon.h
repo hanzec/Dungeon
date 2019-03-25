@@ -5,6 +5,7 @@
 #ifndef DUNGEON_COMS327_F19_GAMECOMMON_H
 #define DUNGEON_COMS327_F19_GAMECOMMON_H
 
+#include <vector>
 #include <stdint.h>
 
 #define DUNGEON_X              80
@@ -18,10 +19,10 @@
 #define DUNGEON_VERSION        0
 #define MAX_ROOMS              10
 #define MONSTER_RANGE           3
-#define mappair(pair) (d->map[pair[dim_y]][pair[dim_x]])
-#define mapxy(x, y) (d->map[y][x])
-#define hardnesspair(pair) (d->hardness[pair[dim_y]][pair[dim_x]])
-#define hardnessxy(x, y) (d->hardness[y][x])
+#define mappair(pair) (d->map[pair[dim_y]][pair[dim_x]].terrain_type)
+#define mapxy(x, y) (d->map[y][x].terrain_type)
+#define hardnesspair(pair) (d->map[pair[dim_y]][pair[dim_x]].hardness)
+#define hardnessxy(x, y) (d->map[y][x].hardness)
 #define DUNGEON_KEY_CONF_LOC "~/.rlg327/keyBind.conf"
 
 typedef enum dim {
@@ -44,6 +45,12 @@ typedef enum __attribute__ ((__packed__)) terrain_type {
     ter_stairs_down
 } terrain_type_t;
 
+typedef struct map_block{
+    bool visable;
+    uint8_t hardness;
+    terrain_type_t terrain_type;
+} map_block_t;
+
 typedef struct room{
     pair_t position;
     pair_t size;
@@ -51,12 +58,9 @@ typedef struct room{
 
 typedef struct dungeon {
     uint8_t num_rooms;
-    pair_t pc_location;
-    uint8_t num_up_stairs;
-    room_t rooms[MAX_ROOMS];
-    uint8_t num_down_stairs;
-    uint8_t hardness[DUNGEON_Y][DUNGEON_X];
-    terrain_type_t map[DUNGEON_Y][DUNGEON_X];
+    pair_t * staris_array;
+    std::vector<room_t> rooms[MAX_ROOMS];
+    map_block_t map[DUNGEON_Y][DUNGEON_X];
 } dungeon_t;
 
 typedef enum direction{

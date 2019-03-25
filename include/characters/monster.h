@@ -6,9 +6,8 @@
 #define DUNGEON_COMS327_F19_MONSTER_H
 
 #include "npc.h"
-#include "monster.h"
-
 #include "../gameCommon.h"
+#include "../utils/data_stucture/heap.h"
 
 typedef struct corridor_node {
     int cost;
@@ -17,8 +16,7 @@ typedef struct corridor_node {
     void * prev_node;
 } corridor_node_t;
 
-class monster
-{
+class monster {
 private:
     npc::npc * npc;
     uint8_t range;

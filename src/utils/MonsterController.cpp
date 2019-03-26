@@ -1,7 +1,4 @@
 
-//
-// Created by 陈瀚泽 on 2019-02-27.
-//
 
 #include <cstdlib> 
 #include <cstring>
@@ -72,7 +69,7 @@ void monsterController::addMonsterToQueue(uint32_t number){
 
     for (int i = 0; i < number; ++i){
         monster::monster * monster = new monster::monster(dungeon,npc);
-        room_t tmp = dungeon->rooms[(rand()%dungeon->num_rooms)];
+        room_t tmp = dungeon->rooms->at(rand()%dungeon->num_rooms);
         monster->currentLocation[dim_y] = (uint16_t) (tmp.position[dim_y] + rand() % tmp.size[dim_y]);
         monster->currentLocation[dim_x] = (uint16_t) (tmp.position[dim_x] + rand() % tmp.size[dim_x]);
 

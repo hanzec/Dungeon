@@ -1,6 +1,0 @@
-/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/cmake-build-debug/CMakeFiles/Dungeon.dir
-/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/cmake-build-debug/display/CMakeFiles/rebuild_cache.dir
-/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/cmake-build-debug/display/CMakeFiles/edit_cache.dir
-/Users/hanzech/CLionProjects/coms327-s19-dungeon/src/cmake-build-debug/display/CMakeFiles/DisplayLib.dir

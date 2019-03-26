@@ -2,14 +2,11 @@
 // Created by chen_ on 2019/2/6.
 //
 #include <sys/stat.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include "../include/io_file_c.h"
+#include "../include/fileReader.h"
 #include "../include/utils/crossplatform_header/endian.h"
 
 
-void read_operation(dungeon_t *dungeon, char *path){
+int io::fileReader::read_operation(dungeon_t *dungeon, char * path){
     uint16_t tmp = 0;
     FILE * saved_file;
     struct stat statbuf;
@@ -17,7 +14,7 @@ void read_operation(dungeon_t *dungeon, char *path){
 
     if (path == NULL){
         char *home = getenv("HOME");
-        *path = malloc(strlen(home) + strlen("/.rlg327/dungeon") + 1);
+        path = (char *)malloc(strlen(home) + strlen("/.rlg327/dungeon") + 1);
         strcpy(path,home);
         strcat(path,"/.rlg327/dungeon");
         free(home);
@@ -29,32 +26,32 @@ void read_operation(dungeon_t *dungeon, char *path){
     fflush(saved_file);
 
     //check the file head
-    char *tmp_file_head = malloc(12);
+    char *tmp_file_head = (char *)malloc(12);
     fread(tmp_file_head,12,1,saved_file);
 
     //Read the file version;
-    int *tmp_file_version = malloc(4);
+    int *tmp_file_version = (int *)malloc(4);
     fread(tmp_file_version,4,1,saved_file);
 
     //read the file size
-    uint32_t *file_size = malloc(4);
+    uint32_t *file_size = (uint32_t *) malloc(4);
     fread(file_size,4,1,saved_file);
 
     //Read the npc location
-    fread(&dungeon->pc_location[dim_x],1,1,saved_file);
-    fread(&dungeon->pc_location[dim_y],1,1,saved_file);
+    fread(&dungeon->pcInitLocation[dim_x],1,1,saved_file);
+    fread(&dungeon->pcInitLocation[dim_y],1,1,saved_file);
 
     //read the hardness of the dungeon
-    bzero(dungeon->hardness, sizeof(uint8_t)*DUNGEON_Y*DUNGEON_X);
+    bzero(dungeon->map, sizeof(map_block_t)*DUNGEON_Y*DUNGEON_X);
     for (int i = 0; i < DUNGEON_Y; ++i) {
         for (int j = 0; j < DUNGEON_X; ++j) {
-            fread(&dungeon->hardness[i][j],1,1,saved_file);
-            if (dungeon->hardness[i][j] < 1)
-                dungeon->map[i][j] = ter_floor_hall;
-            else if (dungeon->hardness[i][j] == 255)
-                dungeon->map[i][j] = ter_wall_immutable;
+            fread(&dungeon->map[i][j].hardness,1,1,saved_file);
+            if (dungeon->map[i][j].hardness < 1)
+                dungeon->map[i][j].terrain_type = ter_floor_hall;
+            else if (dungeon->map[i][j].hardness == 255)
+                dungeon->map[i][j].terrain_type = ter_wall_immutable;
             else
-                dungeon->map[i][j] = ter_wall;
+                dungeon->map[i][j].terrain_type = ter_wall;
         }
     }
 
@@ -65,25 +62,27 @@ void read_operation(dungeon_t *dungeon, char *path){
 
     //read the room in current dungeon
     for (int k = 0; k < dungeon->num_rooms; ++k) {
-        fread(&dungeon->rooms[k].position[dim_x],1,1,saved_file);
-        fread(&dungeon->rooms[k].position[dim_y],1,1,saved_file);
-        fread(&dungeon->rooms[k].size[dim_x],1,1,saved_file);
-        fread(&dungeon->rooms[k].size[dim_y],1,1,saved_file);
+        room_t * tmpRoom = new room_t();
+        fread((void *)tmpRoom->position[dim_x],1,1,saved_file);
+        fread((void *)tmpRoom->position[dim_y],1,1,saved_file);
+        fread((void *)tmpRoom->size[dim_x],1,1,saved_file);
+        fread((void *)tmpRoom->size[dim_y],1,1,saved_file);
 
-        for (int i = 0; i < dungeon->rooms[k].size[dim_y]; ++i) {
-            for (int j = 0; j < dungeon->rooms[k].size[dim_x]; ++j) {
-                dungeon->map[i + dungeon->rooms[k].position[dim_y]][j + dungeon->rooms[k].position[dim_x]] = ter_floor_room;
+        for (int i = 0; i < tmpRoom->size[dim_y]; ++i) {
+            for (int j = 0; j < tmpRoom->size[dim_x]; ++j) {
+                dungeon->map[i + tmpRoom->position[dim_y]][j + tmpRoom->position[dim_x]].terrain_type = ter_floor_room;
             }
         }
+        dungeon->rooms.push_back(tmpRoom);
     }
 
     // Read the number of the up stairs
     tmp = 0;
     fread(&tmp,2,1,saved_file);
-    dungeon->num_up_stairs = be16toh(tmp);
+    int num_up_stairs = be16toh(tmp);
 
     // read the location of the up stairs
-    for (int l = 0; l < dungeon->num_up_stairs; ++l) {
+    for (int l = 0; l < num_up_stairs; ++l) {
         uint8_t x,y;
         fread(&x,1,1,saved_file);
         fread(&y,1,1,saved_file);

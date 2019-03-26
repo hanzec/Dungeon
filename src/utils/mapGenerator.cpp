@@ -13,10 +13,10 @@ static uint32_t in_room(dungeon_t *d, int16_t y, int16_t x)
     int i;
 
     for (i = 0; i < d->num_rooms; i++) {
-        if ((x >= d->rooms[i].position[dim_x]) &&
-            (x < (d->rooms[i].position[dim_x] + d->rooms[i].size[dim_x])) &&
-            (y >= d->rooms[i].position[dim_y]) &&
-            (y < (d->rooms[i].position[dim_y] + d->rooms[i].size[dim_y]))) {
+        if ((x >= d->rooms->at(i).position[dim_x]) &&
+            (x < (d->rooms->at(i).position[dim_x] + d->rooms[i].size[dim_x])) &&
+            (y >= d->rooms->at(i).position[dim_y]) &&
+            (y < (d->rooms->at(i).position[dim_y] + d->rooms[i].size[dim_y]))) {
             return 1;
         }
     }
@@ -272,10 +272,10 @@ static int create_cycle(dungeon_t *d)
 
     for (i = max = 0; i < d->num_rooms - 1; i++) {
         for (j = i + 1; j < d->num_rooms; j++) {
-            tmp = (((d->rooms[i].position[dim_x] - d->rooms[j].position[dim_x])  *
-                    (d->rooms[i].position[dim_x] - d->rooms[j].position[dim_x])) +
-                   ((d->rooms[i].position[dim_y] - d->rooms[j].position[dim_y])  *
-                    (d->rooms[i].position[dim_y] - d->rooms[j].position[dim_y])));
+            tmp = (((d->rooms[i]->position[dim_x] - d->rooms[j]->position[dim_x])  *
+                    (d->rooms[i]->position[dim_x] - d->rooms[j]->position[dim_x])) +
+                   ((d->rooms[i]->position[dim_y] - d->rooms[j]->position[dim_y])  *
+                    (d->rooms[i]->position[dim_y] - d->rooms[j]->position[dim_y])));
             if (tmp > max) {
                 max = tmp;
                 p = i;
@@ -286,18 +286,18 @@ static int create_cycle(dungeon_t *d)
 
     /* Can't simply call connect_two_rooms() because it doesn't *
      * use inverse hardnesses, so duplicate it here.            */
-    e1[dim_y] = rand_range(d->rooms[p].position[dim_y],
-                           (d->rooms[p].position[dim_y] +
-                            d->rooms[p].size[dim_y] - 1));
-    e1[dim_x] = rand_range(d->rooms[p].position[dim_x],
-                           (d->rooms[p].position[dim_x] +
-                            d->rooms[p].size[dim_x] - 1));
-    e2[dim_y] = rand_range(d->rooms[q].position[dim_y],
-                           (d->rooms[q].position[dim_y] +
-                            d->rooms[q].size[dim_y] - 1));
-    e2[dim_x] = rand_range(d->rooms[q].position[dim_x],
-                           (d->rooms[q].position[dim_x] +
-                            d->rooms[q].size[dim_x] - 1));
+    e1[dim_y] = rand_range(d->rooms[p]->position[dim_y],
+                           (d->rooms[p]->position[dim_y] +
+                            d->rooms[p]->size[dim_y] - 1));
+    e1[dim_x] = rand_range(d->rooms[p]->position[dim_x],
+                           (d->rooms[p]->position[dim_x] +
+                            d->rooms[p]->size[dim_x] - 1));
+    e2[dim_y] = rand_range(d->rooms[p]->position[dim_y],
+                           (d->rooms[p]->position[dim_y] +
+                            d->rooms[p]->size[dim_y] - 1));
+    e2[dim_x] = rand_range(d->rooms[p]->position[dim_x],
+                           (d->rooms[p]->position[dim_x] +
+                            d->rooms[p]->size[dim_x] - 1));
 
     dijkstra_corridor_inv(d, e1, e2);
 
@@ -309,7 +309,7 @@ int mapGenerator::connect_rooms(dungeon_t *d)
     uint32_t i;
 
     for (i = 1; i < d->num_rooms; i++) {
-        connect_two_rooms(d, d->rooms + i - 1, d->rooms + i);
+        connect_two_rooms(d, d->rooms[i - 1], d->rooms[i]);
     }
 
     create_cycle(d);
@@ -357,11 +357,6 @@ static int smooth_hardness(dungeon_t *d)
         tail->x = x;
         tail->y = y;
     }
-
-    out = fopen("seeded.pgm", "w");
-    fprintf(out, "P5\n%u %u\n255\n", DUNGEON_X, DUNGEON_Y);
-    fwrite(&hardness, sizeof (hardness), 1, out);
-    fclose(out);
 
     /* Diffuse the vaules to fill the space */
     while (head) {
@@ -501,7 +496,7 @@ static int place_rooms(dungeon_t *d)
     for (success = 0; !success; ) {
         success = 1;
         for (i = 0; success && i < d->num_rooms; i++) {
-            r = d->rooms + i;
+            r = d->rooms[i];
             r->position[dim_x] = 1 + rand() % (DUNGEON_X - 2 - r->size[dim_x]);
             r->position[dim_y] = 1 + rand() % (DUNGEON_Y - 2 - r->size[dim_y]);
             for (p[dim_y] = r->position[dim_y] - 1;
@@ -556,21 +551,21 @@ static int make_rooms(dungeon_t *d)
 {
     uint32_t i;
 
-    memset(d->rooms, 0, sizeof (d->rooms));
-
     for (i = MIN_ROOMS; i < MAX_ROOMS && rand_under(5, 8); i++)
         ;
     d->num_rooms = i;
 
     for (i = 0; i < d->num_rooms; i++) {
-        d->rooms[i].size[dim_x] = ROOM_MIN_X;
-        d->rooms[i].size[dim_y] = ROOM_MIN_Y;
-        while (rand_under(3, 5) && d->rooms[i].size[dim_x] < ROOM_MAX_X) {
-            d->rooms[i].size[dim_x]++;
+        room_t * tmpRoom = new room_t();
+        tmpRoom->size[dim_x] = ROOM_MIN_X;
+        tmpRoom->size[dim_y] = ROOM_MIN_Y;
+        while (rand_under(3, 5) && tmpRoom->size[dim_x] < ROOM_MAX_X) {
+            tmpRoom->size[dim_x]++;
         }
-        while (rand_under(3, 5) && d->rooms[i].size[dim_y] < ROOM_MAX_Y) {
-            d->rooms[i].size[dim_y]++;
+        while (rand_under(3, 5) && tmpRoom->size[dim_y] < ROOM_MAX_Y) {
+            tmpRoom->size[dim_y]++;
         }
+        d->rooms.push_back(tmpRoom);
     }
 
     return 0;

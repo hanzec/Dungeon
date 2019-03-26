@@ -7,7 +7,7 @@
 
 #include "gamePanel.h"
 #include "../../gameCommon.h"
-#include "../../characters/MonsterController.h"
+#include "../../utils/MonsterController.h"
 
 class monsterList : public gamePanel {
 private:

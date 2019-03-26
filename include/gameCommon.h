@@ -58,8 +58,10 @@ typedef struct room{
 
 typedef struct dungeon {
     uint8_t num_rooms;
-    pair_t * staris_array;
-    std::vector<room_t> rooms[MAX_ROOMS];
+    pair_t pcInitLocation;
+    std::vector<room_t *> rooms;
+    std::vector<pair_t *> upStaris;
+    std::vector<pair_t *> downStaris;
     map_block_t map[DUNGEON_Y][DUNGEON_X];
 } dungeon_t;
 

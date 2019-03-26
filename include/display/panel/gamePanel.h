@@ -6,6 +6,7 @@
 #define DUNGEON_COMS327_F19_PANEL_H
 
 #include <panel.h>
+#include <cstddef>
 
 class gamePanel{
 public:

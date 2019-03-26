@@ -23,6 +23,7 @@ namespace io{
     public:
         keyBindMap(/* args */);
         ~keyBindMap();
+        
         int setMoveKeySet(int * keyMap, int8_t combNum);
         int setKey(int * keyMap, keyList_t func, int key);
     };   

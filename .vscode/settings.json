@@ -24,6 +24,12 @@
         "editor.quickSuggestions": true
     },
     
+    "fileheader.Author": "Hanze Chen",
+    "fileheader.LastModifiedBy": "Hanze Chen",
+    
+    // Use ZSH as the integrated terminal 
+    "terminal.integrated.shell.osx": "zsh",
+
     "files.autoSave": "afterDelay",
     "C_Cpp.intelliSenseEngine":"Default",
     "C_Cpp.intelliSenseEngineFallback": "Disabled",
@@ -35,7 +41,8 @@
         "cstdlib": "cpp",
         "cstring": "cpp",
         "limits": "cpp",
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "unordered_map": "cpp"
     },
     
 }

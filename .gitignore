@@ -1,3 +1,6 @@
 .idea/
 .vscode/
 build/
+
+src/CMakeFiles/
+src/cmake-build-debug/

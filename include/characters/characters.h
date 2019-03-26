@@ -9,14 +9,14 @@ protected:
     uint8_t speed;
     dungeon_t * dungeon;
     pair_t prevLocation;
-    pair_t currentLocation;
-
     typedef enum direction{
         Upper,      UpperLeft,      UpperRight,
         Left,       Right,          Down,       
         DownLeft,   DownRight,
     }direction_t;
 public:
+    pair_t currentLocation;
+
     character(/* args */);
     ~character();
     int getSpeed();

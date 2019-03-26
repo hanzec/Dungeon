@@ -7,7 +7,7 @@
 
 #include "../gameCommon.h"
 #include "../characters/pc.h"
-#include "../characters/Monster.h"
+#include "../characters/monster.h"
 
 typedef struct monsterNode{
     uint32_t time;
@@ -19,7 +19,7 @@ typedef struct monsterNode{
 
 class monsterController{
 private:
-    npc::npc * npc;
+    pc::pc * npc;
     dungeon_t * dungeon;
     int numberOfMonster = 0;
     monsterNode_t * currentNode;
@@ -28,7 +28,7 @@ public:
     void cleanMonsterQueue();
     monster::monster * popMinMonster();
     void addMonsterToQueue(uint32_t number);
-    monsterController(dungeon_t * dungeon, npc::npc * pc);
+    monsterController(dungeon_t * dungeon, pc::pc * pc);
     void addSingleMonster(monster::monster * monster, int weight);
 };
 #endif //COMS327_S19_DUNGEON_MONSTERCONTROLLER_H

@@ -3,7 +3,9 @@
 //
 // todo replace with hashmap
 
+#include <vector>
 #include <zconf.h>
+#include <iostream>
 #include <ncurses.h>
 #include <unordered_map>
 #include "../include/gameCommon.h"
@@ -11,8 +13,8 @@
 
 io::keyBindMap::keyBindMap(){
 
-    // TODO using using hashmap to impliment this function
-    if(access(DUNGEON_KEY_CONF_LOC,4) < 0){
+    if (access(DUNGEON_KEY_CONF_LOC, 4) < 0)
+    {
         this->keyMap[MOVE_L] = KEY_LEFT;
         this->keyMap[MOVE_UL] = KEY_HOME;
         this->keyMap[MOVE_R] = KEY_RIGHT;
@@ -42,49 +44,53 @@ io::keyBindMap::keyBindMap(){
         this->keyMap[INS_INVE_I] = 'I';
         this->keyMap[LOOK_AT_M] = 'L';
         this->keyMap[QUIT] = 'Q';
+    }
 
-    
+    for (std::pair<keyBindMap::keyList, int> element : this->keyMap){
+        this->keyMapSearch[element.second] = element.first;
     }
 }
 
-int setMoveKeySet(int * keyMap, int8_t combMum){
-    switch(combMum){
-        case 0:
-            keyMap[MOVE_L] = KEY_LEFT;
-            keyMap[MOVE_UL] = KEY_HOME;
-            keyMap[MOVE_R] = KEY_RIGHT;
-            keyMap[MOVE_U] = KEY_UP;
-            keyMap[MOVE_D] = KEY_DOWN;
-            keyMap[MOVE_UR] = KEY_PPAGE;
-            keyMap[MOVE_DR] = KEY_NPAGE;
-            keyMap[MOVE_DL] = KEY_END;
-            return 0;
-        case 1:
-            keyMap[MOVE_L] = KEY_LEFT;
-            keyMap[MOVE_UL] = KEY_HOME;
-            keyMap[MOVE_R] = KEY_RIGHT;
-            keyMap[MOVE_U] = KEY_UP;
-            keyMap[MOVE_D] = KEY_DOWN;
-            keyMap[MOVE_UR] = KEY_PPAGE;
-            keyMap[MOVE_DR] = KEY_NPAGE;
-            keyMap[MOVE_DL] = KEY_END;
-            return 0;
-        case 2:
-            keyMap[MOVE_L] = KEY_LEFT;
-            keyMap[MOVE_UL] = KEY_HOME;
-            keyMap[MOVE_R] = KEY_RIGHT;
-            keyMap[MOVE_U] = KEY_UP;
-            keyMap[MOVE_D] = KEY_DOWN;
-            keyMap[MOVE_UR] = KEY_PPAGE;
-            keyMap[MOVE_DR] = KEY_NPAGE;
-            keyMap[MOVE_DL] = KEY_END;
-            return 0;
-        default:
-            return -1;
+int io::keyBindMap::setMoveKeySet(int *keyMap, int8_t combMum)
+{
+    switch (combMum){
+    case 0:
+        keyMap[MOVE_L] = KEY_LEFT;
+        keyMap[MOVE_UL] = KEY_HOME;
+        keyMap[MOVE_R] = KEY_RIGHT;
+        keyMap[MOVE_U] = KEY_UP;
+        keyMap[MOVE_D] = KEY_DOWN;
+        keyMap[MOVE_UR] = KEY_PPAGE;
+        keyMap[MOVE_DR] = KEY_NPAGE;
+        keyMap[MOVE_DL] = KEY_END;
+        return 0;
+    case 1:
+        keyMap[MOVE_L] = KEY_LEFT;
+        keyMap[MOVE_UL] = KEY_HOME;
+        keyMap[MOVE_R] = KEY_RIGHT;
+        keyMap[MOVE_U] = KEY_UP;
+        keyMap[MOVE_D] = KEY_DOWN;
+        keyMap[MOVE_UR] = KEY_PPAGE;
+        keyMap[MOVE_DR] = KEY_NPAGE;
+        keyMap[MOVE_DL] = KEY_END;
+        return 0;
+    case 2:
+        keyMap[MOVE_L] = KEY_LEFT;
+        keyMap[MOVE_UL] = KEY_HOME;
+        keyMap[MOVE_R] = KEY_RIGHT;
+        keyMap[MOVE_U] = KEY_UP;
+        keyMap[MOVE_D] = KEY_DOWN;
+        keyMap[MOVE_UR] = KEY_PPAGE;
+        keyMap[MOVE_DR] = KEY_NPAGE;
+        keyMap[MOVE_DL] = KEY_END;
+        return 0;
+    default:
+        return -1;
     }
 }
 
-int setKey(int * keyMap, keyList_t func, int key){
+int io::keyBindMap::setKey(keyList_t func, int key)
+{
     if (keyMap == NULL)
         return -1;
     keyMap[func] = key;

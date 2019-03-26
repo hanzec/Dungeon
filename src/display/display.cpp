@@ -1,17 +1,24 @@
 //
 // Created by 陈瀚泽 on 2019-03-14.
-//
-
+//d
 
 #include <ncurses.h>
 #include "../../include/display/display.h"
+#include "../../include/display/tombstone.h"
 #include "../../include/display/displayCommon.h"
-#include "../../include/display/window/characterInfo.h"
 #include "../../include/display/window/statusBar.h"
-#include "../../include/display/window/dungeonWindow.h"
 #include "../../include/display/panel/monsterList.h"
+#include "../../include/display/window/dungeonWindow.h"
+#include "../../include/display/window/characterInfo.h"
 
-display::display() {
+
+pc * display::npcPtr;
+dungeon_t * display::dungeonPtr;
+monsterList * display::monsterListPtr;
+monsterNode_t * display::monsterNodePtr;
+gameWindow * display::windowStack[num_windows];
+
+int display::initDisplayEnv() {
     initscr();
     cbreak();
     noecho();
@@ -27,7 +34,7 @@ display::display() {
     refresh();
 }
 
-int display::initScreen(dungeon_t *dungeon, npc *pc, monsterNode_t * monsterNode) {
+int display::initScreen(dungeon_t *dungeon, pc *pc, monsterNode_t * monsterNode) {
     // FIXME bug here statusWindow and pcInfoWindow have same memory address for no reason
     // update 3-14-2019 may fix bug but need testing
 
@@ -57,6 +64,8 @@ int display::initScreen(dungeon_t *dungeon, npc *pc, monsterNode_t * monsterNode
     //refreash screen
     update_panels();
     doupdate();
+
+    return 0;
 }
 
 int display::closeScreen() {
@@ -69,6 +78,7 @@ int display::showDiedScreen() {
     mvaddstr(0,0,tombstone);
     refresh();
     getch();
+    return 0;
 }
 
 int display::showMonsterList() {
@@ -78,16 +88,20 @@ int display::showMonsterList() {
     //wait for user press any key
     getch();
     monsterListPtr->hidePanel();
+    return 0;
 }
 
 int display::updateNPCLocation() {
     ((dungeonWindow *)windowStack[dungeonScreen_win])->updateNPC(npcPtr);
+    return 0;
 }
 
 int display::updateDungeonScreen() {
     ((dungeonWindow *)windowStack[dungeonScreen_win])->updateMap();
+    return 0;
 }
 
-int display::updateMonsterLocation(monster::monster * monster) {
+int display::updateMonsterLocation(monster * monster) {
     ((dungeonWindow *)windowStack[dungeonScreen_win])->updateMonster(monster);
+    return 0;
 }

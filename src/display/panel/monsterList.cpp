@@ -7,7 +7,6 @@
 #include "../../../include/gameCommon.h"
 #include "../../../include/display/displayCommon.h"
 #include "../../../include/display/panel/monsterList.h"
-#include "../../../include/characters/MonsterController.h"
 
 monsterList::monsterList(monsterNode_t *monsterNode) {
     int numMonster = getNumberOfMonster(* ((monsterNode_t *) monsterNode));
@@ -61,5 +60,6 @@ int monsterList::updatePanel() {
 
     getyx(tmpWindowsPtr,y,x);
     mvwprintw(tmpWindowsPtr,y + 1,5,"Press ANY key to return Game!");
+    return 0;
 }
 

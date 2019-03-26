@@ -7,7 +7,6 @@
 
 
 #include "gameWindow.h"
-#include "../../gameCommon.h"
 
 class characterInfo : public gameWindow{
 public:

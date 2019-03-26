@@ -11,7 +11,7 @@
 #define nextMonster(monster) ((corridor_node_t *) monster->path[monster->currentLocation[dim_y]][monster->currentLocation[dim_x]].prev_node)
 
 
-monster::monster(dungeon_t *dungeon,pc::pc *pc){
+monster::monster(dungeon_t *dungeon,pc *pc){
     this->npc = pc;
     this->dungeon = dungeon;
     this->range = (uint8_t) (rand() % 3);

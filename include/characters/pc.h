@@ -11,7 +11,7 @@
 class pc : public character{
 private:
 public:
-    pc(dungeon_t * dungeon);
+    pc(dungeon_t * dungeon, pair_t location);
     int movePC(direction_t direction);
 };
 

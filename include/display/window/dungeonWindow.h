@@ -7,13 +7,13 @@
 
 #include "gameWindow.h"
 #include "../../gameCommon.h"
-#include "../../characters/npc.h"
-#include "../../characters/Monster.h"
+#include "../../characters/pc.h"
+#include "../../characters/monster.h"
 
 class dungeonWindow : public gameWindow {
 public:
     int updateMap();
-    int updateNPC(npc * npc);
+    int updateNPC(pc * npc);
     int updateMonster(monster * monster);
     explicit dungeonWindow(dungeon_t * dungeon);
 

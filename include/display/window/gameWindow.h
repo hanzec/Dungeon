@@ -10,7 +10,7 @@
 
 class gameWindow {
 public:
-    WINDOW * windowPtr = nullptr;
+    WINDOW * windowPtr;
 
     int destroy();
 };

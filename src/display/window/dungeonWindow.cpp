@@ -20,9 +20,10 @@ int dungeonWindow::updateMap() {
             mvwaddch(this->windowPtr,i,j,this->getTerFromChar(i, j));
         }
     }
+    return 0;
 }
 
-int dungeonWindow::updateNPC(npc *npc) {
+int dungeonWindow::updateNPC(pc *npc) {
     if (npc->prevLocation != nullptr){
         mvwaddch(this->windowPtr,
                  npc->prevLocation[dim_y],
@@ -48,7 +49,7 @@ int dungeonWindow::updateMonster(monster * monster) {
 }
 
 const chtype dungeonWindow::getTerFromChar(int x, int y) {
-    switch (dungeonPtr->map[y][x]) {
+    switch (dungeonPtr->map[y][x].terrain_type) {
         case ter_wall:
         case ter_wall_immutable:
             return ' ';

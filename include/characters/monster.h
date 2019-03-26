@@ -19,7 +19,7 @@ typedef struct corridor_node {
 
 class monster : public character{
 private:
-    pc::pc * npc;
+    pc * npc;
     uint8_t characteristics;
 public:
     pair_t lastPcLocation ;
@@ -29,7 +29,7 @@ public:
     bool meetWithNPC();
     void dijkstra_tunnelling();
     void dijkstra_no_tunnelling();
-    monster(dungeon_t *dungeon, pc::pc * pc);
+    monster(dungeon_t *dungeon, pc * pc);
 };
 
 #endif //DUNGEON_COMS327_F19_MONSTER_H

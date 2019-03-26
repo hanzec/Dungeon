@@ -6,14 +6,18 @@
 
 int monsterController::getNumberOfMonster(){return this->numberOfMonster;}
 
-void monsterController::addSingleMonster(monster::monster * monster, int weight){
+monsterController::monsterController(dungeon_t *dungeon, class pc *pc) {
+    this->dungeon = dungeon;
+    this->pc = pc;
+}
+void monsterController::addSingleMonster(monster * monster, int weight){
 
     monsterNode_t * nextMonster = (monsterNode_t *)malloc(sizeof(monsterNode_t));
     
     nextMonster->prevNode = nullptr;
     nextMonster->nextNode = nullptr;
     nextMonster->monster = monster;
-    nextMonster->time = (uint32_t) (1000 / monster->getSpeed + weight);
+    nextMonster->time = (uint32_t) (1000 / monster->getSpeed() + weight);
 
     if (this->currentNode->nextNode == NULL) {
         monsterNode_t * endNode = (monsterNode_t *)malloc(sizeof(monsterNode_t));
@@ -44,12 +48,12 @@ void monsterController::addSingleMonster(monster::monster * monster, int weight)
 
     this->numberOfMonster += 1;
 }
-monster::monster * monsterController::popMinMonster(){
+monster * monsterController::popMinMonster(){
     if (this->currentNode == NULL){
         return NULL;
     }
     monsterNode_t * removeNode = this->currentNode->nextNode;
-    monster::monster * monster = removeNode->monster;
+    monster* monster = removeNode->monster;
     this->currentNode->nextNode = removeNode;
     removeNode->nextNode->prevNode = this->currentNode;
     this->numberOfMonster -= 1;
@@ -68,8 +72,8 @@ void monsterController::cleanMonsterQueue() {
 void monsterController::addMonsterToQueue(uint32_t number){
 
     for (int i = 0; i < number; ++i){
-        monster::monster * monster = new monster::monster(dungeon,npc);
-        room_t tmp = dungeon->rooms->at(rand()%dungeon->num_rooms);
+        monster * monster = new class monster(dungeon,pc);
+        room_t tmp = * dungeon->rooms[rand()%dungeon->num_rooms];
         monster->currentLocation[dim_y] = (uint16_t) (tmp.position[dim_y] + rand() % tmp.size[dim_y]);
         monster->currentLocation[dim_x] = (uint16_t) (tmp.position[dim_x] + rand() % tmp.size[dim_x]);
 

@@ -24,9 +24,9 @@ typedef enum panelList{
 class display{
 public:
     //screen operation
-    display();
+    static int initDisplayEnv();
     static int closeScreen();
-    static int initScreen(dungeon_t * dungeon, npc::npc * pc, monsterNode_t * monsterNode);
+    static int initScreen(dungeon_t * dungeon, pc * pc, monsterNode_t * monsterNode);
 
     //special screen function
     static int showDiedScreen();
@@ -37,10 +37,10 @@ public:
     //update screen function
     static int updateNPCLocation();
     static int updateDungeonScreen();
-    static int updateMonsterLocation(monster::monster * monster);
+    static int updateMonsterLocation(monster * monster);
 
 private:
-    static npc::npc * npcPtr;
+    static pc * npcPtr;
     static dungeon_t * dungeonPtr;
     static monsterList * monsterListPtr;
     static monsterNode_t * monsterNodePtr;

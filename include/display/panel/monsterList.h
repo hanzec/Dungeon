@@ -6,7 +6,6 @@
 #define DUNGEON_COMS327_F19_MONSTERLIST_H
 
 #include "gamePanel.h"
-#include "../../gameCommon.h"
 #include "../../utils/MonsterController.h"
 
 class monsterList : public gamePanel {

@@ -4,58 +4,59 @@
 #include <stdlib.h>
 #include <strings.h>
 #include <ncurses.h>
+
+#include "../include/game.h"
 #include "../include/gameCommon.h"
+#include "../include/characters/pc.h"
 #include "../include/display/display.h"
+#include "../include/utils/mapGenerator.h"
 
 //todo current status
 //todo multiple stair support
 
-npc::npc pc;
+pc * game::pcPtr;
 dungeon_t dungeon;
-monsterNode_t monsterNode;
+monsterController * game::monsterControllerPtr;
 
-void start_new(){
+void game::start_new(){
     //generate dungeon
-    mapGererate::generate_dungon(&dungeon);
-    bzero(&monsterNode,sizeof(monsterNode_t));
+    mapGenerator::generate_dungon(&dungeon);
 
-    //initial npc location
-    npc.dungeon = &dungeon;
-    bzero(&npc.prevLocation, sizeof(pair_t));
-    npc.location[dim_x] = dungeon.rooms[0].position[dim_x];
-    npc.location[dim_y] = dungeon.rooms[0].position[dim_y];
+    //initial PC
+    pcPtr = new pc(&dungeon,dungeon.rooms[0]->position);
 
-    //generate monster
-    pushMonsterToQueue(10,&dungeon,&npc,&monsterNode);
+    //initial Monster Controller
+    monsterControllerPtr = new monsterController(&dungeon,pcPtr);
+
+    //add 10 monster to dungeon
+    monsterControllerPtr->addMonsterToQueue(10);
     
     //start game
-    startGame(&dungeon,&monsterNode,&npc);
+    game::startGame();
 }
 
 
-void close_dungeon(int mode){
+void game::close_dungeon(int mode){
     switch (mode)
     {
         case 1:
-            showDiedScreen(screen);
+            display::showDiedScreen();
             break;
         default:
-            endwin();
-            closeScreen(screen);
+            display::closeScreen();
             break;
     }
-    return;
 }
 
-void startGame(){
+void game::startGame(){
     int time = 0;
     bool flag = true;
     
-    initDisplayEnv();
-    screen = initScreen(&dungeon,&npc,monsterNode);
+    display::initDisplayEnv();
+    display::initScreen(&dungeon,pcPtr,monsterControllerPtr->currentNode);
 
     while(flag){
-        while(time >= seeFrontMonsterNode(&monsterNode)->time){
+        while(time >= monsterControllerPtr->popMinMonster().time){
             monster_t * current = popMinMonster(&monsterNode);
             if (moveMonster(current) == 1){
                 flag = false;

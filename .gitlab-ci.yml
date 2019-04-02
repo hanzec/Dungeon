@@ -3,7 +3,10 @@ stages:
 
 build_gcc:
   stage: build
+  image: ubuntu:bionic
   allow_failure: false
+  before_script:
+    - apt-get update
+    - apt-get install build-essential
   script:
-    - cmake .
-    - make
+    - whoami

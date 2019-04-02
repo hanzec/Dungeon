@@ -9,4 +9,5 @@ build_gcc:
     - apt-get update
     - apt-get install gcc g++ make libncurses5-dev libncursesw5-dev cmake -y
   script:
-    - whoami
+    - cmake .
+    - make

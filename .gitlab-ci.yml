@@ -9,7 +9,7 @@ build:ubuntu:
   before_script:
     - apt-get update -y
     - apt-get install cmake libncurses5-dev libncursesw5-dev -y
-  script：
+  script:
     - cmake.
     - make
 

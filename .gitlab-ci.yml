@@ -4,9 +4,6 @@ stages:
 build_gcc:
   stage: build
   allow_failure: false
-  before_script:
-    - apt-get update -y
-    - apt-get install libncurses5-dev libncursesw5-dev -y
   script:
     - cmake.
     - make

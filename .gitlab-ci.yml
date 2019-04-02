@@ -1,7 +1,5 @@
 stages:
   - build
-  - package
-  - code_quality
 
 build:ubuntu:
   image: gcc:latest
@@ -12,8 +10,3 @@ build:ubuntu:
   script:
     - cmake.
     - make
-
-package:source:
-  image: ubuntu:bionic
-  dependencies:
-    - build:ubuntu

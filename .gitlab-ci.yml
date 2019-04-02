@@ -2,7 +2,7 @@ stages:
   - build
 
 build_gcc:
-  statges: build
+  stages: build
   image: gcc:latest
   allow_failure: false
   before_script:

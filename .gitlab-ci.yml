@@ -3,7 +3,6 @@ stages:
 
 build_gcc:
   stage: build
-  image: gcc:latest
   allow_failure: false
   before_script:
     - apt-get update -y

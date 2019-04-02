@@ -1,7 +1,7 @@
 stages:
   - build
 
-build:ubuntu:
+build:
   image: gcc:latest
   allow_failure: false
   before_script:

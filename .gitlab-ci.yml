@@ -1,5 +1,6 @@
 stages:
   - build
+  - package
 
 build_gcc:
   stage: build
@@ -22,3 +23,14 @@ build_clang:
   script:
     - cmake .
     - make
+
+canvas_submit:
+  stage: package
+  image: ubuntu:bionic
+  allow_failure: true
+  script:
+    - whoami
+  artifacts:
+    reports:
+      codequality: codequality.json
+

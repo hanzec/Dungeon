@@ -11,3 +11,14 @@ build_gcc:
   script:
     - cmake .
     - make
+
+build_clang:
+  stage: build
+  image: ubuntu:bionic
+  allow_failure: false
+  before_script:
+    - apt-get update
+    - apt-get install clang libncurses5-dev libncursesw5-dev cmake -y
+  script:
+    - cmake .
+    - make

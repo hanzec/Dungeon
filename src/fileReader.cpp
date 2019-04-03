@@ -3,7 +3,7 @@
 //
 #include <cstdio>
 #include <cstdlib>
-#include <<cstring>
+#include <cstring>
 #include <sys/stat.h>
 
 #include "../include/fileReader.h"

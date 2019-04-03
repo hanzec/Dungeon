@@ -4,6 +4,7 @@
 
 #include <string.h>
 #include <ncurses.h>
+#include "../include/game.h"
 
 typedef enum file_action {
     no_select,
@@ -13,6 +14,6 @@ typedef enum file_action {
 
 int main(int argc, char *argv[]) {
 
-    start_new();
+    game::newGame();
 
 }

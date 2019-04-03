@@ -1,44 +1,48 @@
-
-
 #include <cstdlib> 
 #include <cstring>
 #include "../../include/utils/MonsterController.h"
 
 int monsterController::getNumberOfMonster(){return this->numberOfMonster;}
 
-monsterController::monsterController(dungeon_t *dungeon, class pc *pc) {
-    this->dungeon = dungeon;
-    this->pc = pc;
-}
-void monsterController::addSingleMonster(monster * monster, int weight){
+int monsterController::seeMinMonsterTime(){ return this->currentNode->nextNode->time;}
 
-    monsterNode_t * nextMonster = (monsterNode_t *)malloc(sizeof(monsterNode_t));
-    
-    nextMonster->prevNode = nullptr;
-    nextMonster->nextNode = nullptr;
+monsterController::monsterController(dungeon_t *dungeon, Pc * user) {
+    this->user = user;
+    this->dungeon = dungeon;
+    this->currentNode = nullptr;
+}
+void monsterController::addSingleMonster(Monster * monster, int weight){
+
+    auto * nextMonster = (MonsterNode_t *)malloc(sizeof(MonsterNode_t));
+
     nextMonster->monster = monster;
+    nextMonster->nextNode = nullptr;
     nextMonster->time = (uint32_t) (1000 / monster->getSpeed() + weight);
 
-    if (this->currentNode->nextNode == NULL) {
-        monsterNode_t * endNode = (monsterNode_t *)malloc(sizeof(monsterNode_t));
+    if (this->currentNode == nullptr) {
+        currentNode = new MonsterNode;
+        auto * endNode = new MonsterNode;
 
-        endNode->nextNode = NULL;
-        endNode->monster = NULL;
-        endNode->time = UINT32_MAX;
+        endNode->time = INT_MAX;
+        endNode->monster = nullptr;
+        endNode->nextNode = nullptr;
         endNode->prevNode = nextMonster;
 
-        nextMonster->nextNode = endNode;
-        nextMonster->prevNode = this->currentNode;
-        this->currentNode->nextNode = nextMonster;
-    } else{
-        monsterNode_t * current = this->currentNode;
+        currentNode->prevNode = nullptr;
+        currentNode->nextNode = nextMonster;
 
-        while(current != NULL){
+        nextMonster->nextNode = endNode;
+        nextMonster->prevNode = currentNode;
+    } else{
+        MonsterNode_t * current = this->currentNode;
+
+        while(current->nextNode != NULL){
             if (nextMonster->time < current->time){
-                current->prevNode->nextNode = nextMonster;
                 nextMonster->prevNode = current->prevNode;
-                current->prevNode = nextMonster;
+                current->prevNode->nextNode = nextMonster;
+
                 nextMonster->nextNode = current;
+                current->prevNode = nextMonster;
                 break;
             }
             current = current->nextNode;
@@ -48,16 +52,16 @@ void monsterController::addSingleMonster(monster * monster, int weight){
 
     this->numberOfMonster += 1;
 }
-monster * monsterController::popMinMonster(){
+Monster * monsterController::popMinMonster(){
     if (this->currentNode == NULL){
         return NULL;
     }
-    monsterNode_t * removeNode = this->currentNode->nextNode;
-    monster* monster = removeNode->monster;
-    this->currentNode->nextNode = removeNode;
+    MonsterNode_t * removeNode = this->currentNode->nextNode;
+    Monster* monster = removeNode->monster;
+    this->currentNode->nextNode = removeNode->nextNode;
     removeNode->nextNode->prevNode = this->currentNode;
     this->numberOfMonster -= 1;
-    free(removeNode);
+    //free(removeNode);
     return monster;
 }
 
@@ -72,7 +76,7 @@ void monsterController::cleanMonsterQueue() {
 void monsterController::addMonsterToQueue(uint32_t number){
 
     for (int i = 0; i < number; ++i){
-        monster * monster = new class monster(dungeon,pc);
+        Monster * monster = new class Monster(this->dungeon,this->user);
         room_t tmp = * dungeon->rooms[rand()%dungeon->num_rooms];
         monster->currentLocation[dim_y] = (uint16_t) (tmp.position[dim_y] + rand() % tmp.size[dim_y]);
         monster->currentLocation[dim_x] = (uint16_t) (tmp.position[dim_x] + rand() % tmp.size[dim_x]);

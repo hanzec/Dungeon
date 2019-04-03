@@ -6,13 +6,13 @@
 #define DUNGEON_COMS327_F19_PC_H
 
 #include "characters.h"
-#include "../gameCommon.h"
 
-class pc : public character{
+class Pc : public Character{
 private:
 public:
-    pc(dungeon_t * dungeon, pair_t location);
+    Pc(dungeon_t * dungeon = NULL);
     int movePC(direction_t direction);
+    int setPcLocation(pair_t location);
 };
 
 #endif //DUNGEON_COMS327_F19_PC_H

@@ -11,13 +11,13 @@
 
 class game{
 public:
-    static void start_new();
     static void startGame();
-    static void close_dungeon(int mode);
+    static void newGame();
 private:
-    static pc * pcPtr;
-    static dungeon_t dungeon;
-    static monsterController * monsterControllerPtr;
+    static Pc pcPtr;
+    static void newDungeonLevel();
+    static void close_dungeon(int mode);
+    static monsterController monsterControllerPtr;
 };
 
 

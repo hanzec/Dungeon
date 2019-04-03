@@ -1,23 +1,17 @@
+#include <stdio.h>
+#include <string.h>
 #include "../../include/macros.h"
 #include "../../include/characters/characters.h"
 
-character::character(/* args */)
-{
-}
+int Character::getSpeed(){ return this->speed;}
+int Character::getRange(){ return this->range;}
 
-character::~character()
-{
-}
-
-int character::getSpeed(){ return this->speed;}
-int character::getRange(){ return this->range;}
-
-int character::move(direction_t direction){
+int Character::move(direction_t direction){
     pair_t location;
     pair_t prev_location;
 
-    memcpy(&location,this->currentLocation, sizeof(pair_t));
-    memcpy(&prev_location,this->prevLocation, sizeof(pair_t));
+    location[dim_x] = this->currentLocation[dim_x];
+    location[dim_y] = this->currentLocation[dim_y];
 
     switch (direction){
         case Upper:
@@ -57,8 +51,10 @@ int character::move(direction_t direction){
             (this->dungeon->map[location[dim_y]][location[dim_x]].terrain_type == ter_floor_hall) ||
             (this->dungeon->map[location[dim_y]][location[dim_x]].terrain_type == ter_stairs_up)  ||  
             (this->dungeon->map[location[dim_y]][location[dim_x]].terrain_type == ter_stairs_down)   ){
-                memcpy(this->currentLocation, &location, sizeof(pair_t));
-                memcpy(this->prevLocation, &prev_location, sizeof(pair_t));
+                this->prevLocation[dim_x] = this->currentLocation[dim_x];
+                this->prevLocation[dim_y] = this->currentLocation[dim_y];
+                this->currentLocation[dim_x] = location[dim_x];
+                this->currentLocation[dim_y] = location[dim_y];
                 return 0;
         }else
             return -1;

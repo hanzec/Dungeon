@@ -532,6 +532,7 @@ static void place_stairs(dungeon_t *d)
                ((mappair(p) < ter_floor)                 ||
                 (mappair(p) > ter_stairs)))
             ;
+        d->downStairs.push_back(&p);
         mappair(p) = ter_stairs_down;
     } while (rand_under(1, 3));
     do {
@@ -541,6 +542,7 @@ static void place_stairs(dungeon_t *d)
                 (mappair(p) > ter_stairs)))
 
             ;
+        d->upStairs.push_back(&p);
         mappair(p) = ter_stairs_up;
     } while (rand_under(2, 4));
 

@@ -3,22 +3,15 @@
 
 #include "../gameCommon.h"
 
-class character{
+class Character{
 protected:
     uint8_t range;
     uint8_t speed;
     dungeon_t * dungeon;
-    typedef enum direction{
-        Upper,      UpperLeft,      UpperRight,
-        Left,       Right,          Down,       
-        DownLeft,   DownRight,
-    }direction_t;
 public:
     pair_t prevLocation;
     pair_t currentLocation;
 
-    character(/* args */);
-    ~character();
     int getSpeed();
     int getRange();
     int move(direction_t direction);

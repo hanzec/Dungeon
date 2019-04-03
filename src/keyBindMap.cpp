@@ -4,8 +4,8 @@
 // todo replace with hashmap
 
 #include <vector>
-#include <zconf.h>
 #include <iostream>
+#include <unistd.h>
 #include <ncurses.h>
 #include <unordered_map>
 #include "../include/gameCommon.h"

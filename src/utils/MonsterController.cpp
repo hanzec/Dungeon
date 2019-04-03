@@ -1,5 +1,6 @@
 #include <cstdlib> 
 #include <cstring>
+#include <climits>
 #include "../../include/utils/MonsterController.h"
 
 int monsterController::getNumberOfMonster(){return this->numberOfMonster;}

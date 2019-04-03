@@ -1,7 +1,7 @@
 stages:
   - build
   - package
-
+  
 build_gcc:
   only:
     - master
@@ -29,8 +29,8 @@ build_clang:
     - make
 
 canvas_submit:
-    only:
-      - master
+  only:
+    - master
   stage: package
   image: ubuntu:bionic
   allow_failure: true
@@ -39,4 +39,3 @@ canvas_submit:
   artifacts:
     reports:
       codequality: codequality.json
-

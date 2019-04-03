@@ -3,7 +3,8 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/include"
+                "/usr/local/include",
+                "${workspaceRoot}/include"
             ],
             "defines": [],
             "macFrameworkPath": [
@@ -11,7 +12,8 @@
             ],
             "browse": {
                 "path": [
-                    "${workspaceFolder}/include/**"
+                    "/usr/local/include",
+                    "${workspaceRoot}/include"
                 ]
             },
             "cStandard": "c99",

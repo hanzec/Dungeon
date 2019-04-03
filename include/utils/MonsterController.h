@@ -9,27 +9,20 @@
 #include "../characters/pc.h"
 #include "../characters/monster.h"
 
-typedef struct monsterNode{
-    uint32_t time;
-    monster * monster;
-    struct monsterNode * nextNode;
-    struct monsterNode * prevNode;
-}monsterNode_t;
-
-
 class monsterController{
 private:
-    pc * pc;
+    Pc * user;
     dungeon_t * dungeon;
     int numberOfMonster = 0;
 public:
-    monsterNode_t * currentNode;
+    MonsterNode_t * currentNode;
 
     int getNumberOfMonster();
     void cleanMonsterQueue();
-    monster * popMinMonster();
+    Monster * popMinMonster();
+    int seeMinMonsterTime();
     void addMonsterToQueue(uint32_t number);
-    monsterController(dungeon_t * dungeon, class pc * pc);
-    void addSingleMonster(monster * monster, int weight);
+    monsterController(dungeon_t * dungeon = nullptr, Pc * user = nullptr);
+    void addSingleMonster(Monster * monster, int weight);
 };
 #endif //COMS327_S19_DUNGEON_MONSTERCONTROLLER_H

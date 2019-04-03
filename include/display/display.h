@@ -24,9 +24,14 @@ typedef enum panelList{
 class display{
 public:
     //screen operation
-    static int initDisplayEnv();
     static int closeScreen();
-    static int initScreen(dungeon_t * dungeon, pc * pc, monsterNode_t * monsterNode);
+    static int initDisplayEnv();
+    static int updateDungeonMap(dungeon_t * dungeon);
+    static int initScreen(dungeon_t * dungeon, Pc * pc);
+
+    //spectcial game mode
+    static void setFOWStatus(bool flag);
+    static void setTeleportStatus(bool flag);
 
     //special screen function
     static int showDiedScreen();
@@ -35,15 +40,14 @@ public:
     static int showMonsterList();
 
     //update screen function
-    static int updateNPCLocation();
-    static int updateDungeonScreen();
-    static int updateMonsterLocation(monster * monster);
+    static int updatePCLocation();// need to change name this function is also update wof
 
 private:
-    static pc * npcPtr;
+    static Pc * npcPtr;
     static dungeon_t * dungeonPtr;
+    static int updateMonsterLocation();
     static monsterList * monsterListPtr;
-    static monsterNode_t * monsterNodePtr;
     static gameWindow * windowStack[num_windows];
+
 };
 #endif //DUNGEON_V1_01_DISPLAY_H

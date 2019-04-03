@@ -12,10 +12,9 @@
 #include "../../include/display/window/characterInfo.h"
 
 
-pc * display::npcPtr;
+Pc * display::npcPtr;
 dungeon_t * display::dungeonPtr;
 monsterList * display::monsterListPtr;
-monsterNode_t * display::monsterNodePtr;
 gameWindow * display::windowStack[num_windows];
 
 int display::initDisplayEnv() {
@@ -34,24 +33,22 @@ int display::initDisplayEnv() {
     refresh();
 }
 
-int display::initScreen(dungeon_t *dungeon, pc *pc, monsterNode_t * monsterNode) {
+int display::initScreen(dungeon_t *dungeon, Pc *pc) {
     // FIXME bug here statusWindow and pcInfoWindow have same memory address for no reason
     // update 3-14-2019 may fix bug but need testing
 
     //init internal dungeon env ptr
     npcPtr = pc;
     dungeonPtr = dungeon;
-    monsterNodePtr = monsterNode;
 
     //inital the main window of the dungeon game
     windowStack[statusBar_win] = new statusBar();
     windowStack[characterInfo_win] = new characterInfo();
-    windowStack[dungeonScreen_win] = new dungeonWindow(dungeon);
+    windowStack[dungeonScreen_win] = new dungeonWindow(dungeon,npcPtr);
 
     //initial monster list panel
-
     // FIXME monsterList class as abstract class
-    monsterListPtr = new monsterList(monsterNodePtr);
+    monsterListPtr = new monsterList(dungeon->monsterArray);
     PANEL * tmpPanel = new_panel((windowStack[dungeonScreen_win])->windowPtr);
 
     // set up monsterList
@@ -59,7 +56,7 @@ int display::initScreen(dungeon_t *dungeon, pc *pc, monsterNode_t * monsterNode)
     set_panel_userptr(monsterListPtr->panel,tmpPanel);
 
     //update npc location
-    updateNPCLocation();
+    updatePCLocation();
 
     //refreash screen
     update_panels();
@@ -72,6 +69,9 @@ int display::closeScreen() {
     return 0;
 }
 
+void display::setFOWStatus(bool flag){((dungeonWindow *)windowStack[dungeonScreen_win])->setFOWStatus(flag);}
+
+void display::setTeleportStatus(bool flag){((dungeonWindow *)windowStack[dungeonScreen_win])->setTeleportStatus(flag);}
 
 int display::showDiedScreen() {
 
@@ -91,17 +91,16 @@ int display::showMonsterList() {
     return 0;
 }
 
-int display::updateNPCLocation() {
-    ((dungeonWindow *)windowStack[dungeonScreen_win])->updateNPC(npcPtr);
+int display::updatePCLocation() {
+    ((dungeonWindow *)windowStack[dungeonScreen_win])->updateNPC();
     return 0;
 }
 
-int display::updateDungeonScreen() {
-    ((dungeonWindow *)windowStack[dungeonScreen_win])->updateMap();
+int display::updateMonsterLocation() {
     return 0;
 }
 
-int display::updateMonsterLocation(monster * monster) {
-    ((dungeonWindow *)windowStack[dungeonScreen_win])->updateMonster(monster);
-    return 0;
+int display::updateDungeonMap(dungeon_t *dungeon) {
+    display::dungeonPtr = dungeon;
+    monsterListPtr->updateMonsterNode(dungeon->monsterArray);
 }

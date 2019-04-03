@@ -12,13 +12,19 @@
 
 class dungeonWindow : public gameWindow {
 public:
-    int updateMap();
-    int updateNPC(pc * npc);
-    int updateMonster(monster * monster);
-    explicit dungeonWindow(dungeon_t * dungeon);
+    int updateNPC();
+    void setFOWStatus(bool flag);
+    void setTeleportStatus(bool flag);
+    int updateMonster(Monster * monster);
+    explicit dungeonWindow(dungeon_t * dungeon, Pc * npc);
 
 private:
+    Pc * npc;
+    bool fow;
+    bool teleport;
+    void updateMap();
     dungeon_t * dungeonPtr;
+    int updateMapByPixel(int x, int y);
     const chtype getTerFromChar(int x, int y);
 };
 

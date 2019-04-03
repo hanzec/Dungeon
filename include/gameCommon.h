@@ -7,23 +7,16 @@
 
 #include <vector>
 #include <stdint.h>
+#include "macros.h"
 
-#define DUNGEON_X              80
-#define DUNGEON_Y              21
-#define MIN_ROOMS              6
-#define ROOM_MAX_X             20
-#define ROOM_MAX_Y             15
-#define ROOM_MIN_X             4
-#define ROOM_MIN_Y             3
-#define MAX_ROOM_RATIO         90
-#define DUNGEON_VERSION        0
-#define MAX_ROOMS              10
-#define MONSTER_RANGE           3
-#define mappair(pair) (d->map[pair[dim_y]][pair[dim_x]].terrain_type)
-#define mapxy(x, y) (d->map[y][x].terrain_type)
-#define hardnesspair(pair) (d->map[pair[dim_y]][pair[dim_x]].hardness)
-#define hardnessxy(x, y) (d->map[y][x].hardness)
-#define DUNGEON_KEY_CONF_LOC "~/.rlg327/keyBind.conf"
+class Monster;
+
+    typedef struct MonsterNode{
+        int time;
+        Monster * monster;
+        struct MonsterNode * nextNode;
+        struct MonsterNode * prevNode;
+    }MonsterNode_t;
 
 typedef enum dim {
     dim_x,
@@ -56,13 +49,19 @@ typedef struct room{
     pair_t size;
 }room_t;
 
+typedef enum direction{
+    Upper,      UpperLeft,      UpperRight,
+    Left,       Right,          Down,
+    DownLeft,   DownRight,
+}direction_t;
+
 typedef struct dungeon {
     uint8_t num_rooms;
     pair_t pcInitLocation;
-    uint16_t numberOfUpStaris;
-    uint16_t numberOfDownStaris;
+    MonsterNode * monsterArray;
     std::vector<room_t *> rooms;
+    std::vector<pair_t *> upStairs;
+    std::vector<pair_t *> downStairs;
     map_block_t map[DUNGEON_Y][DUNGEON_X];
 } dungeon_t;
-
 #endif //DUNGEON_COMS327_F19_GAMECOMMON_H

@@ -14,27 +14,10 @@
 //todo current status
 //todo multiple stair support
 
-pc * game::pcPtr;
-dungeon_t dungeon;
-monsterController * game::monsterControllerPtr;
-
-void game::start_new(){
-    //generate dungeon
-    mapGenerator::generate_dungon(&dungeon);
-
-    //initial PC
-    pcPtr = new pc(&dungeon,dungeon.rooms[0]->position);
-
-    //initial Monster Controller
-    monsterControllerPtr = new monsterController(&dungeon,pcPtr);
-
-    //add 10 monster to dungeon
-    monsterControllerPtr->addMonsterToQueue(10);
-    
-    //start game
-    game::startGame();
-}
-
+Pc game::pcPtr;
+int currentLevel = 0;
+std::vector<dungeon *> dungeonMap;
+monsterController game::monsterControllerPtr;
 
 void game::close_dungeon(int mode){
     switch (mode)
@@ -46,79 +29,150 @@ void game::close_dungeon(int mode){
             display::closeScreen();
             break;
     }
+
+    //todo add free dungeonNap code
 }
 
-void game::startGame(){
+void game::startGame() {
     int time = 0;
     bool flag = true;
-    
-    display::initDisplayEnv();
-    display::initScreen(&dungeon,pcPtr,monsterControllerPtr->currentNode);
+    bool fowFlag = false;
+    bool teleportFlag = false;
 
-    while(flag){
-        while(time >= monsterControllerPtr->popMinMonster().time){
-            monster_t * current = popMinMonster(&monsterNode);
-            if (moveMonster(current) == 1){
+    display::initDisplayEnv();
+    dungeon_t *currentDungeon = dungeonMap[0];
+    display::initScreen(currentDungeon, &pcPtr);
+
+    while (flag) {
+        while (time >= monsterControllerPtr.seeMinMonsterTime()) {
+            Monster *monster = monsterControllerPtr.popMinMonster();
+            monster->moveMonster();
+            if (monster->meetWithNPC()) {
                 flag = false;
                 close_dungeon(1);
-                goto end;
+                return;
             }
-            pushSingleMonster(&monsterNode, current, (uint32_t) (time + 1000 / current->speed));
+            monsterControllerPtr.addSingleMonster(monster, (uint32_t) (time + 1000 / monster->getSpeed()));
         }
 
         reselect:
-        switch (getch())
-        {
+        switch (getch()) {
             case KEY_UP:
-                if(movePC(Upper,&npc))
+                if (pcPtr.move(Upper))
                     goto reselect;
-                updatePCLocation(screen,&npc);
+                display::updatePCLocation();
                 break;
             case KEY_DOWN:
-                if(movePC(Down,&npc))
+                if (pcPtr.move(Down))
                     goto reselect;
-                updatePCLocation(screen,&npc);
+                display::updatePCLocation();
                 break;
             case KEY_RIGHT:
-                if(movePC(Right,&npc))
+                if (pcPtr.move(Right))
                     goto reselect;
-                updatePCLocation(screen,&npc);
+                display::updatePCLocation();
                 break;
             case KEY_LEFT:
-                if(movePC(Left,&npc))
+                if (pcPtr.move(Left))
                     goto reselect;
-                updatePCLocation(screen,&npc);
+                display::updatePCLocation();
                 break;
             case 'm':
-                showMonsterList(screen,&monsterNode);
+                display::showMonsterList();
                 break;
+            case 'f':
+                display::setFOWStatus(!fowFlag);
+                fowFlag = ! fowFlag;
+                break;
+            case 't':
+                display::setTeleportStatus(!teleportFlag);
+                teleportFlag = ! teleportFlag;
+                break;
+            case 'r':
+                pair_t location;
+                if (teleportFlag) {
+                    display::setTeleportStatus(!teleportFlag);
+                    teleportFlag = ! teleportFlag;
+
+                    do{
+                    location[dim_x] = rand()%DUNGEON_X;
+                    location[dim_y] = rand()%DUNGEON_Y;
+                    }while(pcPtr.setPcLocation(location) == 1);
+                    display::updatePCLocation();
+                }
+                goto reselect;
             default:
                 goto reselect;
-                break;
         }
-        if ((dungeon.map[npc.location[dim_y]][npc.location[dim_x]] == ter_stairs_up) ||
-            (dungeon.map[npc.location[dim_y]][npc.location[dim_x]] == ter_stairs_up) ){
-            bzero(&dungeon,sizeof(dungeon_t));
-            //TODO may leak memory need imrove
-            bzero(&monsterNode, sizeof(monsterNode_t));
+        if (currentDungeon->map[pcPtr.currentLocation[dim_y]][pcPtr.currentLocation[dim_x]].terrain_type ==
+            ter_stairs_up) {
+            currentLevel++;
 
-            generate_dungon(&dungeon);
+            if (currentLevel > dungeonMap.size())
+                newDungeonLevel();
 
-            //initial npc location
-            npc.dungeon = &dungeon;
-            bzero(&npc.prevLocation, sizeof(pair_t));
-            npc.location[dim_x] = dungeon.rooms[0].position[dim_x];
-            npc.location[dim_y] = dungeon.rooms[0].position[dim_y];
+            //set current dungeon to next layer
+            currentDungeon = dungeonMap[currentLevel];
 
-            //generate monster
-            pushMonsterToQueue(10,&dungeon,&npc,&monsterNode);
-            
-            updateDungeonScreen(screen,&dungeon);
-        time += 10;
+            //set new pc location to stairs
+            printf("%d",currentDungeon->downStairs.size());
+            pcPtr.setPcLocation(*currentDungeon->downStairs[0]);
+
+            //update display dungeon ptr
+            display::updateDungeonMap(currentDungeon);
+        } else if (currentDungeon->map[pcPtr.currentLocation[dim_y]][pcPtr.currentLocation[dim_x]].terrain_type ==
+                   ter_stairs_up) {
+            currentLevel--;
+
+            if (currentLevel > dungeonMap.size())
+                newDungeonLevel();
+
+            //set current dungeon to next layer
+            currentDungeon = dungeonMap[currentLevel];
+
+            //set new pc location to stairs
+            pcPtr.setPcLocation(*currentDungeon->upStairs[0]);
+
+            //update display dungeon ptr
+            display::updateDungeonMap(currentDungeon);
+        }
+
     }
-    end:
-
-    return;
 }
 
+void game::newDungeonLevel() {
+
+    //generate new layer of dungeon
+    auto * dungeon = new dungeon_t;
+    mapGenerator::generate_dungon(dungeon);
+
+    //push dungeon to vector
+    dungeonMap.push_back(dungeon);
+}
+
+void game::newGame(){
+
+    //generate dungeon
+    auto * dungeon = new dungeon_t;
+    mapGenerator::generate_dungon(dungeon);
+
+    //initial PC
+    pcPtr = Pc(dungeon);
+
+    //initial Monster Controller
+    monsterControllerPtr = monsterController(dungeon,&pcPtr);
+
+    //add 10 monster to dungeon
+    monsterControllerPtr.addMonsterToQueue(10);
+    dungeon->monsterArray = monsterControllerPtr.currentNode;
+
+    //initial dungeon array
+    dungeonMap.push_back(dungeon);
+
+    //set pc location to room[0]
+    pcPtr.setPcLocation(dungeon->rooms[0]->position);
+
+    //start game
+    game::startGame();
+}
 

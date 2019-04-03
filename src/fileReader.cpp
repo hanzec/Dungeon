@@ -90,11 +90,10 @@ int io::fileReader::read_operation(dungeon_t *dungeon, char * path){
 
     // read the number of down stairs
     fread(&tmp,2,1,saved_file);
-    dungeon->numberOfUpStaris = be16toh(tmp);
 
     // read the location of the down stairs
 
-    for (int l = 0; l < dungeon->numberOfDownStaris; ++l) {
+    for (int l = 0; l < be16toh(tmp); ++l) {
         uint8_t x,y;
         fread(&x,1,1,saved_file);
         fread(&y,1,1,saved_file);
@@ -129,7 +128,7 @@ int write_operation(dungeon_t *dungeon){
     fwrite(&tmp, sizeof(tmp),1,saved_file);
 
     //write the file size
-    tmp = htobe32(1704 + dungeon->num_rooms * 4 + 4 + dungeon->numberOfDownStaris * 2 + dungeon->numberOfUpStaris * 2);
+    tmp = htobe32(1704 + dungeon->num_rooms * 4 + 4 + dungeon->downStairs.size() * 2 + dungeon->upStairs.size() * 2);
     fwrite(&tmp, sizeof(tmp),1,saved_file);
 
     //write the npc location
@@ -157,7 +156,7 @@ int write_operation(dungeon_t *dungeon){
     }
 
     // write the number of the up stairs
-    tmp = htobe16(dungeon->numberOfUpStaris);
+    tmp = htobe16(dungeon->upStairs.size());
     fwrite(&tmp,2,1,saved_file);
 
     // write the location of the up stairs
@@ -172,7 +171,7 @@ int write_operation(dungeon_t *dungeon){
     }
 
     // read the number of down stairs
-    tmp = htobe16(dungeon->numberOfDownStaris);
+    tmp = htobe16(dungeon->downStairs.size());
     fwrite(&tmp,2,1,saved_file);
 
     // read the location of the down stairs

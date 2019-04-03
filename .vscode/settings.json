@@ -10,7 +10,11 @@
         "**/.gitattributes": true,
         "**/CMakeCache.txt": true,
         "**/cmake-build-debug": true,
-        "**/cmake_install.cmake": true
+        "**/cmake_install.cmake": true,
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
     },
     "editor.quickSuggestions": {
         "other": true,

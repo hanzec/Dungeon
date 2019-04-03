@@ -4,22 +4,29 @@
 #include "../../include/characters/monster.h"
 #include "../../include/utils/data_stucture/heap.h"
 
-#define npcLocation this->npc->currentLocation
-#define dungeonHardness this->dungeon->hardness
-#define dungeonMapTer(x,y) this->dungeon->map[y][x].terrain_type
-#define getCurrentHardness this->dungeon->map[this->currentLocation[dim_y]][this->currentLocation[dim_x]].hardness
-#define nextMonster(monster) ((corridor_node_t *) monster->path[monster->currentLocation[dim_y]][monster->currentLocation[dim_x]].prev_node)
 
+//overload operator for priority queue
+bool operator< (Monster monster1, Monster monster2){
+    return monster1.getSpeed() < monster2.getSpeed();
+}
 
-monster::monster(dungeon_t *dungeon,pc *pc){
-    this->npc = pc;
+bool operator> (Monster monster1, Monster monster2){
+    return monster1.getSpeed() > monster2.getSpeed();
+}
+
+bool operator== (Monster monster1, Monster monster2){
+    return monster1.getSpeed() == monster2.getSpeed();
+}
+
+Monster::Monster(dungeon_t *dungeon,Pc * userc){
+    this->user = user;
     this->dungeon = dungeon;
     this->range = (uint8_t) (rand() % 3);
     this->speed = (uint8_t) (rand()%16 + 5);
     this->characteristics = (uint8_t) (rand() % 16);
 }
 
-bool monster::meetWithNPC(){
+bool Monster::meetWithNPC(){
     for (int i = -1 * this->range; i < this->range + 1 ; ++i) {
         for (int j = -1 * this->range; j < this->range + 1 ; ++j) {
             uint8_t x = (uint8_t) (this->currentLocation[dim_x] + i);
@@ -37,7 +44,7 @@ bool monster::meetWithNPC(){
     return false;
 }
 
-int monster::moveMonster(){
+int Monster::moveMonster(){
     srand(time(NULL));
 
     pair_t nextParh;
@@ -138,7 +145,6 @@ int monster::moveMonster(){
         //set next location
         this->currentLocation[dim_x] = nextParh[dim_x];
         this->currentLocation[dim_y] = nextParh[dim_y];
-        return 1;
     return 0;
 }
 
@@ -146,7 +152,7 @@ static int32_t corridor_node_cmp(const void *key, const void *with) {
     return ((corridor_node_t *) key)->cost - ((corridor_node_t *) with)->cost;
 }
 
-void monster::dijkstra_no_tunnelling()
+void Monster::dijkstra_no_tunnelling()
 {
 
     heap_t h;
@@ -190,7 +196,7 @@ void monster::dijkstra_no_tunnelling()
     heap_delete(&h);
 }
 
-void monster::dijkstra_tunnelling()
+void Monster::dijkstra_tunnelling()
 {
 
     heap_t h;

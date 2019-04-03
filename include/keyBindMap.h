@@ -18,14 +18,12 @@ namespace io{
             INS_EQIP_I, INS_INVE_I, LOOK_AT_M,  QUIT     ,  KEY_LIST_NUM,
         }keyList_t;
 
-        std::unordered_map<keyBindMap::keyList, int> keyMap;
-        std::unordered_map<int, keyBindMap::keyList> keyMapSearch;
+        std::unordered_map<int, int> keyMap;
+        std::unordered_map<int, int> keyMapSearch;
     public:
         keyBindMap(/* args */);
-        ~keyBindMap();
-        
+        int setKey(keyList_t func, int key);
         int setMoveKeySet(int * keyMap, int8_t combNum);
-        int setKey(int * keyMap, keyList_t func, int key);
     };   
 }
 #endif //DUNGEON_COMS327_F19_KEYBINDMAP_H

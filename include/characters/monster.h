@@ -5,9 +5,9 @@
 #ifndef DUNGEON_COMS327_F19_MONSTER_H
 #define DUNGEON_COMS327_F19_MONSTER_H
 
+
 #include "pc.h"
 #include "characters.h"
-#include "../gameCommon.h"
 #include "../utils/data_stucture/heap.h"
 
 typedef struct corridor_node {
@@ -17,19 +17,19 @@ typedef struct corridor_node {
     void * prev_node;
 } corridor_node_t;
 
-class monster : public character{
+class Monster : public Character{
 private:
-    pc * npc;
+    Pc * user;
     uint8_t characteristics;
 public:
     pair_t lastPcLocation ;
     corridor_node_t path[DUNGEON_Y][DUNGEON_X];
-    
+
     int moveMonster();
     bool meetWithNPC();
     void dijkstra_tunnelling();
     void dijkstra_no_tunnelling();
-    monster(dungeon_t *dungeon, pc * pc);
+    Monster(dungeon_t *dungeon, Pc * pc);
 };
 
 #endif //DUNGEON_COMS327_F19_MONSTER_H

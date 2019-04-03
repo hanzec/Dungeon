@@ -10,11 +10,12 @@
 
 class monsterList : public gamePanel {
 private:
-    monsterNode_t * monsterNodePtr;
-    int getNumberOfMonster(monsterNode_t monsterNode);
+    MonsterNode * monsterNodePtr;
+    int getNumberOfMonster();
 public:
     int updatePanel();
-    explicit monsterList(monsterNode_t *monsterNode);
+    int updateMonsterNode(MonsterNode *monsterNode);
+    explicit monsterList(MonsterNode *monsterNode);
 };
 
 

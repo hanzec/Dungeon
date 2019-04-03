@@ -3,40 +3,37 @@
 //
 
 
+#include <queue>
 #include <ncurses.h>
 #include "../../../include/gameCommon.h"
 #include "../../../include/display/displayCommon.h"
 #include "../../../include/display/panel/monsterList.h"
 
-monsterList::monsterList(monsterNode_t *monsterNode) {
-    int numMonster = getNumberOfMonster(* ((monsterNode_t *) monsterNode));
+monsterList::monsterList(MonsterNode * monsterNode) {
     // todo need to change instead of hard code
-    this->panel = new_panel(newwin(3 + numMonster, 38,4,20));
+    monsterNodePtr = monsterNode;
+    this->panel = new_panel(newwin(3 + this->getNumberOfMonster(), 38,4,20));
     wbkgd(panel_window(this->panel),COLOR_PAIR(PAIR_PANEL));
 }
-int monsterList::getNumberOfMonster(monsterNode_t monsterNode){
-     int number = 0;
 
-    while (monsterNode.nextNode != NULL){
-        number += 1;
-        monsterNode = * monsterNode.nextNode;
-    }
-    return number - 1;
-
+int monsterList::updateMonsterNode(MonsterNode *monsterNode) {
+    this->monsterNodePtr = monsterNode;
+    return 0;
 }
+
 int monsterList::updatePanel() {
     int x, y;
-    int tmpNumber = 1;
+    MonsterNode * currentNode = this->monsterNodePtr->nextNode;
     WINDOW * tmpWindowsPtr = panel_window(this->panel);
-    monsterNode_t * currentNode = this->monsterNodePtr->nextNode;
-    int numMonster = getNumberOfMonster(*currentNode);
+
+    int numMonster = getNumberOfMonster();
 
     wclear(tmpWindowsPtr);
     box(tmpWindowsPtr, 0 , 0);
 
     mvwprintw(tmpWindowsPtr,0,12,"| Monster List |");
     //todo add number index of monster(c++)
-    for (int i = 1; i <= numMonster; ++i) {
+    for (int i = 1; i < numMonster; ++i) {
         char tmp[3];
         mvwaddch(tmpWindowsPtr,i, 3, '#');
         mvwaddch(tmpWindowsPtr,i, 4, ' ');
@@ -63,3 +60,14 @@ int monsterList::updatePanel() {
     return 0;
 }
 
+int monsterList::getNumberOfMonster(){
+    int number = 0;
+    MonsterNode * tmp = this->monsterNodePtr->nextNode;
+
+    while (tmp->nextNode->monster != nullptr){
+        number += 1;
+        tmp = tmp->nextNode;
+    }
+    return number - 1;
+
+}

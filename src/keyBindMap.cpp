@@ -46,7 +46,7 @@ io::keyBindMap::keyBindMap(){
         this->keyMap[QUIT] = 'Q';
     }
 
-    for (std::pair<keyBindMap::keyList, int> element : this->keyMap){
+    for (std::pair<int, int> element : this->keyMap){
         this->keyMapSearch[element.second] = element.first;
     }
 }
@@ -91,8 +91,6 @@ int io::keyBindMap::setMoveKeySet(int *keyMap, int8_t combMum)
 
 int io::keyBindMap::setKey(keyList_t func, int key)
 {
-    if (keyMap == NULL)
-        return -1;
     keyMap[func] = key;
     return 0;
 }

@@ -18,7 +18,7 @@ bool operator== (Monster monster1, Monster monster2){
     return monster1.getSpeed() == monster2.getSpeed();
 }
 
-Monster::Monster(dungeon_t *dungeon,Pc * userc){
+Monster::Monster(dungeon_t *dungeon,Pc * user){
     this->user = user;
     this->dungeon = dungeon;
     this->range = (uint8_t) (rand() % 3);

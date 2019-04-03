@@ -1,6 +1,7 @@
 stages:
   - build
   - package
+  - codeQuality
   
 build_gcc:
   only:
@@ -28,6 +29,28 @@ build_clang:
     - cmake .
     - make
 
+code_quality:
+  only:
+    - master
+  stage:
+    - codeQuality
+  image: docker:stable
+  variables:
+    DOCKER_DRIVER: overlay2
+  allow_failure: true
+  services:
+    - docker:stable-dind
+  script:
+    - export SP_VERSION=$(echo "$CI_SERVER_VERSION" | sed 's/^\([0-9]*\)\.\([0-9]*\).*/\1-\2-stable/')
+    - docker run
+        --env SOURCE_CODE="$PWD"
+        --volume "$PWD":/code
+        --volume /var/run/docker.sock:/var/run/docker.sock
+        "registry.gitlab.com/gitlab-org/security-products/codequality:$SP_VERSION" /code
+  artifacts:
+    reports:
+      codequality: gl-code-quality-report.json
+
 canvas_submit:
   only:
     - master
@@ -36,6 +59,3 @@ canvas_submit:
   allow_failure: true
   script:
     - whoami
-  artifacts:
-    reports:
-      codequality: codequality.json

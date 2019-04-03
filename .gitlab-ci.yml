@@ -4,7 +4,7 @@ stages:
 
 build_gcc:
   only:
-    master
+    - master
   stage: build
   image: ubuntu:bionic
   allow_failure: false
@@ -17,7 +17,7 @@ build_gcc:
 
 build_clang:
   only:
-    master
+    - master
   stage: build
   image: ubuntu:bionic
   allow_failure: false
@@ -30,7 +30,7 @@ build_clang:
 
 canvas_submit:
     only:
-      master
+      - master
   stage: package
   image: ubuntu:bionic
   allow_failure: true

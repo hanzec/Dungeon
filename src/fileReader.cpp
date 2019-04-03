@@ -1,7 +1,11 @@
 //
 // Created by chen_ on 2019/2/6.
 //
+#include <cstdio>
+#include <cstdlib>
+#include <<cstring>
 #include <sys/stat.h>
+
 #include "../include/fileReader.h"
 #include "../include/utils/crossplatform_header/endian.h"
 

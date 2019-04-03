@@ -32,8 +32,7 @@ build_clang:
 code_quality:
   only:
     - master
-  stage:
-    - codeQuality
+  stage: codeQuality
   image: docker:stable
   variables:
     DOCKER_DRIVER: overlay2

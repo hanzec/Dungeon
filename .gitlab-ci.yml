@@ -8,10 +8,6 @@ build_gcc:
     - gcc_linux
   stage: build
   allow_failure: false
-  before_script:
-    - apt-get update
-    - apt-get upgrade -y
-    - apt-get install gcc g++ make libncurses5-dev libncursesw5-dev cmake -y
   script:
     - cmake .
     - make

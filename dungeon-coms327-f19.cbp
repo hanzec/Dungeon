@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="dungeon-coms327-f19"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\src\;CMake Files\src\display\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/hanzech/workspaces/coms327-s19-dungeon"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/hanzech/workspaces/coms327-s19-dungeon"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/hanzech/workspaces/coms327-s19-dungeon"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Dungeon">
+				<Option output="/Users/hanzech/workspaces/coms327-s19-dungeon/src/Dungeon" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/hanzech/workspaces/coms327-s19-dungeon/src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/src/Makefile&quot;  VERBOSE=1 Dungeon"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Dungeon/fast">
+				<Option output="/Users/hanzech/workspaces/coms327-s19-dungeon/src/Dungeon" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/hanzech/workspaces/coms327-s19-dungeon/src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/src/Makefile&quot;  VERBOSE=1 Dungeon/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="DisplayLib">
+				<Option output="/Users/hanzech/workspaces/coms327-s19-dungeon/lib/libDisplayLib.dylib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/hanzech/workspaces/coms327-s19-dungeon/src/display"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/src/display/Makefile&quot;  VERBOSE=1 DisplayLib"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/src/display/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/src/display/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/src/display/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="DisplayLib/fast">
+				<Option output="/Users/hanzech/workspaces/coms327-s19-dungeon/lib/libDisplayLib.dylib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/hanzech/workspaces/coms327-s19-dungeon/src/display"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/src/display/Makefile&quot;  VERBOSE=1 DisplayLib/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/src/display/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/src/display/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/hanzech/workspaces/coms327-s19-dungeon/src/display/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/characters/Monster.cpp">
+			<Option target="Dungeon"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/characters/character.cpp">
+			<Option target="Dungeon"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/characters/pc.cpp">
+			<Option target="Dungeon"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/display/display.cpp">
+			<Option target="DisplayLib"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/display/panel/gamePanel.cpp">
+			<Option target="DisplayLib"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/display/panel/monsterList.cpp">
+			<Option target="DisplayLib"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/display/window/characterInfo.cpp">
+			<Option target="DisplayLib"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/display/window/dungeonWindow.cpp">
+			<Option target="DisplayLib"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/display/window/gameWindow.cpp">
+			<Option target="DisplayLib"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/display/window/statusBar.cpp">
+			<Option target="DisplayLib"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/fileReader.cpp">
+			<Option target="Dungeon"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/game.cpp">
+			<Option target="Dungeon"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/keyBindMap.cpp">
+			<Option target="Dungeon"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/main.cpp">
+			<Option target="Dungeon"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/status_message.cpp">
+			<Option target="Dungeon"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/utils/MonsterController.cpp">
+			<Option target="Dungeon"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/utils/data_stucture/heap.c">
+			<Option target="Dungeon"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/utils/mapGenerator.cpp">
+			<Option target="Dungeon"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\"/>
+		</Unit>
+		<Unit filename="/Users/hanzech/workspaces/coms327-s19-dungeon/src/display/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\display\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

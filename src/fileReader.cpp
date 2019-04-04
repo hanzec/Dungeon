@@ -10,6 +10,8 @@
 #include <iostream>
 #include <sys/stat.h>
 #include <sstream>
+#include <stdlib.h> // pulls in declaration of malloc, free
+#include <string.h> // pulls in declaration for strlen.
 #include "../include/fileReader.h"
 #include "../include/utils/crossplatform_header/endian.h"
 

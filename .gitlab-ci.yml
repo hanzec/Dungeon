@@ -1,7 +1,7 @@
 stages:
   - build
-  - package
-  - codeQuality
+  - changelog
+  - packaging
   
 build_gcc:
   tags:
@@ -25,11 +25,20 @@ build_clang:
     - cmake .
     - make
 
+update_changelog:
+  only:
+    - master
+  stage: changelog
+  image: ferrarimarco/github-changelog-generator
+  script:
+    - github_changelog_generator --user ${GITLAB_USER} --project ${GITLAB_PROJECT} \
+      --github-site ${GITLAB_SITE} --github-api ${GITLAB_API} --verbose --gitlab
+
 canvas_submit:
   only:
     - master
-  stage: package
-  image: ubuntu:bionic
+  stage: packaging
   allow_failure: true
+  image: ubuntu:bionic
   script:
     - whoami

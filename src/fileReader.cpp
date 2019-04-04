@@ -1,13 +1,17 @@
 //
 // Created by chen_ on 2019/2/6.
 //
+
+#include<vector>
+#include <string>
 #include <cstdio>
 #include <cstdlib>
-#include <cstring>
+#include <fstream>
+#include <iostream>
 #include <sys/stat.h>
-
-#include "../include/fileReader.h"
-#include "../include/utils/crossplatform_header/endian.h"
+#include <sstream>
+#include "fileReader.h"
+#include "endian.h"
 
 int io::fileReader::read_operation(dungeon_t *dungeon, char * path){
     uint16_t tmp = 0;
@@ -192,4 +196,44 @@ int write_operation(dungeon_t *dungeon){
 
     fclose(saved_file);
 
+}
+
+std::vector<std::unordered_map<std::string, std::string> > io::fileReader::readConfigureFile(std::string fileLocation){
+    std::string lineBuffer;
+    char *home = getenv("HOME");
+    std::ifstream  configureFile;
+    fileLocation = home + fileLocation;
+    configureFile.open(fileLocation,std::ios::in);
+    std::unordered_map<std::string, std::string> currentObject;
+    std::vector<std::unordered_map<std::string, std::string> > result;
+
+
+    std::getline(configureFile,lineBuffer);
+    while(std::getline(configureFile,lineBuffer)){
+        std::string tmpString;
+        std::istringstream iss(lineBuffer);
+        std::getline(iss,tmpString,' ');
+
+        if (tmpString == "")
+            continue;
+        if (tmpString == "BEGIN"){
+            std::getline(iss,tmpString, '\n');
+            currentObject["TYPE"] = tmpString;
+        }else if (tmpString == "DESC"){
+            tmpString = "";
+            while (lineBuffer[0] != '.'){
+                std::getline(configureFile,lineBuffer);
+                tmpString += lineBuffer;
+            }
+            currentObject["DESC"] = tmpString;
+        }else if (tmpString == "END"){
+            result.push_back(currentObject);
+            currentObject = std::unordered_map<std::string, std::string>();
+        }else{
+            std::string key =  tmpString;
+            std::getline(iss,tmpString, '\n');
+            currentObject[key] = tmpString;
+        }
+    } 
+    return result;
 }

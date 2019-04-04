@@ -10,8 +10,8 @@
 #include <iostream>
 #include <sys/stat.h>
 #include <sstream>
-#include "fileReader.h"
-#include "endian.h"
+#include "../include/fileReader.h"
+#include "../include/utils/crossplatform_header/endian.h"
 
 int io::fileReader::read_operation(dungeon_t *dungeon, char * path){
     uint16_t tmp = 0;

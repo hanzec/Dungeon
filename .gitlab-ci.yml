@@ -4,13 +4,13 @@ stages:
   - codeQuality
   
 build_gcc:
-  only:
-    - master
+  tags:
+    - gcc_linux
   stage: build
-  image: ubuntu:bionic
   allow_failure: false
   before_script:
     - apt-get update
+    - apt-get upgrade -y
     - apt-get install gcc g++ make libncurses5-dev libncursesw5-dev cmake -y
   script:
     - cmake .

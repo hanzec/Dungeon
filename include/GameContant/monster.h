@@ -6,8 +6,8 @@
 #define DUNGEON_COMS327_F19_MONSTER_H
 
 
-#include "pc.h"
-#include "characters.h"
+#include "Pc.h"
+#include "GameContent.h"
 #include "../utils/data_stucture/heap.h"
 
 typedef struct corridor_node {
@@ -17,9 +17,10 @@ typedef struct corridor_node {
     void * prev_node;
 } corridor_node_t;
 
-class Monster : public Character{
+class Monster : public GameContent{
 private:
     Pc * user;
+    dungeon_t * dungeon;
     uint8_t characteristics;
 public:
     pair_t lastPcLocation ;

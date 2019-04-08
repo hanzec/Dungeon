@@ -6,14 +6,14 @@
 #define COMS327_S19_DUNGEON_MONSTERCONTROLLER_H
 
 #include "../gameCommon.h"
-#include "../characters/pc.h"
-#include "../characters/monster.h"
+#include "../GameContant/Pc.h"
+#include "../GameContant/monster.h"
 
 class monsterController{
 private:
     Pc * user;
     dungeon_t * dungeon;
-    int numberOfMonster = 0;
+    int numberOfMonster;
 public:
     MonsterNode_t * currentNode;
 

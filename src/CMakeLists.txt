@@ -1,9 +1,9 @@
-ADD_SUBDIRECTORY(display)
+ADD_SUBDIRECTORY(Display)
 
 # add c file
 aux_source_directory(. DIR_GAME_EXE_SRCS)
 aux_source_directory(utils/ DIR_UTILS_SRCS)
-aux_source_directory(characters/ DIR_CHARACTERS_SRCS)
+aux_source_directory(GameContant/ DIR_CHARACTERS_SRCS)
 aux_source_directory(utils/data_stucture DIR_UTILS_DS_SRCS)
 
 #add header file

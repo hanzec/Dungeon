@@ -5,10 +5,11 @@
 #ifndef DUNGEON_COMS327_F19_PC_H
 #define DUNGEON_COMS327_F19_PC_H
 
-#include "characters.h"
+#include "GameContent.h"
 
-class Pc : public Character{
-private:
+class Pc : public GameContent{
+protected:
+    dungeon_t *dungeon;
 public:
     Pc(dungeon_t * dungeon = NULL);
     int movePC(direction_t direction);

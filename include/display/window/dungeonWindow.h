@@ -7,8 +7,8 @@
 
 #include "gameWindow.h"
 #include "../../gameCommon.h"
-#include "../../characters/pc.h"
-#include "../../characters/monster.h"
+#include "../../GameContant/Pc.h"
+#include "../../GameContant/monster.h"
 
 class dungeonWindow : public gameWindow {
 public:

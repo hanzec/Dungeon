@@ -7,7 +7,7 @@
 
 #include "../include/game.h"
 #include "../include/gameCommon.h"
-#include "../include/characters/pc.h"
+#include "../include/GameContant/Pc.h"
 #include "../include/display/display.h"
 #include "../include/utils/mapGenerator.h"
 
@@ -58,22 +58,22 @@ void game::startGame() {
         reselect:
         switch (getch()) {
             case KEY_UP:
-                if (pcPtr.move(Upper))
+                if (pcPtr.movePC(Upper))
                     goto reselect;
                 display::updatePCLocation();
                 break;
             case KEY_DOWN:
-                if (pcPtr.move(Down))
+                if (pcPtr.movePC(Down))
                     goto reselect;
                 display::updatePCLocation();
                 break;
             case KEY_RIGHT:
-                if (pcPtr.move(Right))
+                if (pcPtr.movePC(Right))
                     goto reselect;
                 display::updatePCLocation();
                 break;
             case KEY_LEFT:
-                if (pcPtr.move(Left))
+                if (pcPtr.movePC(Left))
                     goto reselect;
                 display::updatePCLocation();
                 break;

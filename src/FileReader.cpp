@@ -12,10 +12,10 @@
 #include <sstream>
 #include <stdlib.h> // pulls in declaration of malloc, free
 #include <string.h> // pulls in declaration for strlen.
-#include "../include/fileReader.h"
+#include "../include/FileReader.h"
 #include "../include/utils/crossplatform_header/endian.h"
 
-int io::fileReader::read_operation(dungeon_t *dungeon, char * path){
+int io::FileReader::read_operation(dungeon_t *dungeon, char * path){
     uint16_t tmp = 0;
     FILE * saved_file;
     struct stat statbuf;
@@ -200,7 +200,7 @@ int write_operation(dungeon_t *dungeon){
 
 }
 
-std::vector<std::unordered_map<std::string, std::string> > io::fileReader::readConfigureFile(std::string fileLocation){
+std::vector<std::unordered_map<std::string, std::string> > io::FileReader::readConfigureFile(std::string fileLocation){
     std::string lineBuffer;
     char *home = getenv("HOME");
     std::ifstream  configureFile;

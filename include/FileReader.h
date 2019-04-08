@@ -10,10 +10,10 @@
 #include <unordered_map>
 
 namespace io {
-    class fileReader{
+    class FileReader{
     private:
-        fileReader(/* args */);
-        ~fileReader();
+        FileReader(/* args */);
+        ~FileReader();
     public:
         static int write_operation(dungeon_t *d);
         static int read_operation(dungeon_t *dungeon, char *path);

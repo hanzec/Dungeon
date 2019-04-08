@@ -1,7 +1,11 @@
 
 # add source code for display library
-aux_source_directory(panel DIR_DISPLAY_SRCS_PANEL)
-aux_source_directory(window DIR_DISPLAY_SRCS_WINDOW)
+aux_source_directory(panel DISPLAY_SRCS_PANEL)
+aux_source_directory(window DISPLAY_SRCS_WINDOW)
+
+#add header files to display library
+include_directories("${CMAKE_SOURCE_DIR}/include/Display")
+file (GLOB_RECURSE DISPLAY_HEADERS "${CMAKE_SOURCE_DIR}/include/Display")
 
 #set dependence ncurses
 find_package(Curses REQUIRED)
@@ -11,7 +15,7 @@ include_directories(${CURSES_INCLUDE_DIR})
 SET(LIBRARY_OUTPUT_PATH "${PROJECT_BINARY_DIR}/lib")
 
 #set library name
-add_library (DisplayLib SHARED ${DIR_DISPLAY_SRCS_PANEL} ${DIR_DISPLAY_SRCS_WINDOW} display.cpp)
+add_library (DisplayLib SHARED ${DISPLAY_SRCS_PANEL} ${DISPLAY_SRCS_WINDOW} ${DISPLAY_HEADERS} display.cpp)
 
 # link ncurses lib
 target_link_libraries(DisplayLib panel ${CURSES_LIBRARIES})

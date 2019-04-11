@@ -2,9 +2,9 @@
 // Created by 陈瀚泽 on 2019-03-14.
 //
 
-#include "../../../include/gameCommon.h"
-#include "../../../include/display/displayCommon.h"
-#include "../../../include/display/window/statusBar.h"
+#include "../../../include/GameCommon.h"
+#include "../../../include/Display/displayCommon.h"
+#include "../../../include/Display/window/statusBar.h"
 
 statusBar::statusBar() {
     this->windowPtr = newwin(1,DUNGEON_X,0,0);

@@ -2,9 +2,9 @@
 // Created by 陈瀚泽 on 2019-03-14.
 //
 
-#include "../../../include/gameCommon.h"
-#include "../../../include/display/displayCommon.h"
-#include "../../../include/display/window/characterInfo.h"
+#include "../../../include/GameCommon.h"
+#include "../../../include/Display/displayCommon.h"
+#include "../../../include/Display/window/characterInfo.h"
 
 characterInfo::characterInfo() {
     this->windowPtr = newwin(3,DUNGEON_X,22,0);

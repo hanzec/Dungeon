@@ -3,23 +3,23 @@
 
 #include <string>
 #include <unordered_map>
-#include "../gameCommon.h"
+#include "../GameCommon.h"
 
+using namespace std;
 class GameContent{
 protected:
+    int color;
+    char symbol;
     double range, speed, damage;
-    std::string description, name;
+    string description, name;
 public:
-    pair_t prevLocation;
-    pair_t currentLocation;
-
+    int itemID;
+    string getName();
     double getSpeed();
     double getRange();
     double getDamage();
-    std::string getName();
-    std::string getDescription();
-    static double diceToDouble(const std::string str);
-    GameContent(std::unordered_map<std::string, std::string> base);
-
+    string getDescription();
+    static double diceToDouble(const string str);
+    GameContent(unordered_map<string, string> base);
 };
 #endif

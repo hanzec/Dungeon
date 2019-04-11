@@ -5,7 +5,7 @@
 #ifndef COMS327_S19_DUNGEON_DUNGEON_MAP_GENERATE_H
 #define COMS327_S19_DUNGEON_DUNGEON_MAP_GENERATE_H
 
-#include "../gameCommon.h"
+#include "../GameCommon.h"
 #include "data_stucture/heap.h"
 
 /* Returns true if random float in [0,1] is less than *

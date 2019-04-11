@@ -1,8 +1,8 @@
 //
 // Created by chen_ on 2019/1/31.
 //
-#include "gameCommon.h"
-#include "GameContant/Pc.h"
+#include "Player.h"
+#include "GameCommon.h"
 #include "utils/MonsterController.h"
 
 #ifndef DUNGEON_V1_01_GAME_H
@@ -14,7 +14,7 @@ public:
     static void startGame();
     static void newGame();
 private:
-    static Pc pcPtr;
+    static Player pcPtr;
     static void newDungeonLevel();
     static void close_dungeon(int mode);
     static monsterController monsterControllerPtr;

@@ -6,7 +6,7 @@
 #define DUNGEON_COMS327_F19_IO_FILE_H
 
 #include <vector>
-#include "gameCommon.h"
+#include "GameCommon.h"
 #include <unordered_map>
 
 namespace io {

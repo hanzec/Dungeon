@@ -7,9 +7,10 @@
 
 class GameContantFactory{
 protected:
+    int index = 0, poolSize = 0;
+    std::unordered_map<std::string, std::string> contentPool[100];
     std::vector<std::unordered_map<std::string, std::string> > attributeList;
 public:
     virtual GameContent generateNewGameContant() = 0;
-    GameContantFactory(std::vector<std::unordered_map<std::string, std::string> > attributeList);
-};
+    };
 #endif

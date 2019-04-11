@@ -3,21 +3,19 @@
 //d
 
 #include <ncurses.h>
-#include "../../include/display/display.h"
-#include "../../include/display/tombstone.h"
-#include "../../include/display/displayCommon.h"
-#include "../../include/display/window/statusBar.h"
-#include "../../include/display/panel/monsterList.h"
-#include "../../include/display/window/dungeonWindow.h"
-#include "../../include/display/window/characterInfo.h"
+#include "../../include/Display/Display.h"
+#include "../../include/Display/tombstone.h"
+#include "../../include/Display/displayCommon.h"
+#include "../../include/Display/window/statusBar.h"
+#include "../../include/Display/panel/monsterList.h"
+#include "../../include/Display/window/dungeonWindow.h"
+#include "../../include/Display/window/characterInfo.h"
 
+dungeon_t * Display::dungeonPtr;
+monsterList * Display::monsterListPtr;
+gameWindow * Display::windowStack[num_windows];
 
-Pc * display::npcPtr;
-dungeon_t * display::dungeonPtr;
-monsterList * display::monsterListPtr;
-gameWindow * display::windowStack[num_windows];
-
-int display::initDisplayEnv() {
+int Display::initDisplayEnv() {
     initscr();
     cbreak();
     noecho();
@@ -30,21 +28,32 @@ int display::initDisplayEnv() {
     init_pair(PAIR_DUNGEON_WINDOW, COLOR_WHITE, COLOR_BLACK);
     init_pair(PAIR_CHARACTER_STATUS, COLOR_BLACK, COLOR_WHITE);
 
+    //init color pair of monster
+    init_pair(PAIR_RED, COLOR_WHITE, COLOR_RED);
+    init_pair(PAIR_BLUE, COLOR_WHITE, COLOR_BLUE);
+    init_pair(PAIR_CYAN, COLOR_WHITE, COLOR_CYAN);
+    init_pair(PAIR_GREEN, COLOR_WHITE, COLOR_GREEN);
+    init_pair(PAIR_WHITE, COLOR_WHITE, COLOR_WHITE);
+    init_pair(PAIR_BLACK, COLOR_WHITE, COLOR_BLACK);
+    init_pair(PAIR_YELLOW, COLOR_WHITE, COLOR_YELLOW);
+    init_pair(PAIR_MAGENTA, COLOR_WHITE, COLOR_MAGENTA);
+
     refresh();
+
+    return 0;
 }
 
-int display::initScreen(dungeon_t *dungeon, Pc *pc) {
+int Display::initScreen(dungeon_t *dungeon) {
     // FIXME bug here statusWindow and pcInfoWindow have same memory address for no reason
     // update 3-14-2019 may fix bug but need testing
 
     //init internal dungeon env ptr
-    npcPtr = pc;
     dungeonPtr = dungeon;
 
     //inital the main window of the dungeon game
     windowStack[statusBar_win] = new statusBar();
     windowStack[characterInfo_win] = new characterInfo();
-    windowStack[dungeonScreen_win] = new dungeonWindow(dungeon,npcPtr);
+    windowStack[dungeonScreen_win] = new dungeonWindow(dungeon);
 
     //initial monster list panel
     // FIXME monsterList class as abstract class
@@ -65,15 +74,15 @@ int display::initScreen(dungeon_t *dungeon, Pc *pc) {
     return 0;
 }
 
-int display::closeScreen() {
+int Display::closeScreen() {
     return 0;
 }
 
-void display::setFOWStatus(bool flag){((dungeonWindow *)windowStack[dungeonScreen_win])->setFOWStatus(flag);}
+void Display::setFOWStatus(bool flag){((dungeonWindow *)windowStack[dungeonScreen_win])->setFOWStatus(flag);}
 
-void display::setTeleportStatus(bool flag){((dungeonWindow *)windowStack[dungeonScreen_win])->setTeleportStatus(flag);}
+void Display::setTeleportStatus(bool flag){((dungeonWindow *)windowStack[dungeonScreen_win])->setTeleportStatus(flag);}
 
-int display::showDiedScreen() {
+int Display::showDiedScreen() {
 
     mvaddstr(0,0,tombstone);
     refresh();
@@ -81,7 +90,7 @@ int display::showDiedScreen() {
     return 0;
 }
 
-int display::showMonsterList() {
+int Display::showMonsterList() {
     monsterListPtr->updatePanel();
     monsterListPtr->displayPanel();
 
@@ -91,16 +100,17 @@ int display::showMonsterList() {
     return 0;
 }
 
-int display::updatePCLocation() {
-    ((dungeonWindow *)windowStack[dungeonScreen_win])->updateNPC();
+int Display::updatePCLocation() {
+    ((dungeonWindow *)windowStack[dungeonScreen_win])->updatePlayer();
     return 0;
 }
 
-int display::updateMonsterLocation() {
+int Display::updateMonsterLocation() {
     return 0;
 }
 
-int display::updateDungeonMap(dungeon_t *dungeon) {
-    display::dungeonPtr = dungeon;
+int Display::updateDungeonMap(dungeon_t *dungeon) {
+    Display::dungeonPtr = dungeon;
     monsterListPtr->updateMonsterNode(dungeon->monsterArray);
+    return 0;
 }

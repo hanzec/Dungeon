@@ -2,10 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 
 PROJECT(dungeon-coms327-f19)
 
-if(APPLE)
-    SET(CMAKE_C_COMPILER "/Library/Developer/CommandLineTools/usr/bin/cc")
-    SET(CMAKE_CXX_COMPILER "/Library/Developer/CommandLineTools/usr/bin/c++")
-endif()
+#set c++ VERSION
+set (CMAKE_CXX_STANDARD 11)
 
 ADD_SUBDIRECTORY(src)
 include_directories("${CMAKE_SOURCE_DIR}/include")

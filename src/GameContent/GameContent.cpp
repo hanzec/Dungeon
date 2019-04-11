@@ -1,5 +1,5 @@
 #include <sstream>
-#include <GameContent.h>
+#include "../../include/GameContant/GameContent.h"
 
     GameContent::GameContent(std::unordered_map<std::string, std::string> base){
         this->name = base["NAME"];

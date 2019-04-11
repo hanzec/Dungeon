@@ -5,9 +5,10 @@
 
 #include <queue>
 #include <ncurses.h>
-#include "../../../include/gameCommon.h"
-#include "../../../include/display/displayCommon.h"
-#include "../../../include/display/panel/monsterList.h"
+#include "../../../include/Map.h"
+#include "../../../include/GameCommon.h"
+#include "../../../include/Display/displayCommon.h"
+#include "../../../include/Display/panel/monsterList.h"
 
 monsterList::monsterList(MonsterNode * monsterNode) {
     // todo need to change instead of hard code
@@ -40,14 +41,14 @@ int monsterList::updatePanel() {
         mvwaddch(tmpWindowsPtr,i, 5, ' ');
         mvwaddch(tmpWindowsPtr,i, 6, 'x');
         mvwaddch(tmpWindowsPtr,i, 7, ':');
-        sprintf(tmp, "%d", currentNode->monster->currentLocation[dim_x]);
+        sprintf(tmp, "%d", Map::getCurrentLocation(currentNode->monster->itemID)[dim_x]);
         mvwaddch(tmpWindowsPtr,i, 8, tmp[0]);
         mvwaddch(tmpWindowsPtr,i, 9, tmp[1]);
         mvwaddch(tmpWindowsPtr,i, 10, ' ');
 
         mvwaddch(tmpWindowsPtr,i, 11, 'y');
         mvwaddch(tmpWindowsPtr,i, 12, ':');
-        sprintf(tmp, "%d", currentNode->monster->currentLocation[dim_y]);
+        sprintf(tmp, "%d", Map::getCurrentLocation(currentNode->monster->itemID)[dim_y]);
         mvwaddch(tmpWindowsPtr,i, 13, tmp[0]);
         mvwaddch(tmpWindowsPtr,i, 14, tmp[1]);
         mvwaddch(tmpWindowsPtr,i, 15, ' ');

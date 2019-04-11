@@ -26,10 +26,7 @@
 #define checkLocation(x,y) (x > 0 && x < DUNGEON_X) && (y > 0 && y < DUNGEON_Y)
 
 
-#define npcLocation this->user->currentLocation
 #define dungeonHardness this->dungeon->hardness
 #define dungeonMapTer(x,y) this->dungeon->map[y][x].terrain_type
-#define getCurrentHardness this->dungeon->map[this->currentLocation[dim_y]][this->currentLocation[dim_x]].hardness
-#define nextMonster(monster) ((corridor_node_t *) monster->path[monster->currentLocation[dim_y]][monster->currentLocation[dim_x]].prev_node)
 
 #endif //DUNGEON_COMS327_F19_MACROS_H

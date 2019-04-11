@@ -10,8 +10,7 @@
 #include <iostream>
 #include <sys/stat.h>
 #include <sstream>
-#include <stdlib.h> // pulls in declaration of malloc, free
-#include <string.h> // pulls in declaration for strlen.
+#include <string> // pulls in declaration for strlen.
 #include "../include/FileReader.h"
 #include "../include/utils/crossplatform_header/endian.h"
 
@@ -208,7 +207,6 @@ std::vector<std::unordered_map<std::string, std::string> > io::FileReader::readC
     configureFile.open(fileLocation,std::ios::in);
     std::unordered_map<std::string, std::string> currentObject;
     std::vector<std::unordered_map<std::string, std::string> > result;
-
 
     std::getline(configureFile,lineBuffer);
     while(std::getline(configureFile,lineBuffer)){

@@ -1,20 +1,21 @@
 //
 // Created by chen_ on 2019/1/31.
 //
-#include <stdlib.h>
+#include <cstdlib>
 #include <strings.h>
 #include <ncurses.h>
 
+#include "../include/Map.h"
 #include "../include/game.h"
-#include "../include/gameCommon.h"
-#include "../include/GameContant/Pc.h"
-#include "../include/display/display.h"
+#include "../include/Player.h"
+#include "../include/GameCommon.h"
+#include "../include/Display/Display.h"
 #include "../include/utils/mapGenerator.h"
 
 //todo current status
 //todo multiple stair support
 
-Pc game::pcPtr;
+Player game::pcPtr;
 int currentLevel = 0;
 std::vector<dungeon *> dungeonMap;
 monsterController game::monsterControllerPtr;
@@ -23,10 +24,10 @@ void game::close_dungeon(int mode){
     switch (mode)
     {
         case 1:
-            display::showDiedScreen();
+            Display::showDiedScreen();
             break;
         default:
-            display::closeScreen();
+            Display::closeScreen();
             break;
     }
 
@@ -39,9 +40,9 @@ void game::startGame() {
     bool fowFlag = false;
     bool teleportFlag = false;
 
-    display::initDisplayEnv();
+    Display::initDisplayEnv();
     dungeon_t *currentDungeon = dungeonMap[0];
-    display::initScreen(currentDungeon, &pcPtr);
+    Display::initScreen(currentDungeon, &pcPtr);
 
     while (flag) {
         while (time >= monsterControllerPtr.seeMinMonsterTime()) {
@@ -60,51 +61,51 @@ void game::startGame() {
             case KEY_UP:
                 if (pcPtr.movePC(Upper))
                     goto reselect;
-                display::updatePCLocation();
+                Display::updatePCLocation();
                 break;
             case KEY_DOWN:
                 if (pcPtr.movePC(Down))
                     goto reselect;
-                display::updatePCLocation();
+                Display::updatePCLocation();
                 break;
             case KEY_RIGHT:
                 if (pcPtr.movePC(Right))
                     goto reselect;
-                display::updatePCLocation();
+                Display::updatePCLocation();
                 break;
             case KEY_LEFT:
                 if (pcPtr.movePC(Left))
                     goto reselect;
-                display::updatePCLocation();
+                Display::updatePCLocation();
                 break;
             case 'm':
-                display::showMonsterList();
+                Display::showMonsterList();
                 break;
             case 'f':
-                display::setFOWStatus(!fowFlag);
+                Display::setFOWStatus(!fowFlag);
                 fowFlag = ! fowFlag;
                 break;
             case 't':
-                display::setTeleportStatus(!teleportFlag);
+                Display::setTeleportStatus(!teleportFlag);
                 teleportFlag = ! teleportFlag;
                 break;
             case 'r':
                 pair_t location;
                 if (teleportFlag) {
-                    display::setTeleportStatus(!teleportFlag);
+                    Display::setTeleportStatus(!teleportFlag);
                     teleportFlag = ! teleportFlag;
 
                     do{
                     location[dim_x] = rand()%DUNGEON_X;
                     location[dim_y] = rand()%DUNGEON_Y;
                     }while(pcPtr.setPcLocation(location) == 1);
-                    display::updatePCLocation();
+                    Display::updatePCLocation();
                 }
                 goto reselect;
             default:
                 goto reselect;
         }
-        if (currentDungeon->map[pcPtr.currentLocation[dim_y]][pcPtr.currentLocation[dim_x]].terrain_type ==
+        if (currentDungeon->map[Map::getPlayerLocation()[dim_y]][Map::getPlayerLocation()[dim_x]].terrain_type ==
             ter_stairs_up) {
             currentLevel++;
 
@@ -119,8 +120,8 @@ void game::startGame() {
             pcPtr.setPcLocation(*currentDungeon->downStairs[0]);
 
             //update display dungeon ptr
-            display::updateDungeonMap(currentDungeon);
-        } else if (currentDungeon->map[pcPtr.currentLocation[dim_y]][pcPtr.currentLocation[dim_x]].terrain_type ==
+            Display::updateDungeonMap(currentDungeon);
+        } else if (currentDungeon->map[Map::getPlayerLocation()[dim_y]][Map::getPlayerLocation()[dim_x]].terrain_type ==
                    ter_stairs_up) {
             currentLevel--;
 
@@ -134,7 +135,7 @@ void game::startGame() {
             pcPtr.setPcLocation(*currentDungeon->upStairs[0]);
 
             //update display dungeon ptr
-            display::updateDungeonMap(currentDungeon);
+            Display::updateDungeonMap(currentDungeon);
         }
 
     }
@@ -157,7 +158,7 @@ void game::newGame(){
     mapGenerator::generate_dungon(dungeon);
 
     //initial PC
-    pcPtr = Pc(dungeon);
+    //pcPtr = Pc(dungeon);
 
     //initial Monster Controller
     monsterControllerPtr = monsterController(dungeon,&pcPtr);

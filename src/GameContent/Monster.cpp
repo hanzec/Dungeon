@@ -1,12 +1,17 @@
 #include <time.h>
 #include <math.h>
-#include "../../include/macros.h"
-#include "../../include/GameContant/monster.h"
+#include "Monster.h"
+#include <unordered_map>
+#include "../../include/Map.h"
 #include "../../include/utils/data_stucture/heap.h"
+
+#define getCurrentHardness this->dungeon->map[Map::getCurrentLocation(this->itemID)[dim_y]][Map::getCurrentLocation(this->itemID)[dim_x]].hardness
+#define nextMonster(monster) ((corridor_node_t *) monster->path[Map::getCurrentLocation(monster->itemID)[dim_y]][Map::getCurrentLocation(monster->itemID)[dim_x]].prev_node)
+
 
 
 //overload operator for priority queue
-bool operator< (Monster monster1, Monster monster2){
+bool operator < (Monster monster1, Monster monster2){
     return monster1.getSpeed() < monster2.getSpeed();
 }
 
@@ -18,8 +23,8 @@ bool operator== (Monster monster1, Monster monster2){
     return monster1.getSpeed() == monster2.getSpeed();
 }
 
-Monster::Monster(dungeon_t *dungeon,Pc * user){
-    this->user = user;
+Monster::Monster(std::unordered_map<std::string, std::string> base, dungeon_t * dungeon):GameContent(base){
+    this->itemID;
     this->dungeon = dungeon;
     this->range = (uint8_t) (rand() % 3);
     this->speed = (uint8_t) (rand()%16 + 5);
@@ -29,11 +34,11 @@ Monster::Monster(dungeon_t *dungeon,Pc * user){
 bool Monster::meetWithNPC(){
     for (int i = -1 * this->range; i < this->range + 1 ; ++i) {
         for (int j = -1 * this->range; j < this->range + 1 ; ++j) {
-            uint8_t x = (uint8_t) (this->currentLocation[dim_x] + i);
-            uint8_t y = (uint8_t) (this->currentLocation[dim_y] + j);
+            uint8_t x = (uint8_t) (Map::getCurrentLocation(this->itemID)[dim_x] + i);
+            uint8_t y = (uint8_t) (Map::getCurrentLocation(this->itemID)[dim_y] + j);
 
             if (checkLocation(x,y)){
-                if ((x == npcLocation[dim_x]) && (y == npcLocation[dim_y])){
+                if ((x == Map::getPlayerLocation()[dim_x]) && (y == Map::getPlayerLocation()[dim_y])){
                     this->lastPcLocation[dim_y] = y;
                     this->lastPcLocation[dim_x] = x;
                     return true;
@@ -54,8 +59,8 @@ int Monster::moveMonster(){
         bool flag = true;
         if ((rand() % 2 ) == 1){
             while(flag){
-                int x = this->currentLocation[dim_x] + rand()%3 - 1;
-                int y = this->currentLocation[dim_y] + rand()%3 - 1;
+                int x = Map::getCurrentLocation(this->itemID)[dim_x] + rand()%3 - 1;
+                int y = Map::getCurrentLocation(this->itemID)[dim_y] + rand()%3 - 1;
                 if (checkLocation(x,y)){
                     if ((dungeonMapTer(x,y) == ter_floor_room) ||
                         (dungeonMapTer(x,y)  == ter_floor_hall))
@@ -96,11 +101,11 @@ int Monster::moveMonster(){
             double shortestDistance = UINT32_MAX;
             for (int i = -1; i <2 ; ++i) {
                 for (int j = -1; j < 2; ++j) {
-                    int16_t y = (int16_t) (this->currentLocation[dim_y] + j);
-                    int16_t x = (int16_t) (this->currentLocation[dim_x] + i);
+                    int16_t y = (int16_t) (Map::getCurrentLocation(this->itemID)[dim_y] + j);
+                    int16_t x = (int16_t) (Map::getCurrentLocation(this->itemID)[dim_x] + i);
                     if (checkLocation(x,y)){
-                        double distance = sqrt(abs(this->currentLocation[dim_y] + j - npcLocation[dim_y])) +
-                                            sqrt(abs(this->currentLocation[dim_x] + i - npcLocation[dim_x]));
+                        double distance = sqrt(abs(Map::getCurrentLocation(this->itemID)[dim_y] + j - Map::getPlayerLocation()[dim_y])) +
+                                            sqrt(abs(Map::getCurrentLocation(this->itemID)[dim_x] + i - Map::getPlayerLocation()[dim_x]));
                         if (distance < shortestDistance){
                             shortestDistance = distance;
                             nextParh[dim_x] = x;
@@ -139,12 +144,8 @@ int Monster::moveMonster(){
         return 0;
 
     update:
-        //set prev location
-        this->prevLocation[dim_x] = this->currentLocation[dim_x];
-        this->prevLocation[dim_y] = this->currentLocation[dim_y];
-        //set next location
-        this->currentLocation[dim_x] = nextParh[dim_x];
-        this->currentLocation[dim_y] = nextParh[dim_y];
+    Map::updateGameItem(this->itemID,nextParh);
+
     return 0;
 }
 
@@ -167,11 +168,11 @@ void Monster::dijkstra_no_tunnelling()
         }
     }
 
-    this->path[npcLocation[dim_y]][npcLocation[dim_x]].cost = 0;
+    this->path[Map::getPlayerLocation()[dim_y]][Map::getPlayerLocation()[dim_x]].cost = 0;
 
     heap_init(&h, corridor_node_cmp, NULL);
 
-    heap_insert(&h,&this->path[npcLocation[dim_y]][npcLocation[dim_x]]);
+    heap_insert(&h,&this->path[Map::getPlayerLocation()[dim_y]][Map::getPlayerLocation()[dim_x]]);
 
     while (h.size != 0){
         prev_node = (corridor_node_t *) heap_remove_min(&h);
@@ -212,11 +213,11 @@ void Monster::dijkstra_tunnelling()
     }
 
 
-    this->path[npcLocation[dim_y]][npcLocation[dim_x]].cost = 0;
+    this->path[Map::getPlayerLocation()[dim_y]][Map::getPlayerLocation()[dim_x]].cost = 0;
 
     heap_init(&h, corridor_node_cmp, NULL);
 
-    heap_insert(&h,&this->path[npcLocation[dim_y]][npcLocation[dim_x]]);
+    heap_insert(&h,&this->path[Map::getPlayerLocation()[dim_y]][Map::getPlayerLocation()[dim_x]]);
 
     while (h.size != 0){
         prev_node = (corridor_node_t*) heap_remove_min(&h);

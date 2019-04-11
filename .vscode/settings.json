@@ -28,11 +28,9 @@
         "editor.quickSuggestions": true
     },
     
-    "C_Cpp.autocomplete":"Default", 
-    "C_Cpp.intelliSenseEngine":"Default",
     "C_Cpp.intelliSenseEngineFallback": "Disabled",
     
-    // Use ZSH as the integrated terminal 
+    //Use ZSH as the integrated terminal 
     "terminal.integrated.shell.osx": "zsh",
 
     "files.autoSave": "afterDelay",
@@ -98,6 +96,5 @@
         "deque": "cpp",
         "queue": "cpp",
         "sstream": "cpp"
-    },
-    
+    },    
 }

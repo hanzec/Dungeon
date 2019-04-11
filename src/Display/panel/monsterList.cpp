@@ -5,9 +5,9 @@
 
 #include <queue>
 #include <ncurses.h>
-#include "../../../include/gameCommon.h"
-#include "../../../include/display/displayCommon.h"
-#include "../../../include/display/panel/monsterList.h"
+#include "../../../include/GameCommon.h"
+#include "../../../include/Display/displayCommon.h"
+#include "../../../include/Display/panel/monsterList.h"
 
 monsterList::monsterList(MonsterNode * monsterNode) {
     // todo need to change instead of hard code

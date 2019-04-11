@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <ncurses.h>
 #include <unordered_map>
-#include "../include/gameCommon.h"
+#include "../include/GameCommon.h"
 #include "../include/keyBindMap.h"
 
 io::keyBindMap::keyBindMap(){

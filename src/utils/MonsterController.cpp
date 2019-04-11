@@ -7,18 +7,17 @@ int monsterController::getNumberOfMonster(){return this->numberOfMonster;}
 
 int monsterController::seeMinMonsterTime(){ return this->currentNode->nextNode->time;}
 
-monsterController::monsterController(dungeon_t *dungeon, Pc * user) {
-    this->user = user;
+monsterController::monsterController(dungeon_t *dungeon) {
     this->dungeon = dungeon;
     this->currentNode = nullptr;
 }
-void monsterController::addSingleMonster(Monster * monster, int weight){
+void monsterController::addSingleMonster(Monster monster, int weight){
 
     auto * nextMonster = (MonsterNode_t *)malloc(sizeof(MonsterNode_t));
 
-    nextMonster->monster = monster;
+    nextMonster->monster = &monster;
     nextMonster->nextNode = nullptr;
-    nextMonster->time = (uint32_t) (1000 / monster->getSpeed() + weight);
+    nextMonster->time = (uint32_t) (1000 / monster.getSpeed() + weight);
 
     if (this->currentNode == nullptr) {
         currentNode = new MonsterNode;
@@ -72,16 +71,4 @@ void monsterController::cleanMonsterQueue() {
         this->currentNode = this->currentNode->nextNode;
     }
     this->numberOfMonster = 0;
-}
-
-void monsterController::addMonsterToQueue(uint32_t number){
-
-    for (int i = 0; i < number; ++i){
-        Monster * monster = new class Monster(this->dungeon,this->user);
-        room_t tmp = * dungeon->rooms[rand()%dungeon->num_rooms];
-        monster->currentLocation[dim_y] = (uint16_t) (tmp.position[dim_y] + rand() % tmp.size[dim_y]);
-        monster->currentLocation[dim_x] = (uint16_t) (tmp.position[dim_x] + rand() % tmp.size[dim_x]);
-
-        this->addSingleMonster(monster,0);
-    }
 }

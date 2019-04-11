@@ -3,21 +3,23 @@
         {
             "name": "Mac",
             "includePath": [
-                "/usr/local/include",
-                "${workspaceRoot}/include"
+                "/usr/local/include/**",
+                "${workspaceRoot}/include/**",
+                "/usr/local/opt/ncurses/include/**"
             ],
+            "browse": {
+                "path": [
+                    "/usr/local/include/",
+                    "${workspaceRoot}/include/**",
+                    "/usr/local/opt/ncurses/include/"
+                ]
+            },
             "defines": [],
             "macFrameworkPath": [
                 "/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks"
             ],
-            "browse": {
-                "path": [
-                    "/usr/local/include",
-                    "${workspaceRoot}/include"
-                ]
-            },
             "cStandard": "c99",
-            "cppStandard": "c++17",
+            "cppStandard": "c++11",
             "intelliSenseMode": "clang-x64",
             "configurationProvider": "vector-of-bool.cmake-tools",
             "compileCommands": "${workspaceFolder}/build/compile_commands.json"

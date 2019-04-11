@@ -4,7 +4,7 @@
 
 #include <time.h>
 #include <limits.h>
-#include "../../include/gameCommon.h"
+#include "../../include/GameCommon.h"
 #include "../../include/utils/mapGenerator.h"
 #include "../../include/utils/data_stucture/heap.h"
 

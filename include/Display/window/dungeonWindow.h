@@ -6,20 +6,18 @@
 #define DUNGEON_COMS327_F19_DUNGEONWINDOW_H
 
 #include "gameWindow.h"
-#include "../../gameCommon.h"
-#include "../../characters/pc.h"
-#include "../../characters/monster.h"
+#include "../../GameCommon.h"
 
+class Monster;
 class dungeonWindow : public gameWindow {
 public:
-    int updateNPC();
     void setFOWStatus(bool flag);
     void setTeleportStatus(bool flag);
-    int updateMonster(Monster * monster);
-    explicit dungeonWindow(dungeon_t * dungeon, Pc * npc);
+    dungeonWindow(dungeon_t * dungeon);
+    int updatePlayer(pair_t location, pair_t prevLocation);
+    int updateGameItem(pair_t location, pair_t prevLocation, int color, char symbol);
 
 private:
-    Pc * npc;
     bool fow;
     bool teleport;
     void updateMap();

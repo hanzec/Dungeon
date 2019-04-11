@@ -24,7 +24,22 @@ typedef enum dim {
     num_dims
 } dim_t;
 
-typedef int16_t pair_t[num_dims];
+typedef struct pair{
+private:
+    int dimx;
+    int dimy;
+public:
+    int& operator[](int i){
+        if (i == dim_x)
+            return dimx;
+        else
+            return dimy;
+    }
+    void operator=(struct pair pair){
+        this->dimx = pair.dimx;
+        this->dimy = pair.dimy;
+    }
+}pair_t;
 
 typedef enum __attribute__ ((__packed__)) terrain_type {
     ter_debug,

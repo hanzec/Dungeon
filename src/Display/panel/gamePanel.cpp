@@ -2,7 +2,7 @@
 // Created by 陈瀚泽 on 2019-03-14.
 //
 
-#include "../../../include/display/panel/gamePanel.h"
+#include "../../../include/Display/panel/gamePanel.h"
 
 int gamePanel::hidePanel() {
     if (this->panel != nullptr){

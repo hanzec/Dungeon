@@ -7,7 +7,7 @@
 
 #include <panel.h>
 #include <ncurses.h>
-#include "../gameCommon.h"
+#include "../GameCommon.h"
 #include "window/gameWindow.h"
 #include "panel/monsterList.h"
 
@@ -21,13 +21,13 @@ typedef enum panelList{
     num_panel
 }panelList_T;
 
-class display{
+class Display{
 public:
     //screen operation
     static int closeScreen();
     static int initDisplayEnv();
     static int updateDungeonMap(dungeon_t * dungeon);
-    static int initScreen(dungeon_t * dungeon, Pc * pc);
+    static int initScreen(dungeon_t * dungeon);
 
     //spectcial game mode
     static void setFOWStatus(bool flag);
@@ -40,10 +40,11 @@ public:
     static int showMonsterList();
 
     //update screen function
-    static int updatePCLocation();// need to change name this function is also update wof
-
+    static int updatePlayerLocation(pair_t location, pair_t prevLocation);// need to change name this function is also update wof
+    static int updateItemLocation(pair_t location, pair_t prevLocation, int color, char symbol);
+    static int updateMonsterLocation(pair_t location, pair_t prevLocation, int color, char symbol);
+    
 private:
-    static Pc * npcPtr;
     static dungeon_t * dungeonPtr;
     static int updateMonsterLocation();
     static monsterList * monsterListPtr;

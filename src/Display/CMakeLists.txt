@@ -15,7 +15,7 @@ include_directories(${CURSES_INCLUDE_DIR})
 SET(LIBRARY_OUTPUT_PATH "${PROJECT_BINARY_DIR}/lib")
 
 #set library name
-add_library (DisplayLib SHARED ${DISPLAY_SRCS_PANEL} ${DISPLAY_SRCS_WINDOW} ${DISPLAY_HEADERS} Display.cpp ../Map.cpp)
+add_library (DisplayLib SHARED ${DISPLAY_SRCS_PANEL} ${DISPLAY_SRCS_WINDOW} ${DISPLAY_HEADERS} Display.cpp)
 
 # link ncurses lib
 target_link_libraries(DisplayLib panel ${CURSES_LIBRARIES})

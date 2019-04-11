@@ -3,14 +3,12 @@
 //
 
 #include <ncurses.h>
-#include "../../../include/Map.h"
 #include "../../../include/Display/displayCommon.h"
 #include "../../../include/Display/window/dungeonWindow.h"
 
 void dungeonWindow::setFOWStatus(bool flag){ 
     this->fow = flag;
     dungeonWindow::updateMap();
-    dungeonWindow::updatePlayer(); 
 }
 
 void dungeonWindow::setTeleportStatus(bool flag){this->teleport = flag; }
@@ -47,45 +45,37 @@ void dungeonWindow::updateMap() {
 }
 
 
-int dungeonWindow::updatePlayer() {
+int dungeonWindow::updatePlayer(pair_t location, pair_t prevLocation) {
    //set map to visable
     for(int i = -1; i <2 ; i++){
         for(int j = -1; j < 2; j++){
-            this->dungeonPtr->map[Map::getPlayerLocation()[dim_x] + i][Map::getPlayerLocation()[dim_y] + j].visable = true;
+            this->dungeonPtr->map[location[dim_x] + i][location[dim_y] + j].visable = true;
             if (fow)
-                dungeonWindow::updateMapByPixel(Map::getPlayerLocation()[dim_x] + i,Map::getPlayerLocation()[dim_y] + j);
+                dungeonWindow::updateMapByPixel(location[dim_x] + i,location[dim_y] + j);
         }  
     }
     //update pc location
-    mvwaddch(this->windowPtr,
-             Map::getPlayerLocation()[dim_y],
-             Map::getPlayerLocation()[dim_x],
-             this->getTerFromChar(Map::getPlayerLocation()[dim_x],Map::getPlayerLocation()[dim_y])
-             );
+    mvwaddch(this->windowPtr, prevLocation[dim_y], prevLocation[dim_x], 
+            getTerFromChar(prevLocation[dim_x], prevLocation[dim_y]));
     if (teleport)
-        mvwaddch(this->windowPtr,Map::getPlayerLocation()[dim_y], Map::getPlayerLocation()[dim_x],'*');
+        mvwaddch(this->windowPtr,location[dim_y], location[dim_x],'*');
     else
-        mvwaddch(this->windowPtr,Map::getPlayerLocation()[dim_y], Map::getPlayerLocation()[dim_x],'@');
+        mvwaddch(this->windowPtr,location[dim_y], location[dim_x],'@');
             
     wrefresh(this->windowPtr);
     return 0;
 }
 
-int dungeonWindow::updateGameItem(int gameItemID) {
-   if (Map::getPrevLocation(gameItemID)[dim_x] != 0 && Map::getPrevLocation(gameItemID)[dim_x] != 0) {
-       mvwaddch(this->windowPtr,
-                 Map::getPrevLocation(gameItemID)[dim_x],
-                 Map::getPrevLocation(gameItemID)[dim_y],
-                 this->getTerFromChar(Map::getPrevLocation(gameItemID)[dim_x],
-                                      Map::getPrevLocation(gameItemID)[dim_y]));
-   }
+int dungeonWindow::updateGameItem(pair_t location, pair_t prevLocation, int color, char symbol) {
+   if (prevLocation[dim_x] != 0 && prevLocation[dim_x] != 0)
+       mvwaddch(this->windowPtr, prevLocation[dim_y], prevLocation[dim_x],
+                getTerFromChar(prevLocation[dim_x], prevLocation[dim_y]));
+
     //TODO for mutiple color for simgle monster support
-    attron(COLOR_PAIR(Map::getGameItemColor(gameItemID)));
-    mvwaddch(this->windowPtr,Map::getPrevLocation(gameItemID)[dim_y], 
-                             Map::getPrevLocation(gameItemID)[dim_x],
-                             Map::getGameItemSymbol(gameItemID));
-    attroff(COLOR_PAIR(Map::getGameItemColor(gameItemID)));
-    
+    attron(COLOR_PAIR(color));
+    mvaddch(location[dim_y] + 1, location[dim_x], symbol);
+    attroff(COLOR_PAIR(color));
+    wrefresh(this->windowPtr);
     return 0;
 }
 

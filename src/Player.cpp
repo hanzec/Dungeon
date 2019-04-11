@@ -1,7 +1,6 @@
 
 #include <string>
 #include <cstring>
-#include "../include/Map.h"
 #include "../include/Player.h"
 
 Player::Player(dungeon_t * dungeon){
@@ -9,12 +8,14 @@ Player::Player(dungeon_t * dungeon){
     this->dungeon = dungeon;
 }
 
+int Player::getSpeed(){ return this->speed;}
 int Player::setPcLocation(pair_t location) {
     if ((this->dungeon->map[location[dim_y]][location[dim_x]].terrain_type == ter_floor_room) ||
             (this->dungeon->map[location[dim_y]][location[dim_x]].terrain_type == ter_floor_hall) ||
             (this->dungeon->map[location[dim_y]][location[dim_x]].terrain_type == ter_stairs_up)  ||  
             (this->dungeon->map[location[dim_y]][location[dim_x]].terrain_type == ter_stairs_down)   ){
-                Map::updatePlayer(location);
+                this->prevLocation = this->currentLocation;
+                this->currentLocation = location;
                 return 0;
         }else
          return 1;
@@ -24,7 +25,7 @@ int Player::movePC(direction_t direction){
     pair_t location;
     pair_t prev_location;
 
-    location = Map::getPlayerLocation();
+    location = this->currentLocation;
 
     switch (direction){
         case Upper:
@@ -64,7 +65,8 @@ int Player::movePC(direction_t direction){
             (this->dungeon->map[location[dim_y]][location[dim_x]].terrain_type == ter_floor_hall) ||
             (this->dungeon->map[location[dim_y]][location[dim_x]].terrain_type == ter_stairs_up)  ||  
             (this->dungeon->map[location[dim_y]][location[dim_x]].terrain_type == ter_stairs_down)   ){
-                Map::updatePlayer(location);
+                this->prevLocation = this->currentLocation;
+                this->currentLocation = location;
                 return 0;
         }else
             return -1;

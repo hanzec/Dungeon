@@ -5,6 +5,7 @@
 #ifndef DUNGEON_COMS327_F19_PLAYER_H
 #define DUNGEON_COMS327_F19_PLAYER_H
 
+#include <unordered_map>
 #include "GameContant/Item.h"
 #include "GameContant/GameContent.h"
 
@@ -18,12 +19,14 @@ typedef enum wearSlot{
 class Player{
 protected:
     dungeon_t *dungeon;
-    Item wearSlot[numberSlot];
     int healthPoint, damgaePoint, speed;
+    std::unordered_map<std::string,Item> itemCollection;
 public:
-    Player(dungeon_t * dungeon);
+    pair_t currentLocation,prevLocation;
+    int getSpeed();
     int movePC(direction_t direction);
     int setPcLocation(pair_t location);
+    Player(dungeon_t * dungeon = nullptr);
 };
 
 #endif //DUNGEON_COMS327_F19_PC_H

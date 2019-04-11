@@ -17,7 +17,7 @@ private:
     static Player pcPtr;
     static void newDungeonLevel();
     static void close_dungeon(int mode);
-    static monsterController monsterControllerPtr;
+    static monsterController * monsterControllerPtr;
 };
 
 

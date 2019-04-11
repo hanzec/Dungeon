@@ -8,11 +8,12 @@
 using namespace std;
 class GameContent{
 protected:
-    int color;
-    char symbol;
-    double range, speed, damage;
-    string description, name;
 public:
+    char symbol;
+    int color,range;
+    pair_t currentLocation,prevLocation;
+    string description, name,speed, damage;
+
     int itemID;
     string getName();
     double getSpeed();

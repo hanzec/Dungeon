@@ -10,6 +10,7 @@
 #include <iostream>
 #include <sys/stat.h>
 #include <sstream>
+#include <unordered_map>
 #include <string> // pulls in declaration for strlen.
 #include "../include/FileReader.h"
 #include "../include/utils/crossplatform_header/endian.h"

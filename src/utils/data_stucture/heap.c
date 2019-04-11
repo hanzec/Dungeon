@@ -146,7 +146,7 @@ static void heap_consolidate(heap_t *h)
     while (a[x->degree]) {
       y = a[x->degree];
       if (h->compare(x->datum, y->datum) > 0) {
-        swap(x, y);
+        swap_heap(x, y);
       }
       a[x->degree] = NULL;
       heap_link(h, y, x);

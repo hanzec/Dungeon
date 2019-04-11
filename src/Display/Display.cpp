@@ -29,14 +29,14 @@ int Display::initDisplayEnv() {
     init_pair(PAIR_CHARACTER_STATUS, COLOR_BLACK, COLOR_WHITE);
 
     //init color pair of monster
-    init_pair(PAIR_RED, COLOR_WHITE, COLOR_RED);
-    init_pair(PAIR_BLUE, COLOR_WHITE, COLOR_BLUE);
-    init_pair(PAIR_CYAN, COLOR_WHITE, COLOR_CYAN);
-    init_pair(PAIR_GREEN, COLOR_WHITE, COLOR_GREEN);
-    init_pair(PAIR_WHITE, COLOR_WHITE, COLOR_WHITE);
-    init_pair(PAIR_BLACK, COLOR_WHITE, COLOR_BLACK);
-    init_pair(PAIR_YELLOW, COLOR_WHITE, COLOR_YELLOW);
-    init_pair(PAIR_MAGENTA, COLOR_WHITE, COLOR_MAGENTA);
+    init_pair(PAIR_RED, COLOR_RED, COLOR_BLACK );
+    init_pair(PAIR_BLUE, COLOR_BLUE,COLOR_BLACK);
+    init_pair(PAIR_CYAN, COLOR_CYAN, COLOR_BLACK);
+    init_pair(PAIR_GREEN, COLOR_GREEN, COLOR_BLACK);
+    init_pair(PAIR_WHITE, COLOR_WHITE, COLOR_BLACK);
+    init_pair(PAIR_BLACK, COLOR_BLACK, COLOR_BLACK);
+    init_pair(PAIR_YELLOW, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(PAIR_MAGENTA, COLOR_MAGENTA, COLOR_BLACK);
 
     refresh();
 
@@ -63,9 +63,6 @@ int Display::initScreen(dungeon_t *dungeon) {
     // set up monsterList
     set_panel_userptr(tmpPanel,monsterListPtr->panel);
     set_panel_userptr(monsterListPtr->panel,tmpPanel);
-
-    //update npc location
-    updatePCLocation();
 
     //refreash screen
     update_panels();
@@ -100,8 +97,8 @@ int Display::showMonsterList() {
     return 0;
 }
 
-int Display::updatePCLocation() {
-    ((dungeonWindow *)windowStack[dungeonScreen_win])->updatePlayer();
+int Display::updatePlayerLocation(pair_t location, pair_t prevLocation) {
+    ((dungeonWindow *)windowStack[dungeonScreen_win])->updatePlayer(location,prevLocation);
     return 0;
 }
 
@@ -112,5 +109,14 @@ int Display::updateMonsterLocation() {
 int Display::updateDungeonMap(dungeon_t *dungeon) {
     Display::dungeonPtr = dungeon;
     monsterListPtr->updateMonsterNode(dungeon->monsterArray);
+    return 0;
+}
+int Display::updateMonsterLocation(pair_t location, pair_t prevLocation, int color, char symbol){
+    ((dungeonWindow *)windowStack[dungeonScreen_win])->updateGameItem(location,prevLocation,color,symbol);
+    return 0;
+}
+
+int Display::updateItemLocation(pair_t location, pair_t prevLocation, int color, char symbol){
+    ((dungeonWindow *)windowStack[dungeonScreen_win])->updateGameItem(location,prevLocation,color,symbol);
     return 0;
 }

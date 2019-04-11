@@ -1,25 +1,18 @@
 #ifndef DUNGEON_COMS327_F19_ITEMFACTORY_H
 #define DUNGEON_COMS327_F19_ITEMFACTORY_H
-
-#include "GameContantFactory.h"
-
-class ItemFactory : public GameContantFactory
+#include <vector>
+#include <unordered_map>
+#include "Item.h"
+class ItemFactory
 {
 private:
-    /* data */
+    void updateGameItemPool();
+    int index, poolSize;
+    std::vector<std::unordered_map<std::string, std::string> > contentPool;
+    std::vector<std::unordered_map<std::string, std::string> > attributeList;
 public:
-    ItemFactory(/* args */);
+    Item generateNewGameContant(dungeon * dungeon);
+    ItemFactory(std::vector<std::unordered_map<std::string, std::string> > attributeList);
     ~ItemFactory();
 };
-
-
-
-ItemFactory::ItemFactory(/* args */)
-{
-}
-
-ItemFactory::~ItemFactory()
-{
-}
-
 #endif

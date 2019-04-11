@@ -20,6 +20,6 @@ public:
     int seeMinMonsterTime();
     void addMonsterToQueue(uint32_t number);
     monsterController(dungeon_t * dungeon = nullptr);
-    void addSingleMonster(Monster * monster, int weight);
+    void addSingleMonster(Monster monster, int weight);
 };
 #endif //COMS327_S19_DUNGEON_MONSTERCONTROLLER_H

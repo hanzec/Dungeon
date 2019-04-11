@@ -4,13 +4,16 @@
 #include <iostream>
 #include "Monster.h"
 #include "GameContent.h"
-#include "GameContantFactory.h"
 
-class MonsterFactory : public GameContantFactory{
+class MonsterFactory{
 private:
     void updateGameItemPool();
+    int index, poolSize;
+    std::vector<std::unordered_map<std::string, std::string> > contentPool;
+    std::vector<std::unordered_map<std::string, std::string> > attributeList;
+    std::vector<std::unordered_map<std::string, std::string> > uniqueMonster;
 public:
-    static Monster generateNewGameContant();
+    Monster generateNewGameContant(dungeon * dungeon);
     MonsterFactory(std::vector<std::unordered_map<std::string, std::string> > attributeList);
 };
 

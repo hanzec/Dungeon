@@ -24,17 +24,16 @@ using namespace std;
 
 class Monster : public GameContent{
 private:
-    int healthPoint;
     dungeon_t * dungeon;
-    uint8_t characteristics;
 public:
+    int healthPoint;
+    uint8_t characteristics;
     pair_t lastPcLocation ;
     corridor_node_t path[DUNGEON_Y][DUNGEON_X];
-
-    int moveMonster();
-    bool meetWithNPC();
-    void dijkstra_tunnelling();
-    void dijkstra_no_tunnelling(); // TODO write as private class
+    int moveMonster(pair_t playerLocation);
+    bool meetWithPlayer(pair_t playerLocation);
+    void dijkstra_tunnelling(pair_t playerLocation);
+    void dijkstra_no_tunnelling(pair_t playerLocation); // TODO write as private class
     Monster(unordered_map<string, string> base, dungeon_t * dungeon);
 };
 

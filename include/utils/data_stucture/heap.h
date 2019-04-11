@@ -28,7 +28,7 @@ typedef struct heap {
 } heap_t;
 
 
-#define swap(a, b) ({    \
+#define swap_heap(a, b) ({    \
   typeof (a) _tmp = (a); \
   (a) = (b);             \
   (b) = _tmp;            \

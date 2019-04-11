@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <cstring>
 #include <sys/stat.h>
 #include <sstream>
 #include <unordered_map>

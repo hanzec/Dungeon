@@ -43,7 +43,7 @@ int Display::initDisplayEnv() {
     return 0;
 }
 
-int Display::initScreen(dungeon_t *dungeon) {
+int Display::initDisplaySystem(dungeon_t *dungeon) {
     // FIXME bug here statusWindow and pcInfoWindow have same memory address for no reason
     // update 3-14-2019 may fix bug but need testing
 
@@ -71,13 +71,9 @@ int Display::initScreen(dungeon_t *dungeon) {
     return 0;
 }
 
-int Display::closeScreen() {
+int Display::closeDislaySystem() {
     return 0;
 }
-
-void Display::setFOWStatus(bool flag){((dungeonWindow *)windowStack[dungeonScreen_win])->setFOWStatus(flag);}
-
-void Display::setTeleportStatus(bool flag){((dungeonWindow *)windowStack[dungeonScreen_win])->setTeleportStatus(flag);}
 
 int Display::showDiedScreen() {
 
@@ -97,15 +93,8 @@ int Display::showMonsterList() {
     return 0;
 }
 
-
-int Display::updateMonsterLocation() {
-    return 0;
-}
-
-int Display::updateDungeonMap(dungeon_t *dungeon) {
-    Display::dungeonPtr = dungeon;
-    monsterListPtr->updateMonsterNode(dungeon->monsterArray);
-    return 0;
+void Display::updateDungeonMap() {
+    monsterListPtr->updateMonsterNode(Display::dungeonPtr->monsterArray);
 }
 
 void Display::setFOWStatus(bool flag){

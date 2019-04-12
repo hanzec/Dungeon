@@ -32,7 +32,7 @@ void game::close_dungeon(int mode){
             Display::showDiedScreen();
             break;
         default:
-            Display::closeScreen();
+            Display::closeDislaySystem();
             break;
     }
 
@@ -47,7 +47,7 @@ void game::startGame() {
 
     Display::initDisplayEnv();
     dungeon_t *currentDungeon = dungeonMap[0];
-    Display::initScreen(currentDungeon);
+    Display::initDisplaySystem(currentDungeon);
     //update ALL Monster
     MonsterNode_t * tmpList = currentDungeon->monsterArray->nextNode;
     while(tmpList->monster != nullptr){

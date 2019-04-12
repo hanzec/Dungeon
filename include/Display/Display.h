@@ -40,9 +40,9 @@ public:
     static int showMonsterList();
 
     //update screen function
-    static int updatePlayerLocation(pair_t location, pair_t prevLocation);// need to change name this function is also update wof
-    static int updateItemLocation(pair_t location, pair_t prevLocation, int color, char symbol);
-    static int updateMonsterLocation(pair_t location, pair_t prevLocation, int color, char symbol);
+    static void updatePlayerLocation(pair_t location, pair_t prevLocation);// need to change name this function is also update wof
+    static void updateItemLocation(pair_t location, pair_t prevLocation, int color, char symbol);
+    static void updateMonsterLocation(pair_t location, pair_t prevLocation, int color, char symbol);
     
 private:
     static dungeon_t * dungeonPtr;

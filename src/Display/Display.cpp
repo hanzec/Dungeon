@@ -97,10 +97,6 @@ int Display::showMonsterList() {
     return 0;
 }
 
-int Display::updatePlayerLocation(pair_t location, pair_t prevLocation) {
-    ((dungeonWindow *)windowStack[dungeonScreen_win])->updatePlayer(location,prevLocation);
-    return 0;
-}
 
 int Display::updateMonsterLocation() {
     return 0;
@@ -111,12 +107,23 @@ int Display::updateDungeonMap(dungeon_t *dungeon) {
     monsterListPtr->updateMonsterNode(dungeon->monsterArray);
     return 0;
 }
-int Display::updateMonsterLocation(pair_t location, pair_t prevLocation, int color, char symbol){
-    ((dungeonWindow *)windowStack[dungeonScreen_win])->updateGameItem(location,prevLocation,color,symbol);
-    return 0;
+
+void Display::setFOWStatus(bool flag){
+    ((dungeonWindow *)windowStack[dungeonScreen_win])->setFOWStatus(flag);
 }
 
-int Display::updateItemLocation(pair_t location, pair_t prevLocation, int color, char symbol){
+void Display::setTeleportStatus(bool flag){
+    ((dungeonWindow *)windowStack[dungeonScreen_win])->setTeleportStatus(flag);
+}
+
+void Display::updatePlayerLocation(pair_t location, pair_t prevLocation) {
+    ((dungeonWindow *)windowStack[dungeonScreen_win])->updatePlayer(location,prevLocation);
+}
+
+void Display::updateMonsterLocation(pair_t location, pair_t prevLocation, int color, char symbol){
     ((dungeonWindow *)windowStack[dungeonScreen_win])->updateGameItem(location,prevLocation,color,symbol);
-    return 0;
+}
+
+void Display::updateItemLocation(pair_t location, pair_t prevLocation, int color, char symbol){
+    ((dungeonWindow *)windowStack[dungeonScreen_win])->updateGameItem(location,prevLocation,color,symbol);
 }

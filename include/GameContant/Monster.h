@@ -15,7 +15,7 @@
 
 typedef struct corridor_node {
     int cost;
-    pair_t pos;
+    location_t pos;
     heap_node_t *hn;
     void * prev_node;
 } corridor_node_t;
@@ -28,12 +28,12 @@ private:
 public:
     int healthPoint;
     uint8_t characteristics;
-    pair_t lastPcLocation ;
+    location_t lastPcLocation ;
     corridor_node_t path[DUNGEON_Y][DUNGEON_X];
-    int moveMonster(pair_t playerLocation);
-    bool meetWithPlayer(pair_t playerLocation);
-    void dijkstra_tunnelling(pair_t playerLocation);
-    void dijkstra_no_tunnelling(pair_t playerLocation); // TODO write as private class
+    int moveMonster(location_t playerLocation);
+    bool meetWithPlayer(location_t playerLocation);
+    void dijkstra_tunnelling(location_t playerLocation);
+    void dijkstra_no_tunnelling(location_t playerLocation); // TODO write as private class
     Monster(unordered_map<string, string> base, dungeon_t * dungeon);
 };
 

@@ -6,6 +6,8 @@
 #include "../../../include/Display/displayCommon.h"
 #include "../../../include/Display/window/dungeonWindow.h"
 
+#define getPrevChar getTerFromChar(location[prev_x], location[prev_y])
+
 void dungeonWindow::setFOWStatus(bool flag){ 
     this->fow = flag;
     dungeonWindow::updateMap();
@@ -45,38 +47,34 @@ void dungeonWindow::updateMap() {
 }
 
 
-int dungeonWindow::updatePlayer(pair_t location, pair_t prevLocation) {
+void dungeonWindow::updatePlayer(location_t location) {
    //set map to visable
     for(int i = -1; i <2 ; i++){
         for(int j = -1; j < 2; j++){
-            this->dungeonPtr->map[location[dim_x] + i][location[dim_y] + j].visable = true;
+            this->dungeonPtr->map[location[curr_x] + i][location[curr_y] + j].visable = true;
             if (fow)
-                dungeonWindow::updateMapByPixel(location[dim_x] + i,location[dim_y] + j);
+                dungeonWindow::updateMapByPixel(location[curr_x] + i,location[curr_y] + j);
         }  
     }
     //update pc location
-    mvwaddch(this->windowPtr, prevLocation[dim_y], prevLocation[dim_x], 
-            getTerFromChar(prevLocation[dim_x], prevLocation[dim_y]));
+    mvwaddch(this->windowPtr, location[prev_y], location[prev_x], getPrevChar);
     if (teleport)
-        mvwaddch(this->windowPtr,location[dim_y], location[dim_x],'*');
+        mvwaddch(this->windowPtr,location[curr_y], location[curr_x],'*');
     else
-        mvwaddch(this->windowPtr,location[dim_y], location[dim_x],'@');
+        mvwaddch(this->windowPtr,location[curr_y], location[curr_x],'@');
             
     wrefresh(this->windowPtr);
-    return 0;
 }
 
-int dungeonWindow::updateGameItem(pair_t location, pair_t prevLocation, int color, char symbol) {
-   if (prevLocation[dim_x] != 0 && prevLocation[dim_x] != 0)
-       mvwaddch(this->windowPtr, prevLocation[dim_y], prevLocation[dim_x],
-                getTerFromChar(prevLocation[dim_x], prevLocation[dim_y]));
+void dungeonWindow::updateGameContent(location_t location, int color, char symbol) {
+   if (location[prev_x] != 0 && location[prev_y] != 0)
+       mvwaddch(this->windowPtr, location[prev_y], location[prev_x], getPrevChar);
 
     //TODO for mutiple color for simgle monster support
     attron(COLOR_PAIR(color));
-    mvaddch(location[dim_y] + 1, location[dim_x], symbol);
+    mvaddch(location[curr_y] + 1, location[curr_x], symbol);
     attroff(COLOR_PAIR(color));
     wrefresh(this->windowPtr);
-    return 0;
 }
 
 const chtype dungeonWindow::getTerFromChar(int x, int y) {

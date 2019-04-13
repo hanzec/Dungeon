@@ -22,10 +22,11 @@ protected:
     int healthPoint, damgaePoint, speed;
     std::unordered_map<std::string,Item> itemCollection;
 public:
-    pair_t currentLocation,prevLocation;
+    location_t location;
+
     int getSpeed();
     int movePC(direction_t direction);
-    int setPcLocation(pair_t location);
+    int setPcLocation(location_t location);
     Player(dungeon_t * dungeon = nullptr);
 };
 

@@ -40,10 +40,9 @@ public:
 
     //update screen function
     static void updateDungeonMap();
-    static void updatePlayerLocation(pair_t location, pair_t prevLocation);
-    static void updateItemLocation(pair_t location, pair_t prevLocation, int color, char symbol);
-    static void updateMonsterLocation(pair_t location, pair_t prevLocation, int color, char symbol);
-    
+    static void updatePlayer(location_t location);
+    static void updateGameContent(location_t location, int color, char symbol);
+
 private:
     static dungeon_t * dungeonPtr;
     static monsterList * monsterListPtr;

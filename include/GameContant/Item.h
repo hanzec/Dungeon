@@ -10,7 +10,6 @@ class Item : public GameContent
 {
 private:
     bool isTake;
-    pair_t location;
 public:
     Item generateNewGameContant();
     Item(std::unordered_map<std::string, std::string> base);

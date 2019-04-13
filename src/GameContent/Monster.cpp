@@ -4,8 +4,8 @@
 #include "../../include/GameContant/Monster.h"
 #include "../../include/utils/data_stucture/heap.h"
 
-#define getCurrentHardness this->dungeon->map[this->currentLocation[dim_y]][this->currentLocation[dim_x]].hardness
-#define nextMonster(monster) ((corridor_node_t *) monster->path[this->currentLocation[dim_y]][this->currentLocation[dim_x]].prev_node)
+#define getCurrentHardness this->dungeon->map[this->location[curr_y]][this->location[curr_x]].hardness
+#define nextMonster(monster) ((corridor_node_t *) monster->path[this->location[curr_y]][this->location[curr_x]].prev_node)
 
 
 
@@ -28,16 +28,16 @@ Monster::Monster(std::unordered_map<std::string, std::string> base, dungeon_t * 
     this->range = (uint8_t) (rand() % 3);
 }
 
-bool Monster::meetWithPlayer(pair_t playerLocation){
+bool Monster::meetWithPlayer(location_t location){
     for (int i = -1 * this->range; i < this->range + 1 ; ++i) {
         for (int j = -1 * this->range; j < this->range + 1 ; ++j) {
-            uint8_t x = (uint8_t) (this->currentLocation[dim_x] + i);
-            uint8_t y = (uint8_t) (this->currentLocation[dim_y] + j);
+            uint8_t x = (uint8_t) (this->location[curr_x] + i);
+            uint8_t y = (uint8_t) (this->location[curr_y] + j);
 
             if (checkLocation(x,y)){
-                if ((x == playerLocation[dim_x]) && (y == playerLocation[dim_y])){
-                    this->lastPcLocation[dim_y] = y;
-                    this->lastPcLocation[dim_x] = x;
+                if ((x == location[curr_x]) && (y == location[curr_y])){
+                    this->lastPcLocation[curr_y] = y;
+                    this->lastPcLocation[curr_x] = x;
                     return true;
                 }
             }
@@ -46,25 +46,25 @@ bool Monster::meetWithPlayer(pair_t playerLocation){
     return false;
 }
 
-int Monster::moveMonster(pair_t playerLocation){
+int Monster::moveMonster(location_t playerLocation){
     srand(time(NULL));
 
-    pair_t nextParh;
+    location_t nextParh;
     corridor_node_t path[DUNGEON_Y][DUNGEON_X];
 
     if (this->characteristics & 0x1){
         bool flag = true;
         if ((rand() % 2 ) == 1){
             while(flag){
-                int x = this->currentLocation[dim_x] + rand()%3 - 1;
-                int y = this->currentLocation[dim_y] + rand()%3 - 1;
+                int x = this->location[curr_x] + rand()%3 - 1;
+                int y = this->location[curr_y] + rand()%3 - 1;
                 if (checkLocation(x,y)){
                     if ((dungeonMapTer(x,y) == ter_floor_room) ||
                         (dungeonMapTer(x,y)  == ter_floor_hall))
                     {
                         flag = false;
-                        nextParh[dim_y] = (int16_t) y;
-                        nextParh[dim_x] = (int16_t) x;
+                        nextParh[curr_y] = (int16_t) y;
+                        nextParh[curr_x] = (int16_t) x;
                     }
                 }
             }
@@ -77,8 +77,8 @@ int Monster::moveMonster(pair_t playerLocation){
             if(this->characteristics & 0x2){
                 if ( getCurrentHardness == 0){
                     dijkstra_tunnelling(playerLocation);
-                    nextParh[dim_x] = nextMonster(this)->pos[dim_x];
-                    nextParh[dim_y] = nextMonster(this)->pos[dim_y];
+                    nextParh[curr_x] = nextMonster(this)->pos[curr_x];
+                    nextParh[curr_y] = nextMonster(this)->pos[curr_y];
                     goto update;
                 } else{
                     if (getCurrentHardness <= 85)
@@ -90,23 +90,23 @@ int Monster::moveMonster(pair_t playerLocation){
                 }
             }else{
                 dijkstra_no_tunnelling(playerLocation);
-                nextParh[dim_x] = nextMonster(this)->pos[dim_x];
-                nextParh[dim_y] = nextMonster(this)->pos[dim_y];
+                nextParh[curr_x] = nextMonster(this)->pos[curr_x];
+                nextParh[curr_y] = nextMonster(this)->pos[curr_y];
                 goto update;
             }
         }else{
             double shortestDistance = UINT32_MAX;
             for (int i = -1; i <2 ; ++i) {
                 for (int j = -1; j < 2; ++j) {
-                    int16_t y = (int16_t) (this->currentLocation[dim_y] + j);
-                    int16_t x = (int16_t) (this->currentLocation[dim_x] + i);
+                    int16_t y = (int16_t) (this->location[curr_y] + j);
+                    int16_t x = (int16_t) (this->location[curr_x] + i);
                     if (checkLocation(x,y)){
-                        double distance = sqrt(abs(this->currentLocation[dim_y] + j - playerLocation[dim_y])) +
-                                            sqrt(abs(this->currentLocation[dim_x] + i - playerLocation[dim_x]));
+                        double distance = sqrt(abs(this->location[curr_y] + j - playerLocation[curr_y])) +
+                                            sqrt(abs(this->location[curr_x] + i - playerLocation[curr_x]));
                         if (distance < shortestDistance){
                             shortestDistance = distance;
-                            nextParh[dim_x] = x;
-                            nextParh[dim_y] = y;
+                            nextParh[curr_x] = x;
+                            nextParh[curr_y] = y;
                         }
                     }
                 }
@@ -139,8 +139,7 @@ int Monster::moveMonster(pair_t playerLocation){
         return 0;
 
     update:
-    this->prevLocation = this->currentLocation;
-    this->currentLocation = nextParh;
+    this->location = nextParh;
 
     return 0;
 }
@@ -149,7 +148,7 @@ static int32_t corridor_node_cmp(const void *key, const void *with) {
     return ((corridor_node_t *) key)->cost - ((corridor_node_t *) with)->cost;
 }
 
-void Monster::dijkstra_no_tunnelling(pair_t playerLocation)
+void Monster::dijkstra_no_tunnelling(location_t playerLocation)
 {
 
     heap_t h;
@@ -157,25 +156,25 @@ void Monster::dijkstra_no_tunnelling(pair_t playerLocation)
 
     for (uint16_t y = 0; y < DUNGEON_Y; y++) {
         for (uint16_t x = 0; x < DUNGEON_X; x++) {
-            this->path[y][x].pos[dim_y] = y;
-            this->path[y][x].pos[dim_x] = x;
+            this->path[y][x].pos[curr_y] = y;
+            this->path[y][x].pos[curr_x] = x;
             this->path[y][x].cost = INT32_MAX;
 
         }
     }
 
-    this->path[playerLocation[dim_y]][playerLocation[dim_x]].cost = 0;
+    this->path[playerLocation[curr_y]][playerLocation[curr_x]].cost = 0;
 
     heap_init(&h, corridor_node_cmp, NULL);
 
-    heap_insert(&h,&this->path[playerLocation[dim_y]][playerLocation[dim_x]]);
+    heap_insert(&h,&this->path[playerLocation[curr_y]][playerLocation[curr_x]]);
 
     while (h.size != 0){
         prev_node = (corridor_node_t *) heap_remove_min(&h);
         for (int8_t i = -1; i < 2; ++i) {
             for (int8_t j = -1; j < 2 ; ++j) {
-                uint16_t x = j + prev_node->pos[dim_x];
-                uint16_t y = i + prev_node->pos[dim_y];
+                uint16_t x = j + prev_node->pos[curr_x];
+                uint16_t y = i + prev_node->pos[curr_y];
 
                 if (checkLocation(x,y)){
                     if (dungeonMapTer(x,y) != ter_wall){
@@ -193,7 +192,7 @@ void Monster::dijkstra_no_tunnelling(pair_t playerLocation)
     heap_delete(&h);
 }
 
-void Monster::dijkstra_tunnelling(pair_t playerLocation)
+void Monster::dijkstra_tunnelling(location_t playerLocation)
 {
 
     heap_t h;
@@ -201,26 +200,26 @@ void Monster::dijkstra_tunnelling(pair_t playerLocation)
 
     for (uint16_t y = 0; y < DUNGEON_Y; y++) {
         for (uint16_t x = 0; x < DUNGEON_X; x++) {
-            this->path[y][x].pos[dim_y] = y;
-            this->path[y][x].pos[dim_x] = x;
+            this->path[y][x].pos[curr_y] = y;
+            this->path[y][x].pos[curr_x] = x;
             this->path[y][x].cost = INT32_MAX;
 
         }
     }
 
 
-    this->path[playerLocation[dim_y]][playerLocation[dim_x]].cost = 0;
+    this->path[playerLocation[curr_y]][playerLocation[curr_x]].cost = 0;
 
     heap_init(&h, corridor_node_cmp, NULL);
 
-    heap_insert(&h,&this->path[playerLocation[dim_y]][playerLocation[dim_x]]);
+    heap_insert(&h,&this->path[playerLocation[curr_y]][playerLocation[curr_x]]);
 
     while (h.size != 0){
         prev_node = (corridor_node_t*) heap_remove_min(&h);
         for (int8_t i = -1; i < 2; ++i) {
             for (int8_t j = -1; j < 2 ; ++j) {
-                uint16_t x = j + prev_node->pos[dim_x];
-                uint16_t y = i + prev_node->pos[dim_y];
+                uint16_t x = j + prev_node->pos[curr_x];
+                uint16_t y = i + prev_node->pos[curr_y];
 
                 if (checkLocation(x,y)){
                     int weight_tmp = 0;

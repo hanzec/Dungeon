@@ -19,27 +19,35 @@ class Monster;
     }MonsterNode_t;
 
 typedef enum dim {
-    dim_x,
-    dim_y,
-    num_dims
+    curr_x,     curr_y,
+    prev_x,     prev_y
 } dim_t;
 
-typedef struct pair{
+typedef struct location{
 private:
-    int dimx;
-    int dimy;
+    struct pair {
+        int dimx = 0;
+        int dimy = 0;
+    }pair_t;
+    struct pair prev;
+    struct pair current;
 public:
     int& operator[](int i){
-        if (i == dim_x)
-            return dimx;
+        if (i == curr_x)
+            return this->current.dimx;
+        else if (i == curr_y)
+            return this->current.dimy;
+        else if (i == prev_x)
+            return this->prev.dimy;
         else
-            return dimy;
+            return this->prev.dimy;
     }
-    void operator=(struct pair pair){
-        this->dimx = pair.dimx;
-        this->dimy = pair.dimy;
+    void operator=(struct location pair){
+        this->prev = this->current;
+        this->current.dimx = pair[curr_x];
+        this->current.dimy = pair[curr_y];
     }
-}pair_t;
+}location_t;
 
 typedef enum __attribute__ ((__packed__)) terrain_type {
     ter_debug,
@@ -60,8 +68,8 @@ typedef struct map_block{
 } map_block_t;
 
 typedef struct room{
-    pair_t position;
-    pair_t size;
+    location_t position;
+    location_t size;
 }room_t;
 
 typedef enum direction{
@@ -72,11 +80,11 @@ typedef enum direction{
 
 typedef struct dungeon {
     uint8_t num_rooms;
-    pair_t pcInitLocation;
+    location_t pcInitLocation; //need to remove 
     MonsterNode * monsterArray;
     std::vector<room_t *> rooms;
-    std::vector<pair_t *> upStairs;
-    std::vector<pair_t *> downStairs;
+    std::vector<location_t> upStairs;
+    std::vector<location_t> downStairs;
     map_block_t map[DUNGEON_Y][DUNGEON_X];
 } dungeon_t;
 #endif //DUNGEON_COMS327_F19_GAMECOMMON_H

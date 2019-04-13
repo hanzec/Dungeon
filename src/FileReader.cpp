@@ -48,8 +48,8 @@ int io::FileReader::read_operation(dungeon_t *dungeon, char * path){
     fread(file_size,4,1,saved_file);
 
     //Read the npc location
-    fread(&dungeon->pcInitLocation[dim_x],1,1,saved_file);
-    fread(&dungeon->pcInitLocation[dim_y],1,1,saved_file);
+    fread(&dungeon->pcInitLocation[curr_x],1,1,saved_file);
+    fread(&dungeon->pcInitLocation[curr_y],1,1,saved_file);
 
     //read the hardness of the dungeon
     bzero(dungeon->map, sizeof(map_block_t)*DUNGEON_Y*DUNGEON_X);
@@ -73,14 +73,14 @@ int io::FileReader::read_operation(dungeon_t *dungeon, char * path){
     //read the room in current dungeon
     for (int k = 0; k < dungeon->num_rooms; ++k) {
         room_t * tmpRoom = new room_t();
-        fread((void *)tmpRoom->position[dim_x],1,1,saved_file);
-        fread((void *)tmpRoom->position[dim_y],1,1,saved_file);
-        fread((void *)tmpRoom->size[dim_x],1,1,saved_file);
-        fread((void *)tmpRoom->size[dim_y],1,1,saved_file);
+        fread((void *)tmpRoom->position[curr_x],1,1,saved_file);
+        fread((void *)tmpRoom->position[curr_y],1,1,saved_file);
+        fread((void *)tmpRoom->size[curr_x],1,1,saved_file);
+        fread((void *)tmpRoom->size[curr_y],1,1,saved_file);
 
-        for (int i = 0; i < tmpRoom->size[dim_y]; ++i) {
-            for (int j = 0; j < tmpRoom->size[dim_x]; ++j) {
-                dungeon->map[i + tmpRoom->position[dim_y]][j + tmpRoom->position[dim_x]].terrain_type = ter_floor_room;
+        for (int i = 0; i < tmpRoom->size[curr_y]; ++i) {
+            for (int j = 0; j < tmpRoom->size[curr_x]; ++j) {
+                dungeon->map[i + tmpRoom->position[curr_y]][j + tmpRoom->position[curr_x]].terrain_type = ter_floor_room;
             }
         }
         dungeon->rooms.push_back(tmpRoom);
@@ -144,8 +144,8 @@ int write_operation(dungeon_t *dungeon){
 
     //write the npc location
     //tmp set to 1st room's position
-    fwrite(&dungeon->rooms[0]->position[dim_x], 1,1,saved_file);
-    fwrite(&dungeon->rooms[0]->position[dim_y], 1,1,saved_file);
+    fwrite(&dungeon->rooms[0]->position[curr_x], 1,1,saved_file);
+    fwrite(&dungeon->rooms[0]->position[curr_y], 1,1,saved_file);
 
     //write the hardness of the dungeon
     for (int i = 0; i < DUNGEON_Y; ++i) {
@@ -160,10 +160,10 @@ int write_operation(dungeon_t *dungeon){
 
     //write the room
     for (int k = 0; k < dungeon->num_rooms; ++k) {
-        fwrite(&dungeon->rooms[k]->position[dim_x],1,1,saved_file);
-        fwrite(&dungeon->rooms[k]->position[dim_y],1,1,saved_file);
-        fwrite(&dungeon->rooms[k]->size[dim_x],1,1,saved_file);
-        fwrite(&dungeon->rooms[k]->size[dim_y],1,1,saved_file);
+        fwrite(&dungeon->rooms[k]->position[curr_x],1,1,saved_file);
+        fwrite(&dungeon->rooms[k]->position[curr_y],1,1,saved_file);
+        fwrite(&dungeon->rooms[k]->size[curr_x],1,1,saved_file);
+        fwrite(&dungeon->rooms[k]->size[curr_y],1,1,saved_file);
     }
 
     // write the number of the up stairs

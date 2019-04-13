@@ -25,7 +25,7 @@ Monster MonsterFactory::generateNewGameContant(dungeon * dungeon){
     Monster monster(tmpAttr,dungeon);
     monster.symbol = tmpAttr["SYMB"].at(0);
     monster.healthPoint = monster.diceToDouble(tmpAttr["HP"]);
-    monster.currentLocation = dungeon->rooms[rand()%dungeon->rooms.size()]->position;
+    monster.location = dungeon->rooms[rand()%dungeon->rooms.size()]->position;
     
     uint8_t tmp = 0;
     if (tmpAttr["SYMB"].find("ERRATIC"))

@@ -40,14 +40,14 @@ int monsterList::updatePanel() {
         mvwaddch(tmpWindowsPtr,i, 5, ' ');
         mvwaddch(tmpWindowsPtr,i, 6, 'x');
         mvwaddch(tmpWindowsPtr,i, 7, ':');
-        sprintf(tmp, "%d", currentNode->monster->currentLocation[dim_x]);
+        sprintf(tmp, "%d", currentNode->monster->location[curr_x]);
         mvwaddch(tmpWindowsPtr,i, 8, tmp[0]);
         mvwaddch(tmpWindowsPtr,i, 9, tmp[1]);
         mvwaddch(tmpWindowsPtr,i, 10, ' ');
 
         mvwaddch(tmpWindowsPtr,i, 11, 'y');
         mvwaddch(tmpWindowsPtr,i, 12, ':');
-        sprintf(tmp, "%d", currentNode->monster->currentLocation[dim_y]);
+        sprintf(tmp, "%d", currentNode->monster->location[curr_y]);
         mvwaddch(tmpWindowsPtr,i, 13, tmp[0]);
         mvwaddch(tmpWindowsPtr,i, 14, tmp[1]);
         mvwaddch(tmpWindowsPtr,i, 15, ' ');

@@ -105,14 +105,10 @@ void Display::setTeleportStatus(bool flag){
     ((dungeonWindow *)windowStack[dungeonScreen_win])->setTeleportStatus(flag);
 }
 
-void Display::updatePlayerLocation(pair_t location, pair_t prevLocation) {
-    ((dungeonWindow *)windowStack[dungeonScreen_win])->updatePlayer(location,prevLocation);
+void Display::updatePlayer(location_t location) {
+    ((dungeonWindow *)windowStack[dungeonScreen_win])->updatePlayer(location);
 }
 
-void Display::updateMonsterLocation(pair_t location, pair_t prevLocation, int color, char symbol){
-    ((dungeonWindow *)windowStack[dungeonScreen_win])->updateGameItem(location,prevLocation,color,symbol);
-}
-
-void Display::updateItemLocation(pair_t location, pair_t prevLocation, int color, char symbol){
-    ((dungeonWindow *)windowStack[dungeonScreen_win])->updateGameItem(location,prevLocation,color,symbol);
+void Display::updateGameContent(location_t location, int color, char symbol){
+    ((dungeonWindow *)windowStack[dungeonScreen_win])->updateGameContent(location,color,symbol);
 }

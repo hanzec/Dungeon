@@ -28,8 +28,6 @@
         "editor.quickSuggestions": true
     },
     
-    "C_Cpp.intelliSenseEngineFallback": "Disabled",
-    
     //Use ZSH as the integrated terminal 
     "terminal.integrated.shell.osx": "zsh",
 

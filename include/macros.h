@@ -16,9 +16,9 @@
 #define DUNGEON_VERSION        0
 #define MAX_ROOMS              10
 #define MONSTER_RANGE           3
-#define mappair(pair) (d->map[pair[dim_y]][pair[dim_x]].terrain_type)
+#define mappair(pair) (d->map[pair[curr_y]][pair[curr_x]].terrain_type)
 #define mapxy(x, y) (d->map[y][x].terrain_type)
-#define hardnesspair(pair) (d->map[pair[dim_y]][pair[dim_x]].hardness)
+#define hardnesspair(pair) (d->map[pair[curr_y]][pair[curr_x]].hardness)
 #define hardnessxy(x, y) (d->map[y][x].hardness)
 #define DUNGEON_KEY_CONF_LOC "~/.rlg327/keyBind.conf"
 

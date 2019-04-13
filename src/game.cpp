@@ -1,7 +1,6 @@
 //
 // Created by chen_ on 2019/1/31.
 //
-#include <cstdlib>
 #include <strings.h>
 #include <ncurses.h>
 #include <vector>
@@ -53,8 +52,8 @@ void game::startGame() {
     while(tmpList->monster != nullptr){
         Item item = itemFactory->generateNewGameContant(currentDungeon);
         Monster * monster = tmpList->monster;
-        Display::updateMonsterLocation(monster->currentLocation,monster->prevLocation,monster->color,monster->symbol);
-        Display::updateItemLocation(item.currentLocation,item.prevLocation,item.color,item.symbol);
+        Display::updateGameContent(item.location,item.color,item.symbol);
+        Display::updateGameContent(monster->location,monster->color,monster->symbol);
         tmpList = tmpList->nextNode;
     }
     
@@ -64,14 +63,14 @@ void game::startGame() {
     while (flag) {
         while (time >= monsterControllerPtr->seeMinMonsterTime()) {
             Monster *monster = monsterControllerPtr->popMinMonster();
-            monster->moveMonster(pcPtr.currentLocation);
-            if (monster->meetWithPlayer(pcPtr.currentLocation)){
+            monster->moveMonster(pcPtr.location);
+            if (monster->meetWithPlayer(pcPtr.location)){
                 flag = false;
                 close_dungeon(1);
                 return;
             }
             monsterControllerPtr->addSingleMonster(*monster, (uint32_t) (time + 1000 / monster->getSpeed()));
-            Display::updateMonsterLocation(monster->currentLocation,monster->prevLocation,monster->color,monster->symbol);
+            Display::updateGameContent(monster->location,monster->color,monster->symbol);
         }
 
         reselect:
@@ -81,22 +80,22 @@ void game::startGame() {
             case KEY_UP:
                 if (pcPtr.movePC(Upper))
                     goto reselect;
-                Display::updatePlayerLocation(pcPtr.currentLocation,pcPtr.prevLocation);
+                Display::updatePlayer(pcPtr.location);
                 break;
             case KEY_DOWN:
                 if (pcPtr.movePC(Down))
                     goto reselect;
-                Display::updatePlayerLocation(pcPtr.currentLocation,pcPtr.prevLocation);
+                Display::updatePlayer(pcPtr.location);
                 break;
             case KEY_RIGHT:
                 if (pcPtr.movePC(Right))
                     goto reselect;
-                Display::updatePlayerLocation(pcPtr.currentLocation,pcPtr.prevLocation);
+                Display::updatePlayer(pcPtr.location);
                 break;
             case KEY_LEFT:
                 if (pcPtr.movePC(Left))
                     goto reselect;
-                Display::updatePlayerLocation(pcPtr.currentLocation,pcPtr.prevLocation);
+                Display::updatePlayer(pcPtr.location);
                 break;
             case 'm':
                 Display::showMonsterList();
@@ -110,19 +109,17 @@ void game::startGame() {
                 teleportFlag = ! teleportFlag;
                 break;
             case 'r':
-                pair_t location;
+                location_t location;
                 if (teleportFlag) {
                     Display::setTeleportStatus(!teleportFlag);
                     teleportFlag = ! teleportFlag;
 
                     do{
-                    location[dim_x] = rand()%DUNGEON_X;
-                    location[dim_y] = rand()%DUNGEON_Y;
+                    location[curr_x] = rand()%DUNGEON_X;
+                    location[curr_y] = rand()%DUNGEON_Y;
                     }while(pcPtr.setPcLocation(location) == 1);
-                    Display::updatePlayerLocation(pcPtr.currentLocation,pcPtr.prevLocation);
+                    Display::updatePlayer(pcPtr.location);
                 }
-                goto reselect;
-            default:
                 goto reselect;
         }
         // if (currentDungeon->map[pcPtr.currentLocation[dim_y]][pcPtr.currentLocation[dim_x]].terrain_type ==

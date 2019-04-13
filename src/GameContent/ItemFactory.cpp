@@ -1,8 +1,9 @@
-#include "../../include/GameContant/ItemFactory.h"
 #include <vector>
+#include <cstdlib>
 #include <unordered_map>
 #include "../../include/GameCommon.h"
 #include "../../include/GameContant/Item.h"
+#include "../../include/GameContant/ItemFactory.h"
 
 ItemFactory::ItemFactory(std::vector<std::unordered_map<std::string, std::string> > attributeList){
     int index = 0;
@@ -56,8 +57,8 @@ Item ItemFactory::generateNewGameContant(dungeon * dungeon){
        item.symbol = '&'; 
     
     int randRoam = rand()%(dungeon->rooms.size() - 1);
-    item.currentLocation[dim_x] = dungeon->rooms[randRoam]->position[dim_x] + rand()%dungeon->rooms[randRoam]->size[dim_x];
-    item.currentLocation[dim_y] = dungeon->rooms[randRoam]->position[dim_y] + rand()%dungeon->rooms[randRoam]->size[dim_y];
+    item.location[curr_x] = dungeon->rooms[randRoam]->position[curr_x] + rand()%dungeon->rooms[randRoam]->size[curr_x];
+    item.location[curr_y] = dungeon->rooms[randRoam]->position[curr_y] + rand()%dungeon->rooms[randRoam]->size[curr_y];
 
     return item;
 }

@@ -26,6 +26,8 @@ build_clang:
     - make
 
 update_changelog:
+  tags:
+    - changelog
   only:
     - master
   stage: changelog

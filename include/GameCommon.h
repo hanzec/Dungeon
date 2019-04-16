@@ -39,7 +39,7 @@ public:
         else if (i == curr_y)
             return this->current.dimy;
         else if (i == prev_x)
-            return this->prev.dimy;
+            return this->prev.dimx;
         else
             return this->prev.dimy;
     }

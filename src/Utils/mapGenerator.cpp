@@ -2,21 +2,21 @@
 // Created by chen_ on 2019/1/31.
 //
 
-#include <time.h>
-#include <limits.h>
+#include <ctime>
+#include <climits>
 #include "../../include/GameCommon.h"
-#include "../../include/utils/mapGenerator.h"
-#include "../../include/utils/data_stucture/heap.h"
+#include "../../include/Utils/mapGenerator.h"
+#include "../../include/Utils/data_stucture/heap.h"
 
 static uint32_t in_room(dungeon_t *d, int16_t y, int16_t x)
 {
     int i;
 
     for (i = 0; i < d->num_rooms; i++) {
-        if ((x >= d->rooms[i]->position[curr_x]) &&
-            (x < (d->rooms[i]->position[curr_x] + d->rooms[i]->size[curr_x])) &&
-            (y >= d->rooms[i]->position[curr_y]) &&
-            (y < (d->rooms[i]->position[curr_y] + d->rooms[i]->size[curr_y]))) {
+        if ((x >= d->rooms.at(i).position[curr_x]) &&
+            (x < (d->rooms.at(i).position[curr_x] + d->rooms.at(i).size[curr_x])) &&
+            (y >= d->rooms.at(i).position[curr_y]) &&
+            (y < (d->rooms.at(i).position[curr_y] + d->rooms.at(i).size[curr_y]))) {
             return 1;
         }
     }
@@ -272,10 +272,10 @@ static int create_cycle(dungeon_t *d)
 
     for (i = max = 0; i < d->num_rooms - 1; i++) {
         for (j = i + 1; j < d->num_rooms; j++) {
-            tmp = (((d->rooms[i]->position[curr_x] - d->rooms[j]->position[curr_x])  *
-                    (d->rooms[i]->position[curr_x] - d->rooms[j]->position[curr_x])) +
-                   ((d->rooms[i]->position[curr_y] - d->rooms[j]->position[curr_y])  *
-                    (d->rooms[i]->position[curr_y] - d->rooms[j]->position[curr_y])));
+            tmp = (((d->rooms.at(i).position[curr_x] - d->rooms.at(j).position[curr_x])  *
+                    (d->rooms.at(i).position[curr_x] - d->rooms.at(j).position[curr_x])) +
+                   ((d->rooms.at(i).position[curr_y] - d->rooms.at(j).position[curr_y])  *
+                    (d->rooms.at(i).position[curr_y] - d->rooms.at(j).position[curr_y])));
             if (tmp > max) {
                 max = tmp;
                 p = i;
@@ -286,18 +286,18 @@ static int create_cycle(dungeon_t *d)
 
     /* Can't simply call connect_two_rooms() because it doesn't *
      * use inverse hardnesses, so duplicate it here.            */
-    e1[curr_y] = rand_range(d->rooms[p]->position[curr_y],
-                           (d->rooms[p]->position[curr_y] +
-                            d->rooms[p]->size[curr_y] - 1));
-    e1[curr_x] = rand_range(d->rooms[p]->position[curr_x],
-                           (d->rooms[p]->position[curr_x] +
-                            d->rooms[p]->size[curr_x] - 1));
-    e2[curr_y] = rand_range(d->rooms[p]->position[curr_y],
-                           (d->rooms[p]->position[curr_y] +
-                            d->rooms[p]->size[curr_y] - 1));
-    e2[curr_x] = rand_range(d->rooms[p]->position[curr_x],
-                           (d->rooms[p]->position[curr_x] +
-                            d->rooms[p]->size[curr_x] - 1));
+    e1[curr_y] = rand_range(d->rooms.at(p).position[curr_y],
+                           (d->rooms.at(p).position[curr_y] +
+                            d->rooms.at(p).size[curr_y] - 1));
+    e1[curr_x] = rand_range(d->rooms.at(p).position[curr_x],
+                           (d->rooms.at(p).position[curr_x] +
+                            d->rooms.at(p).size[curr_x] - 1));
+    e2[curr_y] = rand_range(d->rooms.at(p).position[curr_y],
+                           (d->rooms.at(p).position[curr_y] +
+                            d->rooms.at(p).size[curr_y] - 1));
+    e2[curr_x] = rand_range(d->rooms.at(p).position[curr_x],
+                           (d->rooms.at(p).position[curr_x] +
+                            d->rooms.at(p).size[curr_x] - 1));
 
     dijkstra_corridor_inv(d, e1, e2);
 
@@ -309,7 +309,7 @@ int mapGenerator::connect_rooms(dungeon_t *d)
     uint32_t i;
 
     for (i = 1; i < d->num_rooms; i++) {
-        connect_two_rooms(d, d->rooms[i - 1], d->rooms[i]);
+        connect_two_rooms(d, &d->rooms.at(i -1 ), &d->rooms.at(i));
     }
 
     create_cycle(d);
@@ -496,7 +496,7 @@ static int place_rooms(dungeon_t *d)
     for (success = 0; !success; ) {
         success = 1;
         for (i = 0; success && i < d->num_rooms; i++) {
-            r = d->rooms[i];
+            r = &d->rooms.at(i);
             r->position[curr_x] = 1 + rand() % (DUNGEON_X - 2 - r->size[curr_x]);
             r->position[curr_y] = 1 + rand() % (DUNGEON_Y - 2 - r->size[curr_y]);
             for (p[curr_y] = r->position[curr_y] - 1;
@@ -558,14 +558,14 @@ static int make_rooms(dungeon_t *d)
     d->num_rooms = i;
 
     for (i = 0; i < d->num_rooms; i++) {
-        room_t * tmpRoom = new room_t();
-        tmpRoom->size[curr_x] = ROOM_MIN_X;
-        tmpRoom->size[curr_y] = ROOM_MIN_Y;
-        while (rand_under(3, 5) && tmpRoom->size[curr_x] < ROOM_MAX_X) {
-            tmpRoom->size[curr_x]++;
+        room_t tmpRoom;
+        tmpRoom.size[curr_x] = ROOM_MIN_X;
+        tmpRoom.size[curr_y] = ROOM_MIN_Y;
+        while (rand_under(3, 5) && tmpRoom.size[curr_x] < ROOM_MAX_X) {
+            tmpRoom.size[curr_x]++;
         }
-        while (rand_under(3, 5) && tmpRoom->size[curr_y] < ROOM_MAX_Y) {
-            tmpRoom->size[curr_y]++;
+        while (rand_under(3, 5) && tmpRoom.size[curr_y] < ROOM_MAX_Y) {
+            tmpRoom.size[curr_y]++;
         }
         d->rooms.push_back(tmpRoom);
     }

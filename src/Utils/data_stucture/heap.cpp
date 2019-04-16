@@ -1,5 +1,5 @@
-#include <assert.h>
-#include "../../../include/utils/data_stucture/heap.h"
+#include <cassert>
+#include "../../../include/Utils/data_stucture/heap.h"
 
 void print_heap_node(heap_node_t *n, unsigned indent,
                      char *(*print)(const void *v))
@@ -93,7 +93,7 @@ heap_node_t *heap_insert(heap_t *h, void *v)
 {
   heap_node_t *n;
 
-  assert(n = calloc(1, sizeof (*n)));
+  assert(n = (heap_node_t *)calloc(1, sizeof (*n)));
   n->datum = v;
 
   if (h->min) {

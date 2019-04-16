@@ -1,8 +1,8 @@
-#include <time.h>
-#include <math.h>
+#include <ctime>
+#include <cmath>
 #include <unordered_map>
 #include "../../include/GameContant/Monster.h"
-#include "../../include/utils/data_stucture/heap.h"
+#include "../../include/Utils/data_stucture/heap.h"
 
 #define getCurrentHardness this->dungeon->map[this->location[curr_y]][this->location[curr_x]].hardness
 #define nextMonster(monster) ((corridor_node_t *) monster->path[this->location[curr_y]][this->location[curr_x]].prev_node)

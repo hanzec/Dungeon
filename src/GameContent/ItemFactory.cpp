@@ -57,8 +57,8 @@ Item ItemFactory::generateNewGameContant(dungeon * dungeon){
        item.symbol = '&'; 
     
     int randRoam = rand()%(dungeon->rooms.size() - 1);
-    item.location[curr_x] = dungeon->rooms[randRoam]->position[curr_x] + rand()%dungeon->rooms[randRoam]->size[curr_x];
-    item.location[curr_y] = dungeon->rooms[randRoam]->position[curr_y] + rand()%dungeon->rooms[randRoam]->size[curr_y];
+    item.location[curr_x] = dungeon->rooms.at(randRoam).position[curr_x] + rand()%dungeon->rooms.at(randRoam).size[curr_x];
+    item.location[curr_y] = dungeon->rooms.at(randRoam).position[curr_y] + rand()%dungeon->rooms.at(randRoam).size[curr_y];
 
     return item;
 }

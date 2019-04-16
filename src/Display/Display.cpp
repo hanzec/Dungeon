@@ -57,7 +57,7 @@ int Display::initDisplaySystem(dungeon_t *dungeon) {
 
     //initial monster list panel
     // FIXME monsterList class as abstract class
-    monsterListPtr = new monsterList(dungeon->monsterArray);
+    monsterListPtr = new monsterList(&dungeon->monsters);
     PANEL * tmpPanel = new_panel((windowStack[dungeonScreen_win])->windowPtr);
 
     // set up monsterList
@@ -94,7 +94,7 @@ int Display::showMonsterList() {
 }
 
 void Display::updateDungeonMap() {
-    monsterListPtr->updateMonsterNode(Display::dungeonPtr->monsterArray);
+    monsterListPtr->updateMonsterNode(&Display::dungeonPtr->monsters);
 }
 
 void Display::setFOWStatus(bool flag){

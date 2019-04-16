@@ -10,7 +10,7 @@
 #include <vector>
 #include <unordered_map>
 #include "GameContent.h"
-#include "../utils/data_stucture/heap.h"
+#include "../Utils/data_stucture/heap.h"
 
 
 typedef struct corridor_node {
@@ -26,9 +26,9 @@ class Monster : public GameContent{
 private:
     dungeon_t * dungeon;
 public:
-    int healthPoint;
     uint8_t characteristics;
     location_t lastPcLocation ;
+    int healthPoint, nextMoveTime;
     corridor_node_t path[DUNGEON_Y][DUNGEON_X];
     int moveMonster(location_t playerLocation);
     bool meetWithPlayer(location_t playerLocation);

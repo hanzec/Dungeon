@@ -14,7 +14,7 @@
 #include <unordered_map>
 #include <string> // pulls in declaration for strlen.
 #include "../include/FileReader.h"
-#include "../include/utils/crossplatform_header/endian.h"
+#include "../include/Utils/crossplatform_header/endian.h"
 
 int io::FileReader::read_operation(dungeon_t *dungeon, char * path){
     uint16_t tmp = 0;
@@ -83,7 +83,7 @@ int io::FileReader::read_operation(dungeon_t *dungeon, char * path){
                 dungeon->map[i + tmpRoom->position[curr_y]][j + tmpRoom->position[curr_x]].terrain_type = ter_floor_room;
             }
         }
-        dungeon->rooms.push_back(tmpRoom);
+        dungeon->rooms.push_back(*tmpRoom);
     }
 
     // Read the number of the up stairs
@@ -142,10 +142,10 @@ int write_operation(dungeon_t *dungeon){
     tmp = htobe32(1704 + dungeon->num_rooms * 4 + 4 + dungeon->downStairs.size() * 2 + dungeon->upStairs.size() * 2);
     fwrite(&tmp, sizeof(tmp),1,saved_file);
 
-    //write the npc location
-    //tmp set to 1st room's position
-    fwrite(&dungeon->rooms[0]->position[curr_x], 1,1,saved_file);
-    fwrite(&dungeon->rooms[0]->position[curr_y], 1,1,saved_file);
+    // //write the npc location
+    // //tmp set to 1st room's position
+    // fwrite(&dungeon->rooms.get()[0]->position[curr_x], 1,1,saved_file);
+    // fwrite(&dungeon->rooms.get()[0]->position[curr_y], 1,1,saved_file);
 
     //write the hardness of the dungeon
     for (int i = 0; i < DUNGEON_Y; ++i) {
@@ -158,13 +158,13 @@ int write_operation(dungeon_t *dungeon){
     tmp = htobe16(dungeon->num_rooms);
     fwrite(&tmp, 2,1,saved_file);
 
-    //write the room
-    for (int k = 0; k < dungeon->num_rooms; ++k) {
-        fwrite(&dungeon->rooms[k]->position[curr_x],1,1,saved_file);
-        fwrite(&dungeon->rooms[k]->position[curr_y],1,1,saved_file);
-        fwrite(&dungeon->rooms[k]->size[curr_x],1,1,saved_file);
-        fwrite(&dungeon->rooms[k]->size[curr_y],1,1,saved_file);
-    }
+    // //write the room
+    // for (int k = 0; k < dungeon->num_rooms; ++k) {
+    //     fwrite(&dungeon->rooms[k]->position[curr_x],1,1,saved_file);
+    //     fwrite(&dungeon->rooms[k]->position[curr_y],1,1,saved_file);
+    //     fwrite(&dungeon->rooms[k]->size[curr_x],1,1,saved_file);
+    //     fwrite(&dungeon->rooms[k]->size[curr_y],1,1,saved_file);
+    // }
 
     // write the number of the up stairs
     tmp = htobe16(dungeon->upStairs.size());

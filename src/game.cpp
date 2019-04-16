@@ -76,7 +76,9 @@ void game::startGame() {
 
         reselect:
 
-        time += pcPtr.getSpeed();
+        if (!teleportFlag)
+            time += pcPtr.getSpeed();
+        
         switch (getch()) {
             case KEY_UP:
                 if (pcPtr.movePC(Upper))
@@ -114,7 +116,6 @@ void game::startGame() {
                 if (teleportFlag) {
                     Display::setTeleportStatus(!teleportFlag);
                     teleportFlag = ! teleportFlag;
-
                     do{
                     location[curr_x] = rand()%DUNGEON_X;
                     location[curr_y] = rand()%DUNGEON_Y;

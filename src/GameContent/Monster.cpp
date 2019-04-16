@@ -148,8 +148,7 @@ static int32_t corridor_node_cmp(const void *key, const void *with) {
     return ((corridor_node_t *) key)->cost - ((corridor_node_t *) with)->cost;
 }
 
-void Monster::dijkstra_no_tunnelling(location_t playerLocation)
-{
+void Monster::dijkstra_no_tunnelling(location_t playerLocation){
 
     heap_t h;
     corridor_node_t *prev_node;
@@ -192,8 +191,7 @@ void Monster::dijkstra_no_tunnelling(location_t playerLocation)
     heap_delete(&h);
 }
 
-void Monster::dijkstra_tunnelling(location_t playerLocation)
-{
+void Monster::dijkstra_tunnelling(location_t playerLocation){
 
     heap_t h;
     corridor_node_t *prev_node;

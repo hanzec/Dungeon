@@ -9,65 +9,45 @@
 #include "../../../include/Display/displayCommon.h"
 #include "../../../include/Display/panel/monsterList.h"
 
-monsterList::monsterList(MonsterNode * monsterNode) {
+monsterList::monsterList(std::list<Monster> * monsters) {
     // todo need to change instead of hard code
-    monsterNodePtr = monsterNode;
-    this->panel = new_panel(newwin(3 + this->getNumberOfMonster(), 38,4,20));
+    this->monstersPtr = monsters;
+    this->panel = new_panel(newwin(3 + this->monstersPtr->size(), 38,4,20));
     wbkgd(panel_window(this->panel),COLOR_PAIR(PAIR_PANEL));
 }
 
-int monsterList::updateMonsterNode(MonsterNode *monsterNode) {
-    this->monsterNodePtr = monsterNode;
-    return 0;
-}
-
 int monsterList::updatePanel() {
-    int x, y;
-    MonsterNode * currentNode = this->monsterNodePtr->nextNode;
-    WINDOW * tmpWindowsPtr = panel_window(this->panel);
+    int x, y, i = 0;
 
-    int numMonster = getNumberOfMonster();
+    wclear(panel_window(this->panel));
+    box(panel_window(this->panel), 0 , 0);
+    mvwprintw(panel_window(this->panel),0,12,"| Monster List |");
 
-    wclear(tmpWindowsPtr);
-    box(tmpWindowsPtr, 0 , 0);
-
-    mvwprintw(tmpWindowsPtr,0,12,"| Monster List |");
     //todo add number index of monster(c++)
-    for (int i = 1; i < numMonster; ++i) {
+    for (auto K : *this->monstersPtr) {
         char tmp[3];
-        mvwaddch(tmpWindowsPtr,i, 3, '#');
-        mvwaddch(tmpWindowsPtr,i, 4, ' ');
-        mvwaddch(tmpWindowsPtr,i, 5, ' ');
-        mvwaddch(tmpWindowsPtr,i, 6, 'x');
-        mvwaddch(tmpWindowsPtr,i, 7, ':');
-        sprintf(tmp, "%d", currentNode->monster->location[curr_x]);
-        mvwaddch(tmpWindowsPtr,i, 8, tmp[0]);
-        mvwaddch(tmpWindowsPtr,i, 9, tmp[1]);
-        mvwaddch(tmpWindowsPtr,i, 10, ' ');
+        mvwaddch(panel_window(this->panel),i, 3, '#');
+        mvwaddch(panel_window(this->panel),i, 4, ' ');
+        mvwaddch(panel_window(this->panel),i, 5, ' ');
+        mvwaddch(panel_window(this->panel),i, 6, 'x');
+        mvwaddch(panel_window(this->panel),i, 7, ':');
+        sprintf(tmp, "%d", K.location[curr_x]);
+        mvwaddch(panel_window(this->panel),i, 8, tmp[0]);
+        mvwaddch(panel_window(this->panel),i, 9, tmp[1]);
+        mvwaddch(panel_window(this->panel),i, 10, ' ');
 
-        mvwaddch(tmpWindowsPtr,i, 11, 'y');
-        mvwaddch(tmpWindowsPtr,i, 12, ':');
-        sprintf(tmp, "%d", currentNode->monster->location[curr_y]);
-        mvwaddch(tmpWindowsPtr,i, 13, tmp[0]);
-        mvwaddch(tmpWindowsPtr,i, 14, tmp[1]);
-        mvwaddch(tmpWindowsPtr,i, 15, ' ');
+        mvwaddch(panel_window(this->panel),i, 11, 'y');
+        mvwaddch(panel_window(this->panel),i, 12, ':');
+        sprintf(tmp, "%d", K.location[curr_y]);
+        mvwaddch(panel_window(this->panel),i, 13, tmp[0]);
+        mvwaddch(panel_window(this->panel),i, 14, tmp[1]);
+        mvwaddch(panel_window(this->panel),i, 15, ' ');
 
-        currentNode = currentNode->nextNode;
+        i++;
     }
 
-    getyx(tmpWindowsPtr,y,x);
-    mvwprintw(tmpWindowsPtr,y + 1,5,"Press ANY key to return Game!");
-    return 0;
+    getyx(panel_window(this->panel),y,x);
+    mvwprintw(panel_window(this->panel),y + 1,5,"Press ANY key to return Game!");
 }
 
-int monsterList::getNumberOfMonster(){
-    int number = 0;
-    MonsterNode * tmp = this->monsterNodePtr->nextNode;
-
-    while (tmp->nextNode->monster != nullptr){
-        number += 1;
-        tmp = tmp->nextNode;
-    }
-    return number - 1;
-
-}
+void monsterList::updateMonsterNode(std::list<Monster> * monsters) { this->monstersPtr = monsters; }

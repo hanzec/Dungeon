@@ -5,18 +5,19 @@
 #ifndef DUNGEON_COMS327_F19_GAMECOMMON_H
 #define DUNGEON_COMS327_F19_GAMECOMMON_H
 
+#include <list>
 #include <vector>
-#include <stdint.h>
+#include <cstdint>
 #include "macros.h"
 
 class Monster;
 
-    typedef struct MonsterNode{
-        int time;
-        Monster * monster;
-        struct MonsterNode * nextNode;
-        struct MonsterNode * prevNode;
-    }MonsterNode_t;
+typedef struct MonsterNode{
+    int time;
+    Monster * monster;
+    struct MonsterNode * nextNode;
+    struct MonsterNode * prevNode;
+}MonsterNode_t;
 
 typedef enum dim {
     curr_x,     curr_y,
@@ -78,13 +79,17 @@ typedef enum direction{
     DownLeft,   DownRight,
 }direction_t;
 
+
+
 typedef struct dungeon {
     uint8_t num_rooms;
     location_t pcInitLocation; //need to remove 
-    MonsterNode * monsterArray;
-    std::vector<room_t *> rooms;
+    map_block_t map[DUNGEON_Y][DUNGEON_X];
+
+    std::vector<room_t> rooms;
+    std::list<Monster> monsters;
     std::vector<location_t> upStairs;
     std::vector<location_t> downStairs;
-    map_block_t map[DUNGEON_Y][DUNGEON_X];
 } dungeon_t;
+
 #endif //DUNGEON_COMS327_F19_GAMECOMMON_H

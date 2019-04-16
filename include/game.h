@@ -3,7 +3,6 @@
 //
 #include "Player.h"
 #include "GameCommon.h"
-#include "utils/MonsterController.h"
 
 #ifndef DUNGEON_V1_01_GAME_H
 #define DUNGEON_V1_01_GAME_H
@@ -17,7 +16,6 @@ private:
     static Player pcPtr;
     static void newDungeonLevel();
     static void close_dungeon(int mode);
-    static monsterController * monsterControllerPtr;
 };
 
 

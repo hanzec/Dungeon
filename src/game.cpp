@@ -10,10 +10,13 @@
 #include "../include/GameCommon.h"
 #include "../include/FileReader.h"
 #include "../include/Display/Display.h"
-#include "../include/utils/mapGenerator.h"
+#include "../include/Utils/mapGenerator.h"
+#include "../include/Utils/MonsterListUtils.h"
 #include "../include/GameContant/ItemFactory.h"
 #include "../include/GameContant/MonsterFactory.h"
 
+#define headMonster currentMonsterList.begin()
+#define currentMonsterList currentDungeon->monsters
 //todo current status
 //todo multiple stair support
 
@@ -22,7 +25,6 @@ int currentLevel = 0;
 std::vector<dungeon *> dungeonMap;
 ItemFactory * itemFactory;
 MonsterFactory * monsterFactoryPtr;
-monsterController * game::monsterControllerPtr;
 
 void game::close_dungeon(int mode){
     switch (mode)
@@ -47,30 +49,29 @@ void game::startGame() {
     Display::initDisplayEnv();
     dungeon_t *currentDungeon = dungeonMap[0];
     Display::initDisplaySystem(currentDungeon);
+
+    //upfate ALL Item
+    for (auto V : currentMonsterList)
+        Display::updateGameContent(V.location,V.color,V.symbol);
+
     //update ALL Monster
-    MonsterNode_t * tmpList = currentDungeon->monsterArray->nextNode;
-    while(tmpList->monster != nullptr){
-        Item item = itemFactory->generateNewGameContant(currentDungeon);
-        Monster * monster = tmpList->monster;
-        Display::updateGameContent(item.location,item.color,item.symbol);
-        Display::updateGameContent(monster->location,monster->color,monster->symbol);
-        tmpList = tmpList->nextNode;
-    }
+    for(auto V : currentMonsterList)
+        Display::updateGameContent(V.location,V.color,V.symbol);
     
-
-
-
     while (flag) {
-        while (time >= monsterControllerPtr->seeMinMonsterTime()) {
-            Monster *monster = monsterControllerPtr->popMinMonster();
-            monster->moveMonster(pcPtr.location);
-            if (monster->meetWithPlayer(pcPtr.location)){
+        while (time >= headMonster->nextMoveTime) {
+            //TODO may have bug here
+            Monster tmpMonster = *headMonster;
+            tmpMonster.moveMonster(pcPtr.location);
+            if (tmpMonster.meetWithPlayer(pcPtr.location)){
                 flag = false;
                 close_dungeon(1);
                 return;
             }
-            monsterControllerPtr->addSingleMonster(*monster, (uint32_t) (time + 1000 / monster->getSpeed()));
-            Display::updateGameContent(monster->location,monster->color,monster->symbol);
+            tmpMonster.nextMoveTime = time + tmpMonster.getSpeed();
+            MonsterListUtils::removeMinMonster(&currentMonsterList);
+            MonsterListUtils::insertMonster(&currentMonsterList,tmpMonster);
+            Display::updateGameContent(tmpMonster.location,tmpMonster.color,tmpMonster.symbol);
         }
 
         reselect:
@@ -175,10 +176,6 @@ void game::newGame(){
     //initial PC
     pcPtr = Player(dungeon);
 
-    //initial Monster Controller
-    monsterControllerPtr = new monsterController(dungeon);
-
-
     //inital ItemFactory
     itemFactory = new ItemFactory(io::FileReader::readConfigureFile("/.rlg327/object_desc.txt"));
 
@@ -187,16 +184,13 @@ void game::newGame(){
 
     //add 10 monster to dungeon
     for(int i = 0; i < 10; i++)
-        monsterControllerPtr->addSingleMonster(monsterFactoryPtr->generateNewGameContant(dungeon),0);
+        MonsterListUtils::insertMonster(&dungeon->monsters, monsterFactoryPtr->generateNewGameContant(dungeon));
     
-    dungeon->monsterArray = monsterControllerPtr->currentNode;
-
     //initial dungeon array
     dungeonMap.push_back(dungeon);
 
     //set pc location to room[0]
-    pcPtr.setPcLocation(dungeon->rooms[0]->position);
-
+    pcPtr.setPcLocation(dungeon->rooms[0].position);
 
     //start game
     game::startGame();

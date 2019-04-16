@@ -93,6 +93,7 @@
         "fstream": "cpp",
         "deque": "cpp",
         "queue": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "list": "cpp"
     },    
 }

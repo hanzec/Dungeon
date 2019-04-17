@@ -64,11 +64,11 @@ typedef enum __attribute__ ((__packed__)) terrain_type {
 } terrain_type_t;
 
 typedef struct map_block{
-    bool visable;
     uint8_t hardness;
-    std::shared_ptr<Item> item;
+    Monster * monster;
+    std::unique_ptr<Item> item;
     terrain_type_t terrain_type;
-    std::shared_ptr<Monster> monster;
+    bool visable, isMonsterInit = false, isItemInit = false;
 } map_block_t;
 
 typedef struct room{
@@ -90,8 +90,8 @@ typedef struct dungeon {
     std::vector<room_t> rooms;
     std::vector<location_t> upStairs;
     std::vector<location_t> downStairs;
-    std::list<std::shared_ptr<Item> > items;
-    std::list<std::shared_ptr<Monster> > monsters;
+    std::list<Item> items;
+    std::list<Monster * > monsters;
 } dungeon_t;
 
 #endif //DUNGEON_COMS327_F19_GAMECOMMON_H

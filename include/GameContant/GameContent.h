@@ -11,7 +11,6 @@ protected:
 public:
     char symbol;
     int color,range;
-    location_t location;
     string description, name,speed, damage;
 
     int itemID;

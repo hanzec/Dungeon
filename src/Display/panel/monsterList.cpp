@@ -9,7 +9,7 @@
 #include "../../../include/Display/displayCommon.h"
 #include "../../../include/Display/panel/monsterList.h"
 
-monsterList::monsterList(std::list<std::shared_ptr<Monster> > * monsters) {
+monsterList::monsterList(std::list<Monster * > * monsters) {
     // todo need to change instead of hard code
     this->monstersPtr = monsters;
     this->panel = new_panel(newwin(3 + this->monstersPtr->size(), 38,4,20));
@@ -50,4 +50,4 @@ int monsterList::updatePanel() {
     mvwprintw(panel_window(this->panel),y + 1,5,"Press ANY key to return Game!");
 }
 
-void monsterList::updateMonsterNode(std::list<std::shared_ptr<Monster> > * monsters) { this->monstersPtr = monsters; }
+void monsterList::updateMonsterNode(std::list<Monster * > * monsters) { this->monstersPtr = monsters; }

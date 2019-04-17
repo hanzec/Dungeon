@@ -21,6 +21,8 @@ class Monster : public GameContent{
 private:
     dungeon_t * dungeon;
 public:
+    location_t location;
+    
     uint8_t characteristics;
     location_t lastPcLocation ;
     int healthPoint, nextMoveTime;

@@ -12,11 +12,11 @@
 
 class monsterList : public gamePanel {
 private:
-    std::list<std::shared_ptr<Monster> > * monstersPtr;
+    std::list<Monster * > * monstersPtr;
 public:
     int updatePanel();
-    explicit monsterList(std::list<std::shared_ptr<Monster> > * monsters);
-    void updateMonsterNode(std::list<std::shared_ptr<Monster> > * monsters);
+    explicit monsterList(std::list<Monster * > * monsters);
+    void updateMonsterNode(std::list<Monster * > * monsters);
 };
 
 

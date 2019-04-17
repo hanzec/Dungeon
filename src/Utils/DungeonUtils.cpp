@@ -1,9 +1,9 @@
 #include <queue>
 #include "../../include/Utils/DungeonUtils.h"
-
-void DungeonUtils::OrderedList::push(std::list<std::shared_ptr<Monster> > * monsters, std::shared_ptr<Monster> monster){
+#include "../../include/GameContant/Monster.h"
+void DungeonUtils::OrderedList::push(std::list<Monster * > * monsters, Monster * monster){
     for ( auto i = monsters->begin(); i != monsters->end(); i++){
-        if(i->get()->nextMoveTime > monster->nextMoveTime){
+        if((*i)->nextMoveTime > monster->nextMoveTime){
             monsters->insert(i,monster);
             return;
         }
@@ -11,8 +11,8 @@ void DungeonUtils::OrderedList::push(std::list<std::shared_ptr<Monster> > * mons
     monsters->push_back(monster);
 }
 
-std::shared_ptr<Monster> DungeonUtils::OrderedList::pop_min(std::list<std::shared_ptr<Monster> > * monsters){ 
-    std::shared_ptr<Monster> result = monsters->front();
+Monster * DungeonUtils::OrderedList::pop_min(std::list<Monster * > * monsters){ 
+    Monster * result = monsters->front();
     monsters->pop_front();
     return result;
 }

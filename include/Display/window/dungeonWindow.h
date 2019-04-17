@@ -15,7 +15,7 @@ public:
     void setTeleportStatus(bool flag);
     dungeonWindow(dungeon_t * dungeon);
     void updatePlayer(location_t location);
-    void updateGameContent(location_t location, int color, char symbol);
+    void updateGameContent(location_t location);
 
 private:
     bool fow;

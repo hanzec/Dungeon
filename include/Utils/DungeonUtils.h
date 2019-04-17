@@ -7,8 +7,8 @@ namespace DungeonUtils {
         OrderedList(/* args */);
         ~OrderedList();
     public:
-        static std::shared_ptr<Monster> pop_min(std::list<std::shared_ptr<Monster> > * monsters);
-        static void push(std::list<std::shared_ptr<Monster> > * monsters, std::shared_ptr<Monster> monster);
+        static Monster * pop_min(std::list<Monster * > * monsters);
+        static void push(std::list<Monster * > * monsters, Monster * monster);
     };
 
     class Path{

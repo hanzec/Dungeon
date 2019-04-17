@@ -17,6 +17,9 @@ int Player::setPcLocation(location_t location) {
         (this->dungeon->map[location[curr_y]][location[curr_x]].terrain_type == ter_stairs_up)  ||  
         (this->dungeon->map[location[curr_y]][location[curr_x]].terrain_type == ter_stairs_down)){
             this->location = location;
+            DungeonUtils::Path::dijkstra_tunnelling(dungeon, this->location);
+            DungeonUtils::Path::dijkstra_no_tunnelling(dungeon, this->location);
+
             return 0;
         }else
             return 1;

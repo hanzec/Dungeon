@@ -25,7 +25,6 @@ Monster * MonsterFactory::generateNewGameContant(dungeon * dungeon){
     Monster * monster = new Monster(tmpAttr,dungeon);
     monster->symbol = tmpAttr["SYMB"].at(0);
     monster->healthPoint = monster->diceToDouble(tmpAttr["HP"]);
-    printf("%d\n",dungeon->rooms.size());
     monster->location = dungeon->rooms.at(rand()%(dungeon->rooms.size() - 1) + 1).position;
     
     uint8_t tmp = 0;

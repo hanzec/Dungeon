@@ -56,6 +56,7 @@ void dungeonWindow::updatePlayer(location_t location) {
                 dungeonWindow::updateMapByPixel(location[curr_x] + i,location[curr_y] + j);
         }  
     }
+    
     //update pc location
     mvwaddch(this->windowPtr, location[prev_y], location[prev_x], getPrevChar);
     if (teleport)

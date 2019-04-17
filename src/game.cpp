@@ -11,7 +11,7 @@
 #include "../include/FileReader.h"
 #include "../include/Display/Display.h"
 #include "../include/Utils/mapGenerator.h"
-#include "../include/Utils/MonsterListUtils.h"
+#include "../include/Utils/DungeonUtils.h"
 #include "../include/GameContant/ItemFactory.h"
 #include "../include/GameContant/MonsterFactory.h"
 
@@ -27,8 +27,7 @@ ItemFactory * itemFactory;
 MonsterFactory * monsterFactoryPtr;
 
 void game::close_dungeon(int mode){
-    switch (mode)
-    {
+    switch (mode){
         case 1:
             Display::showDiedScreen();
             break;
@@ -52,26 +51,27 @@ void game::startGame() {
 
     //upfate ALL Item
     for (auto V : currentMonsterList)
-        Display::updateGameContent(V.location,V.color,V.symbol);
+        Display::updateGameContent(V->location,V->color,V->symbol);
 
     //update ALL Monster
     for(auto V : currentMonsterList)
-        Display::updateGameContent(V.location,V.color,V.symbol);
+        Display::updateGameContent(V->location,V->color,V->symbol);
     
     while (flag) {
-        while (time >= headMonster->nextMoveTime) {
+        while (time >= headMonster->get()->nextMoveTime) {
             //TODO may have bug here
-            Monster tmpMonster = *headMonster;
-            tmpMonster.moveMonster(pcPtr.location);
-            if (tmpMonster.meetWithPlayer(pcPtr.location)){
+            std::shared_ptr<Monster> tmpMonster;
+            tmpMonster = DungeonUtils::OrderedList::pop_min(&currentMonsterList);
+
+            tmpMonster->moveMonster(pcPtr.location);
+            if (tmpMonster->meetWithPlayer(pcPtr.location)){
                 flag = false;
                 close_dungeon(1);
                 return;
             }
-            tmpMonster.nextMoveTime = time + tmpMonster.getSpeed();
-            MonsterListUtils::removeMinMonster(&currentMonsterList);
-            MonsterListUtils::insertMonster(&currentMonsterList,tmpMonster);
-            Display::updateGameContent(tmpMonster.location,tmpMonster.color,tmpMonster.symbol);
+            tmpMonster->nextMoveTime = time + tmpMonster->getSpeed();
+            DungeonUtils::OrderedList::push(&currentMonsterList,tmpMonster);
+            Display::updateGameContent(tmpMonster->location,tmpMonster->color,tmpMonster->symbol);
         }
 
         reselect:
@@ -184,9 +184,11 @@ void game::newGame(){
     monsterFactoryPtr = new MonsterFactory(io::FileReader::readConfigureFile("/.rlg327/monster_desc.txt"));
 
     //add 10 monster to dungeon
-    for(int i = 0; i < 10; i++)
-        MonsterListUtils::insertMonster(&dungeon->monsters, monsterFactoryPtr->generateNewGameContant(dungeon));
-    
+    for(int i = 0; i < 10; i++){
+        std::shared_ptr<Monster> result(monsterFactoryPtr->generateNewGameContant(dungeon));
+        DungeonUtils::OrderedList::push(&dungeon->monsters, result);
+    }
+ 
     //initial dungeon array
     dungeonMap.push_back(dungeon);
 

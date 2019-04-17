@@ -11,54 +11,54 @@ ItemFactory::ItemFactory(std::vector<std::unordered_map<std::string, std::string
     updateGameItemPool();
 }
 
-Item ItemFactory::generateNewGameContant(dungeon * dungeon){
+Item * ItemFactory::generateNewGameContant(dungeon * dungeon){
      if (attributeList.size() < 10) {
         updateGameItemPool();
     }
 
-    Item item(contentPool[index]);
+    Item * item = new Item(contentPool[index]);
     if (contentPool[index]["TYPE"] == "WEAPON")
-        item.symbol = '|';
+        item->symbol = '|';
     else if (contentPool[index]["TYPE"] == "OFFHAND")
-        item.symbol = '}';
+        item->symbol = '}';
     else if (contentPool[index]["TYPE"] == "RANGED")
-        item.symbol = '[';
+        item->symbol = '[';
     else if (contentPool[index]["TYPE"] == "ARMOR")
-        item.symbol = ']';
+        item->symbol = ']';
     else if (contentPool[index]["TYPE"] == "HELMET")
-        item.symbol = '(';
+        item->symbol = '(';
     else if (contentPool[index]["TYPE"] == "CLOAK")
-        item.symbol = '{';
+        item->symbol = '{';
     else if (contentPool[index]["TYPE"] == "GLOVES")
-        item.symbol = '\\';
+        item->symbol = '\\';
     else if (contentPool[index]["TYPE"] == "BOOTS")
-        item.symbol = '=';
+        item->symbol = '=';
     else if (contentPool[index]["TYPE"] == "RING")
-        item.symbol = '"';
+        item->symbol = '"';
     else if (contentPool[index]["TYPE"] == "AMULET")
-        item.symbol = '_';
+        item->symbol = '_';
     else if (contentPool[index]["TYPE"] == "LIGHT")
-        item.symbol = '+';
+        item->symbol = '+';
     else if (contentPool[index]["TYPE"] == "SCROLL")
-        item.symbol = '?';
+        item->symbol = '?';
     else if (contentPool[index]["TYPE"] == "FLASK")
-        item.symbol = '!';
+        item->symbol = '!';
     else if (contentPool[index]["TYPE"] == "GOLD")
-        item.symbol = '$';
+        item->symbol = '$';
     else if (contentPool[index]["TYPE"] == "AMMUNITION")
-        item.symbol = '/';
+        item->symbol = '/';
     else if (contentPool[index]["TYPE"] == "FOOD")
-        item.symbol = ',';
+        item->symbol = ',';
     else if (contentPool[index]["TYPE"] == "WAND")
-        item.symbol = '-';
+        item->symbol = '-';
     else if (contentPool[index]["TYPE"] == "CONTAINER")
-        item.symbol = '%';
+        item->symbol = '%';
     else
-       item.symbol = '&'; 
+       item->symbol = '&'; 
     
     int randRoam = rand()%(dungeon->rooms.size() - 1);
-    item.location[curr_x] = dungeon->rooms.at(randRoam).position[curr_x] + rand()%dungeon->rooms.at(randRoam).size[curr_x];
-    item.location[curr_y] = dungeon->rooms.at(randRoam).position[curr_y] + rand()%dungeon->rooms.at(randRoam).size[curr_y];
+    item->location[curr_x] = dungeon->rooms.at(randRoam).position[curr_x] + rand()%dungeon->rooms.at(randRoam).size[curr_x];
+    item->location[curr_y] = dungeon->rooms.at(randRoam).position[curr_y] + rand()%dungeon->rooms.at(randRoam).size[curr_y];
 
     return item;
 }

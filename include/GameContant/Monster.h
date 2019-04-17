@@ -13,12 +13,7 @@
 #include "../Utils/data_stucture/heap.h"
 
 
-typedef struct corridor_node {
-    int cost;
-    location_t pos;
-    heap_node_t *hn;
-    void * prev_node;
-} corridor_node_t;
+
 
 using namespace std;
 
@@ -29,12 +24,9 @@ public:
     uint8_t characteristics;
     location_t lastPcLocation ;
     int healthPoint, nextMoveTime;
-    corridor_node_t path[DUNGEON_Y][DUNGEON_X];
     int moveMonster(location_t playerLocation);
     bool meetWithPlayer(location_t playerLocation);
-    void dijkstra_tunnelling(location_t playerLocation);
-    void dijkstra_no_tunnelling(location_t playerLocation); // TODO write as private class
-    Monster(unordered_map<string, string> base, dungeon_t * dungeon);
+    Monster(std::unordered_map<std::string, std::string> base, dungeon_t * dungeon);
 };
 
 #endif //DUNGEON_COMS327_F19_MONSTER_H

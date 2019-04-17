@@ -11,7 +11,7 @@ private:
     std::vector<std::unordered_map<std::string, std::string> > contentPool;
     std::vector<std::unordered_map<std::string, std::string> > attributeList;
 public:
-    Item generateNewGameContant(dungeon * dungeon);
+    Item * generateNewGameContant(dungeon * dungeon);
     ItemFactory(std::vector<std::unordered_map<std::string, std::string> > attributeList);
     ~ItemFactory();
 };

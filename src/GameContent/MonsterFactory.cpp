@@ -6,7 +6,7 @@ MonsterFactory::MonsterFactory(std::vector<std::unordered_map<std::string, std::
     updateGameItemPool();
 }
 
-Monster MonsterFactory::generateNewGameContant(dungeon * dungeon){
+Monster * MonsterFactory::generateNewGameContant(dungeon * dungeon){
     std::unordered_map<std::string, std::string> tmpAttr;
 
     if (attributeList.size() < 10) {
@@ -22,10 +22,11 @@ Monster MonsterFactory::generateNewGameContant(dungeon * dungeon){
     }
     
     
-    Monster monster(tmpAttr,dungeon);
-    monster.symbol = tmpAttr["SYMB"].at(0);
-    monster.healthPoint = monster.diceToDouble(tmpAttr["HP"]);
-    monster.location = dungeon->rooms.at(rand()%dungeon->rooms.size()).position;
+    Monster * monster = new Monster(tmpAttr,dungeon);
+    monster->symbol = tmpAttr["SYMB"].at(0);
+    monster->healthPoint = monster->diceToDouble(tmpAttr["HP"]);
+    printf("%d\n",dungeon->rooms.size());
+    monster->location = dungeon->rooms.at(rand()%(dungeon->rooms.size() - 1) + 1).position;
     
     uint8_t tmp = 0;
     if (tmpAttr["SYMB"].find("ERRATIC"))
@@ -37,7 +38,7 @@ Monster MonsterFactory::generateNewGameContant(dungeon * dungeon){
     if (tmpAttr["SYMB"].find("SMART"))
         tmp +=8;
     
-    monster.characteristics = tmp;
+    monster->characteristics = tmp;
     return monster;
 }
 

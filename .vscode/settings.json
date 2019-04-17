@@ -95,5 +95,7 @@
         "queue": "cpp",
         "sstream": "cpp",
         "list": "cpp"
-    },    
+    },
+    "cquery.cacheDirectory": "${workspaceFolder}/.vscode/cquery_cached_index/",
+    
 }

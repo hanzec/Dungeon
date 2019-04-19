@@ -3,6 +3,8 @@
 //
 
 #include <ncurses.h>
+#include "../../../include/GameContant/Item.h"
+#include "../../../include/GameContant/Monster.h"
 #include "../../../include/Display/displayCommon.h"
 #include "../../../include/Display/window/dungeonWindow.h"
 
@@ -25,22 +27,52 @@ dungeonWindow::dungeonWindow(dungeon_t * d) {
 }
 
 int dungeonWindow::updateMapByPixel(int x, int y) {
+    if(!this->dungeonPtr->map[y][x].visable){
+        if(fow){
+            mvwaddch(this->windowPtr,y,x,' ');
+            return 0;
+        }
+    }
+
+    if(this->dungeonPtr->map[y][x].monster != nullptr){
+        wattron(this->windowPtr, COLOR_PAIR(this->dungeonPtr->map[y][x].monster->color));
+        mvwaddch(this->windowPtr, y + 1,x,this->dungeonPtr->map[y][x].monster->symbol);
+        wattroff(this->windowPtr, COLOR_PAIR(this->dungeonPtr->map[y][x].monster->color));
+        return 0;
+    }else{
+        if(this->dungeonPtr->map[y][x].isItemInit){
+            wattron(this->windowPtr, COLOR_PAIR(this->dungeonPtr->map[y][x].item->color));
+            mvwaddch(this->windowPtr, y + 1,x,this->dungeonPtr->map[y][x].item->symbol);
+            wattroff(this->windowPtr, COLOR_PAIR(this->dungeonPtr->map[y][x].item->color));
+            return 0;
+        }
+    }
     mvwaddch(this->windowPtr,y,x,this->getTerFromChar(x, y));
-    wrefresh(this->windowPtr);
     return 0;
 }
 
 void dungeonWindow::updateMap() {
+    std::list<std::pair<int, int> > gameItems;
     for (int i = 0; i < DUNGEON_Y; ++i) {
         for (int j = 0; j < DUNGEON_X; ++j) {
-            if (this->fow) {
-                if (this->dungeonPtr->map[i][j].visable) 
-                    mvwaddch(this->windowPtr,i,j,this->getTerFromChar(j, i));
-                else
-                    mvwaddch(this->windowPtr,i,j,' ');
-                
-            }else
+            if(this->dungeonPtr->map[i][j].monster != nullptr || this->dungeonPtr->map[i][j].isItemInit)
+                gameItems.push_back(std::pair<int,int>(i,j));
+            else
                 mvwaddch(this->windowPtr,i,j,this->getTerFromChar(j, i));
+        }
+    }
+
+    for(auto V : gameItems){
+        if(this->dungeonPtr->map[V.first][V.second].monster != nullptr){
+            wattron(this->windowPtr, COLOR_PAIR(this->dungeonPtr->map[V.first][V.second].monster->color));
+            mvwaddch(this->windowPtr, V.first,V.second,this->dungeonPtr->map[V.first][V.second].monster->symbol);
+            wattroff(this->windowPtr, COLOR_PAIR(this->dungeonPtr->map[V.first][V.second].monster->color));
+        }else{
+            if(this->dungeonPtr->map[V.first][V.second].isItemInit){
+                wattron(this->windowPtr, COLOR_PAIR(this->dungeonPtr->map[V.first][V.second].item->color));
+                mvwaddch(this->windowPtr, V.first,V.second,this->dungeonPtr->map[V.first][V.second].item->symbol);
+                wattroff(this->windowPtr, COLOR_PAIR(this->dungeonPtr->map[V.first][V.second].item->color));
+            }
         }
     }
     wrefresh(this->windowPtr);
@@ -56,8 +88,9 @@ void dungeonWindow::updatePlayer(location_t location) {
                 dungeonWindow::updateMapByPixel(location[curr_x] + i,location[curr_y] + j);
         }  
     }
+    
     //update pc location
-    mvwaddch(this->windowPtr, location[prev_y], location[prev_x], getPrevChar);
+    this->updateMapByPixel(location[prev_x],location[prev_y]);
     if (teleport)
         mvwaddch(this->windowPtr,location[curr_y], location[curr_x],'*');
     else
@@ -66,15 +99,8 @@ void dungeonWindow::updatePlayer(location_t location) {
     wrefresh(this->windowPtr);
 }
 
-void dungeonWindow::updateGameContent(location_t location, int color, char symbol) {
-   if (location[prev_x] != 0 && location[prev_y] != 0)
-       mvwaddch(this->windowPtr, location[prev_y], location[prev_x], getPrevChar);
-
-    //TODO for mutiple color for simgle monster support
-    attron(COLOR_PAIR(color));
-    mvaddch(location[curr_y] + 1, location[curr_x], symbol);
-    attroff(COLOR_PAIR(color));
-    wrefresh(this->windowPtr);
+void dungeonWindow::updateGameContent(location_t location) {
+    this->updateMapByPixel(location[curr_x], location[curr_y]);
 }
 
 const chtype dungeonWindow::getTerFromChar(int x, int y) {

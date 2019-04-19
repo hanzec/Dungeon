@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 PROJECT(dungeon-coms327-f19)
 
 #set c++ VERSION
-set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_CXX_STANDARD 17)
 
 ADD_SUBDIRECTORY(src)
 include_directories("${CMAKE_SOURCE_DIR}/include")

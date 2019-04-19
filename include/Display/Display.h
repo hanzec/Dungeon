@@ -41,7 +41,7 @@ public:
     //update screen function
     static void updateDungeonMap();
     static void updatePlayer(location_t location);
-    static void updateGameContent(location_t location, int color, char symbol);
+    static void updateGameContent(location_t location);
 
 private:
     static dungeon_t * dungeonPtr;

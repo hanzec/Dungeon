@@ -13,7 +13,7 @@ private:
     std::vector<std::unordered_map<std::string, std::string> > attributeList;
     std::vector<std::unordered_map<std::string, std::string> > uniqueMonster;
 public:
-    Monster generateNewGameContant(dungeon * dungeon);
+    Monster * generateNewGameContant(dungeon * dungeon);
     MonsterFactory(std::vector<std::unordered_map<std::string, std::string> > attributeList);
 };
 

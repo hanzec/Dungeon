@@ -4,6 +4,8 @@
 
 #include <ctime>
 #include <climits>
+#include <cstdlib>
+#include "../../include/macros.h"
 #include "../../include/GameCommon.h"
 #include "../../include/Utils/mapGenerator.h"
 #include "../../include/Utils/data_stucture/heap.h"
@@ -12,7 +14,7 @@ static uint32_t in_room(dungeon_t *d, int16_t y, int16_t x)
 {
     int i;
 
-    for (i = 0; i < d->num_rooms; i++) {
+    for (i = 0; i < d->rooms.size(); i++) {
         if ((x >= d->rooms.at(i).position[curr_x]) &&
             (x < (d->rooms.at(i).position[curr_x] + d->rooms.at(i).size[curr_x])) &&
             (y >= d->rooms.at(i).position[curr_y]) &&
@@ -269,9 +271,9 @@ static int create_cycle(dungeon_t *d)
 
     int32_t max, tmp, i, j, p, q;
     location_t e1, e2;
-
-    for (i = max = 0; i < d->num_rooms - 1; i++) {
-        for (j = i + 1; j < d->num_rooms; j++) {
+    printf("%d\n",d->rooms.size());
+    for (i = max = 0; i < d->rooms.size() - 1; i++) {
+        for (j = i + 1; j < d->rooms.size(); j++) {
             tmp = (((d->rooms.at(i).position[curr_x] - d->rooms.at(j).position[curr_x])  *
                     (d->rooms.at(i).position[curr_x] - d->rooms.at(j).position[curr_x])) +
                    ((d->rooms.at(i).position[curr_y] - d->rooms.at(j).position[curr_y])  *
@@ -308,7 +310,7 @@ int mapGenerator::connect_rooms(dungeon_t *d)
 {
     uint32_t i;
 
-    for (i = 1; i < d->num_rooms; i++) {
+    for (i = 1; i < d->rooms.size(); i++) {
         connect_two_rooms(d, &d->rooms.at(i -1 ), &d->rooms.at(i));
     }
 
@@ -495,7 +497,7 @@ static int place_rooms(dungeon_t *d)
 
     for (success = 0; !success; ) {
         success = 1;
-        for (i = 0; success && i < d->num_rooms; i++) {
+        for (i = 0; success && i < d->rooms.size(); i++) {
             r = &d->rooms.at(i);
             r->position[curr_x] = 1 + rand() % (DUNGEON_X - 2 - r->size[curr_x]);
             r->position[curr_y] = 1 + rand() % (DUNGEON_Y - 2 - r->size[curr_y]);
@@ -551,13 +553,7 @@ static void place_stairs(dungeon_t *d)
 
 static int make_rooms(dungeon_t *d)
 {
-    uint32_t i;
-
-    for (i = MIN_ROOMS; i < MAX_ROOMS && rand_under(5, 8); i++)
-        ;
-    d->num_rooms = i;
-
-    for (i = 0; i < d->num_rooms; i++) {
+    for (int i = 0; i < rand()%(MAX_ROOMS - MIN_ROOMS) + MIN_ROOMS; i++) {
         room_t tmpRoom;
         tmpRoom.size[curr_x] = ROOM_MIN_X;
         tmpRoom.size[curr_y] = ROOM_MIN_Y;

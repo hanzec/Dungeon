@@ -109,6 +109,6 @@ void Display::updatePlayer(location_t location) {
     ((dungeonWindow *)windowStack[dungeonScreen_win])->updatePlayer(location);
 }
 
-void Display::updateGameContent(location_t location, int color, char symbol){
-    ((dungeonWindow *)windowStack[dungeonScreen_win])->updateGameContent(location,color,symbol);
+void Display::updateGameContent(location_t location){
+    ((dungeonWindow *)windowStack[dungeonScreen_win])->updateGameContent(location);
 }

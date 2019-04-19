@@ -6,18 +6,13 @@
 #define DUNGEON_COMS327_F19_GAMECOMMON_H
 
 #include <list>
+#include <memory>
 #include <vector>
 #include <cstdint>
 #include "macros.h"
 
+class Item;
 class Monster;
-
-typedef struct MonsterNode{
-    int time;
-    Monster * monster;
-    struct MonsterNode * nextNode;
-    struct MonsterNode * prevNode;
-}MonsterNode_t;
 
 typedef enum dim {
     curr_x,     curr_y,
@@ -50,6 +45,12 @@ public:
     }
 }location_t;
 
+typedef struct corridor_node {
+    int cost;
+    location_t pos;
+    void * prev_node;
+} corridor_node_t;
+
 typedef enum __attribute__ ((__packed__)) terrain_type {
     ter_debug,
     ter_wall,
@@ -63,9 +64,11 @@ typedef enum __attribute__ ((__packed__)) terrain_type {
 } terrain_type_t;
 
 typedef struct map_block{
-    bool visable;
     uint8_t hardness;
+    Monster * monster;
+    std::unique_ptr<Item> item;
     terrain_type_t terrain_type;
+    bool visable, isMonsterInit = false, isItemInit = false;
 } map_block_t;
 
 typedef struct room{
@@ -79,17 +82,16 @@ typedef enum direction{
     DownLeft,   DownRight,
 }direction_t;
 
-
-
 typedef struct dungeon {
-    uint8_t num_rooms;
-    location_t pcInitLocation; //need to remove 
     map_block_t map[DUNGEON_Y][DUNGEON_X];
+    corridor_node_t tunnel[DUNGEON_Y][DUNGEON_X];
+    corridor_node_t nontunnel [DUNGEON_Y][DUNGEON_X];
 
     std::vector<room_t> rooms;
-    std::list<Monster> monsters;
     std::vector<location_t> upStairs;
     std::vector<location_t> downStairs;
+    std::list<Item> items;
+    std::list<Monster * > monsters;
 } dungeon_t;
 
 #endif //DUNGEON_COMS327_F19_GAMECOMMON_H

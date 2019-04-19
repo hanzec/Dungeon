@@ -4,28 +4,16 @@
 #include "../../include/GameContant/Monster.h"
 #include "../../include/Utils/data_stucture/heap.h"
 
-#define getCurrentHardness this->dungeon->map[this->location[curr_y]][this->location[curr_x]].hardness
-#define nextMonster(monster) ((corridor_node_t *) monster->path[this->location[curr_y]][this->location[curr_x]].prev_node)
+#define getCurrentHardness dungeon->map[this->location[curr_y]][this->location[curr_x]].hardness
+#define nextTunnel ((corridor_node_t *) dungeon->tunnel[this->location[curr_y]][this->location[curr_x]].prev_node)
+#define nextNonTunnel ((corridor_node_t *) dungeon->nontunnel[this->location[curr_y]][this->location[curr_x]].prev_node)
 
-
-
-//overload operator for priority queue
-bool operator < (Monster monster1, Monster monster2){
-    return monster1.getSpeed() < monster2.getSpeed();
-}
-
-bool operator> (Monster monster1, Monster monster2){
-    return monster1.getSpeed() > monster2.getSpeed();
-}
-
-bool operator== (Monster monster1, Monster monster2){
-    return monster1.getSpeed() == monster2.getSpeed();
-}
 
 Monster::Monster(std::unordered_map<std::string, std::string> base, dungeon_t * dungeon):GameContent(base){
     this->itemID = 0;
     this->dungeon = dungeon;
     this->range = (uint8_t) (rand() % 3);
+    this->nextMoveTime = this->getSpeed();
 }
 
 bool Monster::meetWithPlayer(location_t location){
@@ -48,10 +36,7 @@ bool Monster::meetWithPlayer(location_t location){
 
 int Monster::moveMonster(location_t playerLocation){
     srand(time(NULL));
-
     location_t nextParh;
-    corridor_node_t path[DUNGEON_Y][DUNGEON_X];
-
     if (this->characteristics & 0x1){
         bool flag = true;
         if ((rand() % 2 ) == 1){
@@ -76,9 +61,7 @@ int Monster::moveMonster(location_t playerLocation){
         if(this->characteristics & 0x8){
             if(this->characteristics & 0x2){
                 if ( getCurrentHardness == 0){
-                    dijkstra_tunnelling(playerLocation);
-                    nextParh[curr_x] = nextMonster(this)->pos[curr_x];
-                    nextParh[curr_y] = nextMonster(this)->pos[curr_y];
+                    nextParh = nextTunnel->pos;
                     goto update;
                 } else{
                     if (getCurrentHardness <= 85)
@@ -89,9 +72,7 @@ int Monster::moveMonster(location_t playerLocation){
                     return 0;
                 }
             }else{
-                dijkstra_no_tunnelling(playerLocation);
-                nextParh[curr_x] = nextMonster(this)->pos[curr_x];
-                nextParh[curr_y] = nextMonster(this)->pos[curr_y];
+                nextParh = nextNonTunnel->pos;
                 goto update;
             }
         }else{
@@ -117,8 +98,7 @@ int Monster::moveMonster(location_t playerLocation){
         if(this->characteristics & 0x8){
             if(this->characteristics & 0x2){
                 if (getCurrentHardness == 0){
-                    dijkstra_tunnelling(playerLocation);
-                    nextParh = nextMonster(this)->pos;
+                    nextParh = nextTunnel->pos;
                     goto update;
                 } else{
                     if (getCurrentHardness <= 85)
@@ -129,8 +109,7 @@ int Monster::moveMonster(location_t playerLocation){
                     return 0;
                 }
             }else{
-                dijkstra_no_tunnelling(playerLocation);
-                nextParh = nextMonster(this)->pos;
+                nextParh = nextNonTunnel->pos;
                 goto update;
             }
         } else
@@ -142,107 +121,4 @@ int Monster::moveMonster(location_t playerLocation){
     this->location = nextParh;
 
     return 0;
-}
-
-static int32_t corridor_node_cmp(const void *key, const void *with) {
-    return ((corridor_node_t *) key)->cost - ((corridor_node_t *) with)->cost;
-}
-
-void Monster::dijkstra_no_tunnelling(location_t playerLocation)
-{
-
-    heap_t h;
-    corridor_node_t *prev_node;
-
-    for (uint16_t y = 0; y < DUNGEON_Y; y++) {
-        for (uint16_t x = 0; x < DUNGEON_X; x++) {
-            this->path[y][x].pos[curr_y] = y;
-            this->path[y][x].pos[curr_x] = x;
-            this->path[y][x].cost = INT32_MAX;
-
-        }
-    }
-
-    this->path[playerLocation[curr_y]][playerLocation[curr_x]].cost = 0;
-
-    heap_init(&h, corridor_node_cmp, NULL);
-
-    heap_insert(&h,&this->path[playerLocation[curr_y]][playerLocation[curr_x]]);
-
-    while (h.size != 0){
-        prev_node = (corridor_node_t *) heap_remove_min(&h);
-        for (int8_t i = -1; i < 2; ++i) {
-            for (int8_t j = -1; j < 2 ; ++j) {
-                uint16_t x = j + prev_node->pos[curr_x];
-                uint16_t y = i + prev_node->pos[curr_y];
-
-                if (checkLocation(x,y)){
-                    if (dungeonMapTer(x,y) != ter_wall){
-                        if (prev_node->cost + 1 < this->path[y][x].cost){
-                            this->path[y][x].prev_node = prev_node;
-                            this->path[y][x].cost = prev_node->cost + 1;
-
-                            heap_insert(&h,&this->path[y][x]);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    heap_delete(&h);
-}
-
-void Monster::dijkstra_tunnelling(location_t playerLocation)
-{
-
-    heap_t h;
-    corridor_node_t *prev_node;
-
-    for (uint16_t y = 0; y < DUNGEON_Y; y++) {
-        for (uint16_t x = 0; x < DUNGEON_X; x++) {
-            this->path[y][x].pos[curr_y] = y;
-            this->path[y][x].pos[curr_x] = x;
-            this->path[y][x].cost = INT32_MAX;
-
-        }
-    }
-
-
-    this->path[playerLocation[curr_y]][playerLocation[curr_x]].cost = 0;
-
-    heap_init(&h, corridor_node_cmp, NULL);
-
-    heap_insert(&h,&this->path[playerLocation[curr_y]][playerLocation[curr_x]]);
-
-    while (h.size != 0){
-        prev_node = (corridor_node_t*) heap_remove_min(&h);
-        for (int8_t i = -1; i < 2; ++i) {
-            for (int8_t j = -1; j < 2 ; ++j) {
-                uint16_t x = j + prev_node->pos[curr_x];
-                uint16_t y = i + prev_node->pos[curr_y];
-
-                if (checkLocation(x,y)){
-                    int weight_tmp = 0;
-
-                    if (dungeonMapTer(x,y) == ter_wall_immutable)
-                        break;
-
-                    if (dungeonMapTer(x,y) == 0){
-                        weight_tmp = 1 + prev_node->cost;
-                    }else{
-                        weight_tmp = 1 + (dungeonMapTer(x,y)/85) + prev_node->cost;
-                    }
-
-                    if (weight_tmp < this->path[y][x].cost){
-
-                        this->path[y][x].prev_node = prev_node;
-                        this->path[y][x].cost = weight_tmp;
-
-                        heap_insert(&h,&this->path[y][x]);
-                    }
-                }
-            }
-        }
-    }
-    heap_delete(&h);
 }

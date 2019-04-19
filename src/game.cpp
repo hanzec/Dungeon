@@ -11,11 +11,12 @@
 #include "../include/FileReader.h"
 #include "../include/Display/Display.h"
 #include "../include/Utils/mapGenerator.h"
-#include "../include/Utils/MonsterListUtils.h"
+#include "../include/Utils/DungeonUtils.h"
+#include "../include/GameContant/Monster.h"
 #include "../include/GameContant/ItemFactory.h"
 #include "../include/GameContant/MonsterFactory.h"
 
-#define headMonster currentMonsterList.begin()
+#define headMonster ((Monster *)currentMonsterList.front())
 #define currentMonsterList currentDungeon->monsters
 //todo current status
 //todo multiple stair support
@@ -27,8 +28,7 @@ ItemFactory * itemFactory;
 MonsterFactory * monsterFactoryPtr;
 
 void game::close_dungeon(int mode){
-    switch (mode)
-    {
+    switch (mode){
         case 1:
             Display::showDiedScreen();
             break;
@@ -52,31 +52,33 @@ void game::startGame() {
 
     //upfate ALL Item
     for (auto V : currentMonsterList)
-        Display::updateGameContent(V.location,V.color,V.symbol);
+        Display::updateGameContent(V->location);
 
     //update ALL Monster
     for(auto V : currentMonsterList)
-        Display::updateGameContent(V.location,V.color,V.symbol);
+        Display::updateGameContent(V->location);
     
     while (flag) {
         while (time >= headMonster->nextMoveTime) {
             //TODO may have bug here
-            Monster tmpMonster = *headMonster;
-            tmpMonster.moveMonster(pcPtr.location);
-            if (tmpMonster.meetWithPlayer(pcPtr.location)){
+            Monster * tmpMonster = DungeonUtils::OrderedList::pop_min(&currentMonsterList);
+
+            tmpMonster->moveMonster(pcPtr.location);
+            if (tmpMonster->meetWithPlayer(pcPtr.location)){
                 flag = false;
                 close_dungeon(1);
                 return;
             }
-            tmpMonster.nextMoveTime = time + tmpMonster.getSpeed();
-            MonsterListUtils::removeMinMonster(&currentMonsterList);
-            MonsterListUtils::insertMonster(&currentMonsterList,tmpMonster);
-            Display::updateGameContent(tmpMonster.location,tmpMonster.color,tmpMonster.symbol);
+            tmpMonster->nextMoveTime = time + tmpMonster->getSpeed();
+            DungeonUtils::OrderedList::push(&currentMonsterList,tmpMonster);
+            Display::updateGameContent(tmpMonster->location);
         }
 
         reselect:
 
-        time += pcPtr.getSpeed();
+        if (!teleportFlag)
+            time += pcPtr.getSpeed();
+        
         switch (getch()) {
             case KEY_UP:
                 if (pcPtr.movePC(Upper))
@@ -114,7 +116,6 @@ void game::startGame() {
                 if (teleportFlag) {
                     Display::setTeleportStatus(!teleportFlag);
                     teleportFlag = ! teleportFlag;
-
                     do{
                     location[curr_x] = rand()%DUNGEON_X;
                     location[curr_y] = rand()%DUNGEON_Y;
@@ -183,9 +184,16 @@ void game::newGame(){
     monsterFactoryPtr = new MonsterFactory(io::FileReader::readConfigureFile("/.rlg327/monster_desc.txt"));
 
     //add 10 monster to dungeon
-    for(int i = 0; i < 10; i++)
-        MonsterListUtils::insertMonster(&dungeon->monsters, monsterFactoryPtr->generateNewGameContant(dungeon));
-    
+    for(int i = 0; i < 10; i++){
+        itemFactory->generateNewGameContant(dungeon);
+        Monster * result = monsterFactoryPtr->generateNewGameContant(dungeon);
+        dungeon->map[result->location[curr_y]][result->location[curr_x]].monster = result;
+        DungeonUtils::OrderedList::push(&dungeon->monsters, result);
+    }
+
+
+
+ 
     //initial dungeon array
     dungeonMap.push_back(dungeon);
 

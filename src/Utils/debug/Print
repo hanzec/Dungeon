@@ -1,0 +1,9 @@
+for(int i = 0; i < DUNGEON_Y; i++){
+        for(int j = 0; j < DUNGEON_X; j++){
+            if(dungeon->tunnel[i][j].cost != INT_MAX)
+                printf("%d ", dungeon->tunnel[i][j].cost);
+            else
+                printf("  ");
+        }
+        printf("\n");
+    }

@@ -12,11 +12,11 @@
 
 class monsterList : public gamePanel {
 private:
-    std::list<Monster> * monstersPtr;
+    std::list<Monster * > * monstersPtr;
 public:
     int updatePanel();
-    explicit monsterList(std::list<Monster> * monsters);
-    void updateMonsterNode(std::list<Monster> * monsters);
+    explicit monsterList(std::list<Monster * > * monsters);
+    void updateMonsterNode(std::list<Monster * > * monsters);
 };
 
 

@@ -10,8 +10,8 @@
 #define MIN_ROOMS              6
 #define ROOM_MAX_X             20
 #define ROOM_MAX_Y             15
-#define ROOM_MIN_X             4
-#define ROOM_MIN_Y             3
+#define ROOM_MIN_X             6
+#define ROOM_MIN_Y             5
 #define MAX_ROOM_RATIO         90
 #define DUNGEON_VERSION        0
 #define MAX_ROOMS              10

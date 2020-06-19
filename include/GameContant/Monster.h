@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "GameContent.h"
+#include "GameObjects/GameContent.h"
 #include "../Utils/data_stucture/heap.h"
 
 

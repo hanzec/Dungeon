@@ -2,7 +2,7 @@
 #define DUNGEON_COMS327_F19_ITEM_H
 
 #include <vector>
-#include "GameContent.h"
+#include "GameObjects/GameContent.h"
 #include <unordered_map>
 #include "../GameCommon.h"
 

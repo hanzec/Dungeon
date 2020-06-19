@@ -7,7 +7,7 @@
 
 #include <unordered_map>
 #include "GameContant/Item.h"
-#include "GameContant/GameContent.h"
+#include "GameContant/GameObjects/GameContent.h"
 
 typedef enum wearSlot{
     WEAPONL,    WEAPONR,    OFFHANDL,   OFFHANDR,

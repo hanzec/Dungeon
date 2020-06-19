@@ -5,11 +5,11 @@
 #ifndef DUNGEON_COMS327_F19_DUNGEONWINDOW_H
 #define DUNGEON_COMS327_F19_DUNGEONWINDOW_H
 
-#include "gameWindow.h"
+#include "AbstractWindow.h"
 #include "../../GameCommon.h"
 
 class Monster;
-class dungeonWindow : public gameWindow {
+class dungeonWindow : public AbstractWindow {
 public:
     void setFOWStatus(bool flag);
     void setTeleportStatus(bool flag);

@@ -169,9 +169,9 @@ void game::newDungeonLevel() {
     dungeonMap.push_back(dungeon);
 }
 
-void game::newGame(){
+int main(int argc, char * argv[]) {
     //generate dungeon
-    auto * dungeon = new dungeon_t;
+    auto *dungeon = new dungeon_t;
     mapGenerator::generate_dungon(dungeon);
 
     //initial PC
@@ -184,16 +184,16 @@ void game::newGame(){
     monsterFactoryPtr = new MonsterFactory(io::FileReader::readConfigureFile("/.rlg327/monster_desc.txt"));
 
     //add 10 monster to dungeon
-    for(int i = 0; i < 10; i++){
+    for (int i = 0; i < 10; i++) {
         itemFactory->generateNewGameContant(dungeon);
-        Monster * result = monsterFactoryPtr->generateNewGameContant(dungeon);
+        Monster *result = monsterFactoryPtr->generateNewGameContant(dungeon);
         dungeon->map[result->location[curr_y]][result->location[curr_x]].monster = result;
         DungeonUtils::OrderedList::push(&dungeon->monsters, result);
     }
 
 
 
- 
+
     //initial dungeon array
     dungeonMap.push_back(dungeon);
 
@@ -203,4 +203,3 @@ void game::newGame(){
     //start game
     game::startGame();
 }
-

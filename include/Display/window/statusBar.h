@@ -5,9 +5,9 @@
 #ifndef DUNGEON_COMS327_F19_STATUSBARWINDOW_H
 #define DUNGEON_COMS327_F19_STATUSBARWINDOW_H
 
-#include "gameWindow.h"
+#include "AbstractWindow.h"
 
-class statusBar : public gameWindow {
+class statusBar : public AbstractWindow {
 public:
     statusBar();
 };

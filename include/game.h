@@ -11,7 +11,6 @@
 class game{
 public:
     static void startGame();
-    static void newGame();
 private:
     static Player pcPtr;
     static void newDungeonLevel();

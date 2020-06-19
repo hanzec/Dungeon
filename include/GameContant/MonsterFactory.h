@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "Monster.h"
-#include "GameContent.h"
+#include "GameObjects/GameContent.h"
 
 class MonsterFactory{
 private:

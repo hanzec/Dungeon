@@ -6,9 +6,9 @@
 #define DUNGEON_COMS327_F19_CHARACTERINFO_H
 
 
-#include "gameWindow.h"
+#include "AbstractWindow.h"
 
-class characterInfo : public gameWindow{
+class characterInfo : public AbstractWindow{
 public:
     characterInfo();
 };

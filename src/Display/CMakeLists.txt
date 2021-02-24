@@ -1,6 +1,4 @@
-
-add_subdirectory(sdl2)
-add_subdirectory(curses)
+add_subdirectory(Ncurses)
 
 
 

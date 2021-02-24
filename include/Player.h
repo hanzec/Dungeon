@@ -5,9 +5,12 @@
 #ifndef DUNGEON_COMS327_F19_PLAYER_H
 #define DUNGEON_COMS327_F19_PLAYER_H
 
+#include <vector>
 #include <unordered_map>
-#include "GameContant/Item.h"
+#include "GameContant/GameObjects/Item.h"
 #include "GameContant/GameObjects/GameContent.h"
+
+using namespace std;
 
 typedef enum wearSlot{
     WEAPONL,    WEAPONR,    OFFHANDL,   OFFHANDR,
@@ -17,17 +20,21 @@ typedef enum wearSlot{
 }wearSlot_t;
 
 class Player{
-protected:
-    dungeon_t *dungeon;
-    int healthPoint, damgaePoint, speed;
-    std::unordered_map<std::string,Item> itemCollection;
-public:
+private:
+    vector<Item> bag;
     location_t location;
-
+    Item wearSlot[numberSlot];
+    int base_healthPoint = 0, base_damagePoint = 0, base_speed = 0;
+protected:
     int getSpeed();
+    int getVision();
+    int getWeight();
+    int getHealthPoint();
+    int getDamagePoint();
+public:
     int movePC(direction_t direction);
     int setPcLocation(location_t location);
-    Player(dungeon_t * dungeon = nullptr);
+    Player();
 };
 
 #endif //DUNGEON_COMS327_F19_PC_H

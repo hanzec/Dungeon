@@ -11,7 +11,7 @@ ItemFactory::ItemFactory(std::vector<std::unordered_map<std::string, std::string
     updateGameItemPool();
 }
 
-void ItemFactory::generateNewGameContant(dungeon * dungeon){
+void ItemFactory::generateNewGameContant(Dungeon * dungeon){
      if (attributeList.size() < 10) {
         updateGameItemPool();
     }

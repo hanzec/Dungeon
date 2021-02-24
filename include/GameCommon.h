@@ -7,12 +7,15 @@
 
 #include <list>
 #include <memory>
+#include <pthread.h>
 #include <vector>
 #include <cstdint>
 #include "macros.h"
 
 class Item;
 class Monster;
+
+using namespace std;
 
 typedef enum dim {
     curr_x,     curr_y,
@@ -64,11 +67,11 @@ typedef enum __attribute__ ((__packed__)) terrain_type {
 } terrain_type_t;
 
 typedef struct map_block{
-    uint8_t hardness;
-    Monster * monster;
+    uint8_t hardness = 0;
+    Monster * monster = nullptr;
     std::unique_ptr<Item> item;
-    terrain_type_t terrain_type;
-    bool visable, isMonsterInit = false, isItemInit = false;
+    terrain_type_t terrain_type = ter_debug;
+    bool visable = false, isMonsterInit = false, isItemInit = false;
 } map_block_t;
 
 typedef struct room{
@@ -82,16 +85,30 @@ typedef enum direction{
     DownLeft,   DownRight,
 }direction_t;
 
-typedef struct dungeon {
-    map_block_t map[DUNGEON_Y][DUNGEON_X];
-    corridor_node_t tunnel[DUNGEON_Y][DUNGEON_X];
-    corridor_node_t nontunnel [DUNGEON_Y][DUNGEON_X];
+class Dungeon {
+private:
 
-    std::vector<room_t> rooms;
-    std::vector<location_t> upStairs;
-    std::vector<location_t> downStairs;
-    std::list<Item> items;
-    std::list<Monster * > monsters;
-} dungeon_t;
+bool FogOfWarFlag;
+bool TeleportFlag;
+
+vector<vector<map_block_t>> map;
+corridor_node_t tunnel[DUNGEON_Y][DUNGEON_X];
+corridor_node_t nontunnel[DUNGEON_Y][DUNGEON_X];
+
+std::vector<room_t> rooms;
+
+list<Item> items;
+list<Monster> monsters;
+
+public:
+Dungeon(int sizeX, int sizeY){
+    //allocate spaces
+    this->map = vector<vector<map_block_t>>(sizeX);
+    for (auto mapY : this->map){
+        mapY = vector<map_block_t>(sizeY);
+    }
+}
+
+};
 
 #endif //DUNGEON_COMS327_F19_GAMECOMMON_H

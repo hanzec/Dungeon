@@ -2,21 +2,8 @@
 .vscode/
 .DS_Store
 
+# staffs generate by vscode
 lib/
 build/
-
-CMakeFiles/
-cmake-build-debug/
-
-src/CMakeFiles/
-src/cmake-build-debug/
-src/cmake_install.cmake
-
-src/display/Makefile
-src/display/CMakeFiles/
-src/display/cmake-build-debug/
-src/display/cmake_install.cmake
-
-Dungeon
-CMakeCache.txt
-cmake_install.cmake
+.cache/
+compile_commands.json

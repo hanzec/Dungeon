@@ -34,12 +34,3 @@ update_changelog:
   image: ferrarimarco/github-changelog-generator
   script:
     - github_changelog_generator --user "${GITLAB_USER}" --project "${GITLAB_PROJECT}" --github-site "${GITLAB_SITE}" --github-api "${GITLAB_API}" --verbose --gitlab
-
-canvas_submit:
-  only:
-    - master
-  stage: packaging
-  allow_failure: true
-  image: ubuntu:bionic
-  script:
-    - whoami

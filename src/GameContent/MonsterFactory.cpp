@@ -6,7 +6,7 @@ MonsterFactory::MonsterFactory(std::vector<std::unordered_map<std::string, std::
     updateGameItemPool();
 }
 
-Monster * MonsterFactory::generateNewGameContant(dungeon * dungeon){
+Monster * MonsterFactory::generateNewGameContant(Dungeon * dungeon){
     std::unordered_map<std::string, std::string> tmpAttr;
 
     if (attributeList.size() < 10) {

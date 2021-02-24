@@ -1,6 +1,6 @@
 #include <sstream>
 #include <ncurses.h>
-#include "../../../include/GameContant/GameObjects/GameContent.h"
+#include "GameContant/GameObjects/GameContent.h"
 
     GameContent::GameContent(std::unordered_map<std::string, std::string> base){
         this->name = base["NAME"];

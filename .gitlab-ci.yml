@@ -1,36 +1,43 @@
+# You can override the included template(s) by including variable overrides
+# See https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ee/ci/variables/#priority-of-environment-variables
 stages:
-  - build
-  - changelog
-  - packaging
-  
+- build
+- changelog
+- packaging
+- test
 build_gcc:
   tags:
-    - gcc_linux
+  - gcc_linux
   stage: build
   allow_failure: false
   script:
-    - cmake .
-    - make
-
+  - cmake .
+  - make
 build_clang:
   only:
-    - master
+  - master
   stage: build
   image: ubuntu:bionic
   allow_failure: false
   before_script:
-    - apt-get update
-    - apt-get install clang libncurses5-dev libncursesw5-dev cmake -y
+  - apt-get update
+  - apt-get install clang libncurses5-dev libncursesw5-dev cmake -y
   script:
-    - cmake .
-    - make
-
+  - cmake .
+  - make
 update_changelog:
   tags:
-    - changelog
+  - changelog
   only:
-    - master
+  - master
   stage: changelog
   image: ferrarimarco/github-changelog-generator
   script:
-    - github_changelog_generator --user "${GITLAB_USER}" --project "${GITLAB_PROJECT}" --github-site "${GITLAB_SITE}" --github-api "${GITLAB_API}" --verbose --gitlab
+  - github_changelog_generator --user "${GITLAB_USER}" --project "${GITLAB_PROJECT}"
+    --github-site "${GITLAB_SITE}" --github-api "${GITLAB_API}" --verbose --gitlab
+sast:
+  stage: test
+include:
+- template: Security/SAST.gitlab-ci.yml
